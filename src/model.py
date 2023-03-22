@@ -6,8 +6,8 @@ import os
 class Model():
 
   def connect():
-    pw = os.environ['MONGO_PW'])
-    client = pymongo.MongoClient("mongodb+srv://costa365:%s@cluster0.mcrcmoe.mongodb.net/?retryWrites=true&w=majority" % (pw)
+    pw = os.environ['MONGO_PW']
+    client = pymongo.MongoClient("mongodb+srv://costa365:%s@cluster0.mcrcmoe.mongodb.net/?retryWrites=true&w=majority" % (pw))
     db = client.db1
     col = db["games"]
     return col
