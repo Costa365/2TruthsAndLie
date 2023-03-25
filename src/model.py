@@ -24,6 +24,20 @@ class Model():
   
   def createGame(game):
     col = Model.connect()
-    doc = {'Game': game.game, 'Type': game.type}
+    doc = {'Game': game.game, 'Type': game.type, 'Players': []}
     res = col.insert_one(doc)
     return doc
+
+  def joinGame(player):
+    col = Model.connect()
+    filter = { 'Game': player.game }
+    newvalues = { '$push': { 'Players': {'Name': player.name, 'Score': 0, 'Plays': []}}}
+    col.update_one(filter, newvalues)
+    return True
+  
+  def play(play):
+    col = Model.connect()
+    filter = { 'Game': play.game, 'Players.Name': play.name}
+    newvalues = { '$push': { "Players.$[elem].Plays": { "Ref": play.ref, "Data": play.data } } }
+    col.update_one(filter, newvalues, upsert=True,array_filters=[{ "elem.Name": play.name }])
+    return True

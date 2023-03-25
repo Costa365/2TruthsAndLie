@@ -4,6 +4,10 @@ import body
 
 app = FastAPI()
 
+@app.get("/")
+async def read_game(game_id):
+    return {"message": "Team Games API"}
+
 @app.get("/game/{game_id}")
 async def read_game(game_id):
     data = Model.getGame(game_id)
@@ -20,10 +24,12 @@ async def read_player(game_id, player_id):
     return data
 
 @app.post("/player")
-async def create_player():
-    return {"message": "create_player"}
+async def create_player(player:body.Player):
+    Model.joinGame(player)
+    return {"message": "Joined Game"}
 
 @app.post("/play")
-async def create_play():
-    return {"message": "create_play"}
+async def create_play(play:body.Play):
+    Model.play(play)
+    return {"message": "Created Play"}
 

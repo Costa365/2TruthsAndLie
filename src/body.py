@@ -7,3 +7,9 @@ class Game(BaseModel):
 class Player(BaseModel):
     game: str
     name: str
+
+class Play(BaseModel):
+    game: str
+    name: str
+    ref: str
+    data: str
