@@ -11,11 +11,11 @@ pip install pymongo
 ```
 
 ```
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 or 
 ```
-python -m uvicorn main:app --reload
+python -m app.uvicorn main:app --reload
 ```
 
 Test endpoints:
