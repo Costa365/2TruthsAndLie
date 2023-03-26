@@ -13,3 +13,8 @@ class Play(BaseModel):
     name: str
     ref: str
     data: str
+
+class Score(BaseModel):
+    game: str
+    name: str
+    score: int

@@ -33,3 +33,7 @@ async def create_play(play:schemas.Play):
     Data.play(play)
     return {"message": "Created Play"}
 
+@app.post("/score")
+async def update_score(score:schemas.Score):
+    Data.updateScore(score)
+    return {"message": "Updated Score"}

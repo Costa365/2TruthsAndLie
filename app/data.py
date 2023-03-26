@@ -41,3 +41,10 @@ class Data():
     newvalues = { '$push': { "Players.$[elem].Plays": { "Ref": play.ref, "Data": play.data } } }
     col.update_one(filter, newvalues, upsert=True,array_filters=[{ "elem.Name": play.name }])
     return True
+  
+  def updateScore(score):
+    col = Data.connect()
+    filter = { 'Game': score.game, 'Players.Name': score.name}
+    newvalues = { '$set': { "Players.$[elem].Score": score.score } }
+    col.update_one(filter, newvalues, upsert=True, array_filters=[{ "elem.Name": score.name }])
+    return True
