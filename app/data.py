@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 import pymongo
 import app.schemas as schemas
 import json
@@ -15,12 +16,16 @@ class Data():
   def getGame(game_id):
     col = Data.connect()
     res = col.find({"Game": game_id},{'_id':0})
-    return res[0]
+    if len(list(res.clone()))>0:
+      return res[0]
+    raise HTTPException(status_code=404, detail=f"Game {game_id} not found")
   
   def getPlayer(game_id, player_id):
     col = Data.connect()
     res = col.find({"Game": game_id, 'Players.Name':player_id},{'_id':0})
-    return res[0]
+    if len(list(res.clone()))>0:
+      return res[0]
+    raise HTTPException(status_code=404, detail=f"Game {game_id}, Player {player_id} not found")
   
   def createGame(game):
     col = Data.connect()

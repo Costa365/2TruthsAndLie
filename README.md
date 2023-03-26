@@ -38,5 +38,9 @@ curl -X POST \
   --header 'Content-Type: application/json' \
   --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "ref":"6", "data":"667"}'
 
+curl -X POST \
+  'http://127.0.0.1:8000/score' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "score":"5"}'
 ```
 
