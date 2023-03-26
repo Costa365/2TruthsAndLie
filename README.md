@@ -27,5 +27,16 @@ curl -X POST \
   --data-raw '{"game":"yHdVesGhsN34", "type":"This or That"}'
 
 curl -X GET 'http://127.0.0.1:8000/game/Q46gCdsbc3Jh'
+
+curl -X POST \
+  'http://127.0.0.1:8000/player' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"yHdVesGhsN34", "name":"Timothy"}'
+
+curl -X POST \
+  'http://127.0.0.1:8000/play' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "ref":"6", "data":"667"}'
+
 ```
 
