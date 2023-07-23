@@ -1,0 +1,47 @@
+curl 'https://costatest-cautious-yodel-6x7g9vwwr492r5r6-8000.preview.app.github.dev/game/Jf3sAsnc32nx' \
+  -H 'cookie: __Host-vso-pf=08A301AF331C97058BE20C648CAD420C%3A2WjkXnqLvPWpyhOR%2FH%2B32kyot0ZpqQn9yK2b%2FITgOEKPrEARHuP272%2BQNRH5BQOfiQn4UMyhPnWYXOtBg7hXzQskeLY9%2FAfvVGN89r85ECd%2F7fphjYdu7Tdl5dVHuCk8c1b3vwSrqyUDVKSk3zZ0VIot7Tp9G6XEiTP2U%2FdRXIYBgnPgrGFOOvyIEWES7kKMGzEORV8PD5eUC9getSO9yX5pp%2Fii5JTyG1gqUVeVB9dA7kvyNOSo7NXAMHNgx5F%2B1Mh94uFDHG2wGKp%2FQGirQbujmrbW1BNq5%2FgV9JZyTCGaI0BBJYmHk%2FhEanW5cs%2BT7KFJ7NDgaS5hpdzKtJpkqxiWTml7wpqScKivF7zy16OLfCZmXViet23cWiqNsysMq1fa6n2r60uBsvRbgs4IBxheft284S1u0Rrn9GrIVMPB8hVuMJDyys83uItA%2BHyOaCKtpEfGD5ZZYBRn5khpFfv621dKkbWz1ixrpMkGceTPdrL6%2BDcUZL198rjWZFcq4YhfG4MYTl8YJ9DTGR2oGHQTkpmHQVd%2BQxrsmf2quKa5JEVi6x4LT0qhyUTVFBsTHjyoy8fwfQpYeMWyQmqx9zJ%2FuDeEV20mb2KMvqZoa%2BXZxQ8%2BPwECWEWmeYJfsJnUSfaQY13ceJw8zPbWTEgLQBrA9T44N4CMFiFGVmNv0DxxyctLVqQu4SCL7JCSrpNNRZkKkUxdgWCWyDI8AmnInlQhNxO7cbjdLg4oCeFILhyrtCUs5KLaV7hkINWY5bR0PXznlB05S4DeSVr6sio2MYqr9tMD8ZAzhdpC%2FJsjhFfP7nQJUmrfrH8K2jAONA2c1XbQ3Xd9edqFTpGyjq5oF9ADKmEaza%2BB1U6e54aTRyPOm3z7okBqB0YPOo83h8fBtGQXs6TJJnzP4QIfW41CCJMv9EROqsV5VwnTOs812A9j6bEyg7xs7AxjVuxsG%2FuwyqoSyimkolJCD%2BVwEDnKyaiJOADEgpcnEjZXFQe6x8P4874m89CZAFEXcXRoEFYXsqHE%2BgnavFgnyKhoBU%2BvCmT%2BgzP58NZQsP7BQ8bv%2F2d6nEA0ssZWCDckzkh%2BMrbEgIeg4FgBwNWLpVUhpSJiRXDxrrqG3q7p3NnlboMa7ugIkMdUeLxqwZ%2FXBvSSvvTpfsqHVQOVkhoOUKiLxhY4K9aqfeJGMkAJLyIdFcOhXB2OJKwIg8NEcgrr%2FHGNEX9Lo0OY5GCAs3lrbbgAb3krNCTC%2FOY7ag%2FSRzOrE2TOUNty07a2jix5ECST5oZtmmgK%2F1AyaZZBvc5WmhMcfY%2FqqdTIXENIeWJvuMXLzTdOs%2Fb7fL1F%2FNhDWGD1P0vW0wpU8rXcP0V5EekvubtpaxCj6Fc7SJcF%2BR9c%2FWoOr1rfyeZDYuc3uFQWtKC2kU6u9OaAPQMRL2asDwEfDq1CxLgB2cmVwU0v575FJ90D2HeRArh9uzu3yRfwMW7aw0Z4vE4tmLRqeDWirVMtHtkzGkeWYSM4JgtjS435Dp%2BDJHyiZ0mPoHIg1q9bByLAPk3ybehI3%2BK%2FN267lZjkBMqvoFfngs%2Fa8TPKoyvjgqP6P4kNbDro6JWv5t6qmBf8hrNo5jKTfT0atkXfIVLabq6bdrApigPFviG307caSymhYVupKBzvsrC2W%2BkuyOKPKthn%2Bj84f0T36p0QGc9E9ogCG7pGH2mrklDYWmeOgk4FCcciH05ntu5WloQuEXCsTISyaUD3jkRIF70vcCX2h6l5%2BqUTWMs0oMK8yl24FfkU%2FOfwAz3cItMP0nbnKs1QmIZ%2BxXNdTJiApmiDTnV5zYf25gF7f8EcBjvcqp1VuNCZw%2B0w6o0IIxmaPmMz%2BfzOCtz2dVJ5xEvEvGbOhOalZJ8aeKo3Kj2WeBBOYgta0yJRd6JFTSpAIpVQ%2FUlIfuEMcMaJB1bC17V4JW06BJpTG5Sa0jWKhVj2Jb5bqwdGJRCWevQ7NNoGDfUUcLZvIBOvTuK64YeVGSz6qcphJ4qokB%2B%2FfsMz%2F8D8aR2hGjpvcXptbmPf1T7xBoLHv9UC07fPeieZKrJO7TpY2f7yaP0gLvP5QXL7ggfW1coWdbh0KnJ1fkJX%2BVxqyzs6%2FhelByu1QIy3biJz5ftkLW539ab8Qf0r6tjcl9V6P5KmMkIJZu3SB8NVbhEMTT%2BjCHGpNPaRQICZwfWJ31e1zlav900qbrYCodkSi3%2FGJSzx6m5AaCyJLDktL9gIey7mrCuMHdTXfstNUCMqH6z0t9HS3eGSENE9%2Bv3yBc8Whs4s%2BMCrAQWQlljjqCX%2BR8yLgSbVmm9rqQFjQBYEoucLvtekj9Wp61ewFiPwdrCF2tHPAQpdzpzHgmkf38%2FwT%2BM0n8SNY4vrM2pzd8dUrVMAy5tBbiYR2d0T8NYg0BJeS%2FrE6qIeK2Vv0ROvqBjvJPBrg77%2FoIAqXbiaTN301HUPj3qAhj4Kp%2Fw0Bw9Y51mdvF4DPqoRP6IzfoWQCHo%3D' \
+  --compressed
+
+
+curl -X POST \
+  'http://127.0.0.1:8000/game' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"bNdVkfpQas93", "type":"This or That"}'
+
+
+curl -X POST \
+  'http://127.0.0.1:8000/player' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"bNdVkfpQas93", "name":"Timothy"}'
+
+curl -X POST \
+  'http://127.0.0.1:8000/play' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"bNdVkfpQas93", "name":"Kevin", "ref":"6", "data":"667"}'
+
+
+curl -X POST \
+  'http://127.0.0.1:8000/score' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{"game":"bNdVkfpQas93", "name":"Kevin", "score":"5"}'
+
+curl -X GET 'http://127.0.0.1:8000/game/rPdVespQas34'
+
+curl -X GET 'http://127.0.0.1:8000/admin' \
+  -H "Accept: application/json" \
+  -H "Authorization: Bearer akljnv13bvi2vfo0b0bw"
+
+db.games.updateOne(
+   { Game: "bNdVkfpQas93" },
+   { $push: { Players: { "Name":"Freddy", "Score":0, "Plays": [] } } }
+)
+
+db.games.updateOne( { Game: "bNdVkfpQas93", "Players.Name": "Kevin" }, 
+{ $push: { "Players.$[el].Plays": { "Ref": "3", "Data": "33" } } }, 
+{ arrayFilters: [{ "el.Name": "Kevin" }], new: true })
+
+db.games.updateOne( 
+{ Game: "bNdVkfpQas93", "Players.Name": "Kevin" }, 
+{ $set: {"Players.$[el].Score": 88}},
+{ arrayFilters: [{ "el.Name": "Kevin" }]}
+)
