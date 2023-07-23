@@ -1,6 +1,29 @@
 # Team Games #
 
-Generic Team Games API usng Python / Fast API / Mongo DB
+Generic Team Games API usng Python / Fast API / Mongo DB.
+
+Options: We could make this a totally generic API which can be used by frontend (play game) or by admin (update scores)
+Should this API implement the games or just expose the API and another games service should utilise it?
+
+- This or That (as an example)
+  - Start a new game
+  - The game facilitator should be able to:
+    - Select questions
+    - Order questions
+    - Add/edit/remove questions
+    - Select default questions in random order
+    - Start the game (by sharing url)
+    - Move game on to the next round
+    - End the game
+
+- Game itself should have a web sockets interface, so that everyone can play in realtime
+  - Player voted
+  - FastAPI supports websockets
+
+
+- To Do
+  - Should be able to mark a player as Facilitator 
+  - SHould be able to set the status of the game (Not started, started, waiting for plays, completed)
 
 Mongodb cluster should be created using [MongoDB Atlas](https://www.mongodb.com/)
 
