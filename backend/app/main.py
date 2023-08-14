@@ -1,12 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket
 from app.data import Data
 import app.schemas as schemas
+from app.game import Game
 
 app = FastAPI()
 
 @app.get("/")
-async def read_game(game_id):
-    return {"message": "Team Games API"}
+async def read_game():
+    return {"message": "Team Games API v0.1"}
 
 @app.get("/game/{game_id}")
 async def read_game(game_id):
@@ -37,3 +38,12 @@ async def create_play(play:schemas.Play):
 async def update_score(score:schemas.Score):
     Data.updateScore(score)
     return {"message": "Updated Score"}
+
+game = Game()
+
+@app.websocket("/ws/{client_id}")
+async def websocket_endpoint(websocket: WebSocket, client_id: int):
+    await game.connect(websocket)
+    while True:
+        data = await websocket.receive_text()
+        await game.broadcast(f"Client {client_id}: {data}")

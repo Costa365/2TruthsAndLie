@@ -59,3 +59,47 @@ MVP
   - Wait for players to post items /play {it can be in a json object}
   - Wait for players to vote /play {it can be a json object}
 
+
+2 Truths and 1 Lie:
+
+POST /game/
+
+Game url created - player can connect (facilitator not automatically added)
+
+POST /player {"game":"yHdVesGhsN34", "name":"Timothy"} -> WS conn opened - Register player to game
+
+WS /joined {"name":"Timothy"} (Srv -> Plyr)
+
+GET /game/yHdVesGhsN34
+
+POST /action {"game":"yHdVesGhsN34", "action":"start"}
+
+WS /started {} (Srv -> Plyr) Redirect to page
+
+POST /play   {"game":"yHdVesGhsN34", "name":"Kevin", "true1":"zzzzzz", "true2":"yyyyyyyy", "false1":"xxxxxxx"}
+// Makes sense to use WS for this too
+
+WS /voted {"name":"Timothy"} (Srv -> Plyr)
+
+POST /action {"game":"yHdVesGhsN34", "action":"all_played"}
+
+WS /all_played {} (Srv -> Plyr) Redirect to page
+
+GUESS:
+
+WS /player_guess {"name":"Timothy"} (Srv -> Plyr)
+
+WS /lie {"lie_guess":2} (Plyr -> Svr)
+
+WS /voted {"name":"Timothy"} (Srv -> Plyr)
+
+POST /action {"game":"yHdVesGhsN34", "action":"all_voted"}
+
+WS /votes {[{"name":"Timothy", "lie_guess":2},{"name":"Dick", "lie_guess":1}], "lie":2} (Srv -> Plyr)
+
+POST /action {"game":"yHdVesGhsN34", "action":"next_player"}
+
+goto GUESS
+
+WS /scoreboard {[{"name":"Timothy", "score":2},{"name":"Dick", "score":1}]}  (Srv -> Plyr) Reduect to pages
+ 
