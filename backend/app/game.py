@@ -5,12 +5,14 @@ from collections import namedtuple
 
 class Game:
     def __init__(self):
-        self.connections: Dict[str] = {}
+        self.connections: Dict[Dict[str]] = {}
 
     async def connect(self, websocket: WebSocket, game_id: str, player_id: str):
         await websocket.accept()
-        self.connections[f"{game_id}_{player_id}"] = websocket
+        if not game_id in self.connections:
+          self.connections[game_id] = {}
+        self.connections[game_id][player_id] = websocket
 
-    async def broadcast(self, data: str):
-        for connection in self.connections.values():
+    async def broadcast(self, game: str, data: str):
+        for connection in self.connections[game].values():
             await connection.send_text(data)

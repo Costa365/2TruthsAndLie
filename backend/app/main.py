@@ -47,4 +47,4 @@ async def websocket_endpoint(websocket: WebSocket, game_id: str, player_id: str)
     await game.connect(websocket,game_id,player_id)
     while True:
         data = await websocket.receive_text()
-        await game.broadcast(f"game_id {game_id}, player_id {player_id}: {data}")
+        await game.broadcast(game_id, f"game_id {game_id}, player_id {player_id}: {data}")
