@@ -2,6 +2,7 @@ from typing import List, Dict
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from collections import namedtuple
+from app.data import Data
 import json
 
 class Game:
@@ -20,5 +21,15 @@ class Game:
 
     async def handleMessage(self, game: str, player:str, data: str):
         jsons = json.loads(data)
-
-        await self.broadcast(game, jsons['action'])
+        action = jsons['action']
+        if action == "start":
+            Data.startGame(game,player)
+            await self.broadcast(game, "{'action':'start'}")
+        elif action == "lie":
+            pass
+        elif action == "all_played":
+            pass
+        elif action == "all_voted":
+            pass
+        elif action == "next_player":
+            pass

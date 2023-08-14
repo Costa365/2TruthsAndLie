@@ -55,3 +55,11 @@ class Data():
     newvalues = { '$set': { "Players.$[elem].Score": score.score } }
     col.update_one(filter, newvalues, upsert=True, array_filters=[{ "elem.Name": score.name }])
     return True
+  
+  def startGame(game,player):
+    col = Data.connect()
+    filter = { 'Game': game}
+    newvalues = { '$set': { "State": "STARTED" } }
+    col.update_one(filter, newvalues)
+    return True
+  
