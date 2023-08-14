@@ -1,7 +1,7 @@
 curl -X POST \
   'http://127.0.0.1:8000/game' \
   --header 'Content-Type: application/json' \
-  --data-raw '{"game":"bNdVkfpQas93", "type":"This or That"}'
+  --data-raw '{"type":"2 Truths And A Lie"}'
 
 
 curl -X POST \

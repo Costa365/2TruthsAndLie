@@ -1,4 +1,5 @@
 from fastapi import FastAPI, WebSocket
+from fastapi.responses import JSONResponse
 from app.data import Data
 import app.schemas as schemas
 from app.game import Game
@@ -16,8 +17,8 @@ async def read_game(game_id):
 
 @app.post("/game")
 async def create_game(game:schemas.Game):
-    data = Data.createGame(game)
-    return {"message": "Created Game"}
+    id = Data.createGame(game)
+    return {"id": f"{id}"}
 
 @app.get("/player/{game_id}/{player_id}")
 async def read_player(game_id, player_id):
@@ -28,7 +29,7 @@ async def read_player(game_id, player_id):
 async def create_player(player:schemas.Player):
     Data.joinGame(player)
     return {"message": "Joined Game"}
-
+"""
 @app.post("/play")
 async def create_play(play:schemas.Play):
     Data.play(play)
@@ -38,12 +39,12 @@ async def create_play(play:schemas.Play):
 async def update_score(score:schemas.Score):
     Data.updateScore(score)
     return {"message": "Updated Score"}
-
+"""
 game = Game()
 
-@app.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: int):
-    await game.connect(websocket)
+@app.websocket("/ws/{game_id}/{player_id}")
+async def websocket_endpoint(websocket: WebSocket, game_id: str, player_id: str):
+    await game.connect(websocket,game_id,player_id)
     while True:
         data = await websocket.receive_text()
-        await game.broadcast(f"Client {client_id}: {data}")
+        await game.broadcast(f"game_id {game_id}, player_id {player_id}: {data}")

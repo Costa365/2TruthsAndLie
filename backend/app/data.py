@@ -3,11 +3,11 @@ import pymongo
 import app.schemas as schemas
 import json
 import os
+import time
 
 class Data():
 
   def connect():
-
     conn = os.environ["MONGO_CONNECT"]
     client = pymongo.MongoClient(conn)
     db = client.db1
@@ -30,9 +30,10 @@ class Data():
   
   def createGame(game):
     col = Data.connect()
-    doc = {'Game': game.game, 'Type': game.type, 'Players': []}
+    gid = '{0:010x}'.format(int(time.time() * 256))
+    doc = {'Game': gid, 'Type': game.type, 'Players': []}
     res = col.insert_one(doc)
-    return doc
+    return gid
 
   def joinGame(player):
     col = Data.connect()
