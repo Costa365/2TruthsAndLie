@@ -31,7 +31,7 @@ class Data():
   def createGame(game):
     col = Data.connect()
     gid = '{0:010x}'.format(int(time.time() * 256))
-    doc = {'Game': gid, 'Type': game.type, 'Players': []}
+    doc = {'Game': gid, 'Type': game.type, 'Facilitator':game.name, 'Players': []}
     res = col.insert_one(doc)
     return gid
 

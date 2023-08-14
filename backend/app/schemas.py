@@ -2,6 +2,7 @@ from pydantic import BaseModel
 
 class Game(BaseModel):
     type: str
+    name: str
 
 class Player(BaseModel):
     game: str
