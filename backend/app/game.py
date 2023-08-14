@@ -2,6 +2,7 @@ from typing import List, Dict
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from collections import namedtuple
+import json
 
 class Game:
     def __init__(self):
@@ -16,3 +17,8 @@ class Game:
     async def broadcast(self, game: str, data: str):
         for connection in self.connections[game].values():
             await connection.send_text(data)
+
+    async def handleMessage(self, game: str, player:str, data: str):
+        jsons = json.loads(data)
+
+        await self.broadcast(game, jsons['action'])
