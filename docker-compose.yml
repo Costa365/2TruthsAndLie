@@ -6,13 +6,3 @@ services:
         - "8000:8000"
     volumes:
       - ./backend:/backend
-    environment:
-      - MONGO_CONNECT=mongodb://mongodb:27017
-    depends_on:
-      - mongodb
-  mongodb:
-    image: "mongo:4.4.6"
-    volumes:
-      - ./data:/data/db
-    ports:
-     - "27017:27017"

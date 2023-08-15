@@ -47,7 +47,7 @@ Test endpoints:
 curl -X POST \
   'http://127.0.0.1:8000/game' \
   --header 'Content-Type: application/json' \
-  --data-raw '{"game":"yHdVesGhsN34", "type":"This or That"}'
+  --data-raw '{"game":"yHdVesGhsN34", "type":"This or That", "name":"Costa"}'
 
 curl -X GET 'http://127.0.0.1:8000/game/Q46gCdsbc3Jh'
 
@@ -66,4 +66,9 @@ curl -X POST \
   --header 'Content-Type: application/json' \
   --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "score":"5"}'
 ```
+
+Websockets
+
+connect ws://localhost:8000/ws/64dbc61059/Tim
+send {"action":"start"}
 

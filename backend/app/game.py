@@ -1,30 +1,29 @@
 from typing import List, Dict
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
-from collections import namedtuple
-from app.data import Data
+
 import json
 
 class Game:
-    def __init__(self):
-        self.connections: Dict[Dict[str]] = {}
+    def __init__(self, facilitator):
+        self.facilitator = facilitator
+        self.players: Dict[str] = {}
+        self.state = 'WAITING_FOR_PLAYERS'
 
-    async def connect(self, websocket: WebSocket, game_id: str, player_id: str):
+    async def connect(self, websocket: WebSocket, player_id: str):
         await websocket.accept()
-        if not game_id in self.connections:
-          self.connections[game_id] = {}
-        self.connections[game_id][player_id] = websocket
+        self.players[player_id] = websocket
 
-    async def broadcast(self, game: str, data: str):
-        for connection in self.connections[game].values():
+    async def broadcast(self, data: str):
+        for connection in self.players.values():
             await connection.send_text(data)
 
-    async def handleMessage(self, game: str, player:str, data: str):
+    async def handleMessage(self, player:str, data:str):
         jsons = json.loads(data)
         action = jsons['action']
         if action == "start":
-            Data.startGame(game,player)
-            await self.broadcast(game, "{'action':'start'}")
+            self.state = 'STARTED'
+            await self.broadcast("{'action':'start123'}")
         elif action == "lie":
             pass
         elif action == "all_played":
