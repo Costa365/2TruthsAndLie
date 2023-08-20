@@ -1,7 +1,9 @@
-from typing import NamedTuple
 from fastapi import WebSocket
 
-class Player(NamedTuple):
-    name: str
-    connected: bool
-    webSocket: WebSocket
+class Player():
+    def __init__(self, name, webSocket):
+        self.name = name
+        self.connected = True
+        self.webSocket = webSocket
+        self.plays = []
+        self.guesses = []
