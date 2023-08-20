@@ -24,7 +24,7 @@ class Game:
         action = jsons['action']
         if action == "start":
             self.state = 'STARTED'
-            await self.broadcast("{'action':'game started'}")
+            await self.broadcast("{'game':'started'}")
         elif action == "lie":
             pass
         elif action == "all_played":
@@ -36,4 +36,4 @@ class Game:
 
     async def disconnect(self, player:str):
         self.players[player]._replace(connected=False)
-        await self.broadcast("{'action':'" + player + " disconnected'}")
+        await self.broadcast("{'disconnected':'" + player + "'}")
