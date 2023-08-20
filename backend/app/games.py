@@ -23,3 +23,6 @@ class Games:
 
     async def handleMessage(self, game: str, player:str, data: str):
         await self.games[game].handleMessage(player, data)
+
+    async def disconnect(self, game: str, player:str):
+        await self.games[game].disconnect(player)
