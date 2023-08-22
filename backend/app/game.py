@@ -43,4 +43,4 @@ class Game:
 
     async def disconnect(self, player:str):
         self.players[player].connected = False
-        await self.broadcast("{'disconnected':'" + player + "'}")
+        await self.broadcast('{"disconnected":"' + player + '"}')
