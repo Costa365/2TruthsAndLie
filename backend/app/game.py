@@ -14,7 +14,7 @@ class Game:
     async def connect(self, websocket: WebSocket, player: str):
         await websocket.accept()
         self.players[player] = Player(player, websocket) 
-        await self.broadcast("{'connected':'" + player + "'}")
+        await self.broadcast('{"connected":"' + player + '"}')
 
     async def broadcast(self, data: str):
         for playr in self.players.values():
@@ -25,13 +25,13 @@ class Game:
         action = jsons['action']
         if action == "start":
             self.state = 'STARTED'
-            await self.broadcast("{'game':'started'}")
+            await self.broadcast('{"game":"started"}')
         if action == "play":
             truth1 = jsons['truth1']
             truth2 = jsons['truth2']
             lie = jsons['lie']
             self.players[player].plays.append((truth1,truth2,lie))
-            await self.broadcast("{'played':'"+player+"'}")
+            await self.broadcast('{"played":"'+player+'"}')
         elif action == "lie":
             pass
         elif action == "all_played":
