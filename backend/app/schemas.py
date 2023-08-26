@@ -1,5 +1,11 @@
 from pydantic import BaseModel
 
+class Version(BaseModel):
+    version: str
+
+class Id(BaseModel):
+    id: str
+
 class Game(BaseModel):
     type: str
     name: str

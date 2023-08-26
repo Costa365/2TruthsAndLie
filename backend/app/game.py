@@ -24,21 +24,29 @@ class Game:
         jsons = json.loads(data)
         action = jsons['action']
         if action == "start":
-            self.state = 'STARTED'
-            await self.broadcast('{"game":"started"}')
+            if self.state == 'WAITING_FOR_PLAYERS':
+                self.state = 'STARTED'
+                await self.broadcast('{"game":"started"}')
         if action == "play":
-            truth1 = jsons['truth1']
-            truth2 = jsons['truth2']
-            lie = jsons['lie']
-            self.players[player].plays.append((truth1,truth2,lie))
-            await self.broadcast('{"played":"'+player+'"}')
-        elif action == "lie":
-            pass
+            if self.state == 'STARTED':
+                truth1 = jsons['truth1']
+                truth2 = jsons['truth2']
+                lie = jsons['lie']
+                self.players[player].plays.append((truth1,truth2,lie))
+                await self.broadcast('{"played":"'+player+'"}')
         elif action == "all_played":
+            self.state = 'GUESS'
+            self.playerIndex = 0
+            # broadcast a message containing the 3 statements
+            
+        elif action == "lie":
+            # store the player's guess somewhere
             pass
         elif action == "all_voted":
+            # broadcast results
             pass
         elif action == "next_player":
+            # Move to the next player
             pass
 
     async def disconnect(self, player:str):

@@ -6,11 +6,11 @@ from app.games import Games
 app = FastAPI()
 
 @app.get("/")
-async def read_game():
-    return {"message": "Team Games API v0.1"}
+async def get_version() -> schemas.Version:
+    return {"version": "Team Games API v0.1"}
 
 @app.post("/game")
-async def create_game(game:schemas.Game):
+async def create_game(game:schemas.Game) -> schemas.Id:
     id = games.createGame(game.name)
     return {"id": f"{id}"}
 

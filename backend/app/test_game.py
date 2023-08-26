@@ -11,7 +11,7 @@ def test_endpoint():
     response = client.get(ENDPOINT)
     data = response.json()
     assert response.status_code == 200
-    assert 'Team Games API v0.1' in data['message']
+    assert 'Team Games API v0.1' in data['version']
 
 def test_join_game():
     url = ENDPOINT + '/game'
