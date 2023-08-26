@@ -5,5 +5,5 @@ class Player():
         self.name = name
         self.connected = True
         self.webSocket = webSocket
-        self.plays = []
-        self.guesses = []
+        self.play = {}
+        self.guesses = {}
