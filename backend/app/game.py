@@ -1,6 +1,6 @@
 from typing import Dict
 from fastapi import WebSocket
-from typing import NamedTuple
+import app.schemas as schemas
 from app.player import Player
 
 import json
@@ -14,6 +14,7 @@ class Game:
     async def connect(self, websocket: WebSocket, player: str):
         await websocket.accept()
         self.players[player] = Player(player, websocket) 
+        self.players[player].play = ()
         await self.broadcast('{"connected":"' + player + '"}')
 
     async def broadcast(self, data: str):
@@ -32,13 +33,19 @@ class Game:
                 truth1 = jsons['truth1']
                 truth2 = jsons['truth2']
                 lie = jsons['lie']
-                self.players[player].plays.append((truth1,truth2,lie))
+                self.players[player].play = (truth1,truth2,lie)
                 await self.broadcast('{"played":"'+player+'"}')
-        elif action == "all_played":
+        if action == "all_played":
             self.state = 'GUESS'
-            self.playerIndex = 0
-            # broadcast a message containing the 3 statements
-            
+            self.playersList = list(self.players.keys())
+            self.playerIndex = len(self.playersList)-1
+            play = schemas.Play(
+                name=self.playersList[self.playerIndex],
+                item1=self.players[self.playersList[self.playerIndex]].play[0],
+                item2=self.players[self.playersList[self.playerIndex]].play[1],
+                item3=self.players[self.playersList[self.playerIndex]].play[2]
+            )
+            await self.broadcast(play.json())
         elif action == "lie":
             # store the player's guess somewhere
             pass

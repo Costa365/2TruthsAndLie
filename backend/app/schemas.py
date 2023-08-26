@@ -15,10 +15,10 @@ class Player(BaseModel):
     name: str
 
 class Play(BaseModel):
-    game: str
     name: str
-    ref: str
-    data: str
+    item1: str
+    item2: str
+    item3: str
 
 class Score(BaseModel):
     game: str

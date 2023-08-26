@@ -88,3 +88,10 @@ def test_game_play():
             assert data2 == {"played":"Steve"}
             data = websocket.receive_json()
             assert data == {"played":"Steve"}
+
+            websocket2.send_json({"action":"all_played"})
+            data = websocket.receive_json()
+            assert data["name"] == "Steve"
+            assert "I went to school in France" in data.values()
+            assert "I have 5 sisters" in data.values()
+            assert "I have never eaten bread" in data.values()
