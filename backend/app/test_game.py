@@ -89,9 +89,45 @@ def test_game_play():
             data = websocket.receive_json()
             assert data == {"played":"Steve"}
 
-            websocket2.send_json({"action":"all_played"})
+            websocket.send_json({"action":"all_played"})
             data = websocket.receive_json()
             assert data["name"] == "Steve"
             assert "I went to school in France" in data.values()
             assert "I have 5 sisters" in data.values()
             assert "I have never eaten bread" in data.values()
+            data2 = websocket2.receive_json()
+            assert data2["name"] == "Steve"
+            assert "I went to school in France" in data2.values()
+            assert "I have 5 sisters" in data2.values()
+            assert "I have never eaten bread" in data2.values()
+
+            websocket.send_json({"action":"guess","item":1})
+            data = websocket.receive_json()
+            assert data == {"guessed":"Kugan"}
+            data2 = websocket2.receive_json()
+            assert data2 == {"guessed":"Kugan"}
+            
+            websocket.send_json({"action":"all_voted"})
+
+            data = websocket.receive_json()
+            assert data["name"] == "Kugan"
+            assert "I'm a vegan" in data.values()
+            assert "I have been to India" in data.values()
+            assert "I have run 5 marathons" in data.values()
+            data2 = websocket2.receive_json()
+            assert data["name"] == "Kugan"
+            assert "I'm a vegan" in data.values()
+            assert "I have been to India" in data.values()
+            assert "I have run 5 marathons" in data.values()
+
+            websocket2.send_json({"action":"guess","item":2})
+            data = websocket.receive_json()
+            assert data == {"guessed":"Steve"}
+            data2 = websocket2.receive_json()
+            assert data2 == {"guessed":"Steve"}
+
+            websocket.send_json({"action":"all_voted"})
+            data = websocket.receive_json()
+            assert data == {'plays': [{'name': 'Kugan', 'truth1': "I'm a vegan", 'truth2': 'I have been to India', 'lie': 'I have run 5 marathons'}, {'name': 'Steve', 'truth1': 'I went to school in France', 'truth2': 'I have 5 sisters', 'lie': 'I have never eaten bread'}], 'guesses': [{'guesser': 'Kugan', 'player': 'Steve', 'item': 1}, {'guesser': 'Steve', 'player': 'Kugan', 'item': 2}]}
+            data2 = websocket2.receive_json()
+            assert data2 == {'plays': [{'name': 'Kugan', 'truth1': "I'm a vegan", 'truth2': 'I have been to India', 'lie': 'I have run 5 marathons'}, {'name': 'Steve', 'truth1': 'I went to school in France', 'truth2': 'I have 5 sisters', 'lie': 'I have never eaten bread'}], 'guesses': [{'guesser': 'Kugan', 'player': 'Steve', 'item': 1}, {'guesser': 'Steve', 'player': 'Kugan', 'item': 2}]}

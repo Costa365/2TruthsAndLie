@@ -39,6 +39,7 @@ class Game:
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
             self.playerIndex = len(self.playersList)-1
+            # TODO move this the function and randomize
             play = schemas.Play(
                 name=self.playersList[self.playerIndex],
                 item1=self.players[self.playersList[self.playerIndex]].play[0],
@@ -46,15 +47,49 @@ class Game:
                 item3=self.players[self.playersList[self.playerIndex]].play[2]
             )
             await self.broadcast(play.json())
-        elif action == "lie":
-            # store the player's guess somewhere
+        elif action == "guess":
+            self.players[player].guesses[self.playersList[self.playerIndex]] = jsons['item']
+            await self.broadcast('{"guessed":"'+player+'"}')
             pass
         elif action == "all_voted":
-            # broadcast results
-            pass
-        elif action == "next_player":
-            # Move to the next player
-            pass
+            if self.playerIndex > 0:
+               self.playerIndex-=1
+               play = schemas.Play(
+                    name=self.playersList[self.playerIndex],
+                    item1=self.players[self.playersList[self.playerIndex]].play[0],
+                    item2=self.players[self.playersList[self.playerIndex]].play[1],
+                    item3=self.players[self.playersList[self.playerIndex]].play[2]
+                )
+               await self.broadcast(play.json())
+            else:
+                self.state = 'RESULTS'
+                
+                plays = []
+                for p in self.players.keys():
+                    ttl = schemas.Ttl(
+                        name=p,
+                        truth1=self.players[p].play[0],
+                        truth2=self.players[p].play[1],
+                        lie=self.players[p].play[2] 
+                    )
+                    plays.append(ttl)
+
+                guesses = []
+                for p in self.players.keys():
+                    for g in self.players[p].guesses.keys():
+                        guess = schemas.Guesses(
+                            guesser=p,
+                            player=g,
+                            item=self.players[p].guesses[g]
+                        )
+                        guesses.append(guess)
+                
+                result = schemas.Results(
+                    plays=plays,
+                    guesses=guesses
+                )
+
+                await self.broadcast(result.json())
 
     async def disconnect(self, player:str):
         self.players[player].connected = False
