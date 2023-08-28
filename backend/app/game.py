@@ -5,6 +5,7 @@ from app.player import Player
 
 import json
 
+
 class Game:
     def __init__(self, facilitator):
         self.facilitator = facilitator
@@ -13,7 +14,7 @@ class Game:
 
     async def connect(self, websocket: WebSocket, player: str):
         await websocket.accept()
-        self.players[player] = Player(player, websocket) 
+        self.players[player] = Player(player, websocket)
         self.players[player].play = ()
         await self.broadcast('{"connected":"' + player + '"}')
 
@@ -21,7 +22,7 @@ class Game:
         for playr in self.players.values():
             await playr.webSocket.send_text(data)
 
-    async def handleMessage(self, player:str, data:str):
+    async def handleMessage(self, player: str, data: str):
         jsons = json.loads(data)
         action = jsons['action']
         if action == "start":
@@ -33,7 +34,7 @@ class Game:
                 truth1 = jsons['truth1']
                 truth2 = jsons['truth2']
                 lie = jsons['lie']
-                self.players[player].play = (truth1,truth2,lie)
+                self.players[player].play = (truth1, truth2, lie)
                 await self.broadcast('{"played":"'+player+'"}')
         if action == "all_played":
             self.state = 'GUESS'
@@ -48,29 +49,32 @@ class Game:
             )
             await self.broadcast(play.json())
         elif action == "guess":
-            self.players[player].guesses[self.playersList[self.playerIndex]] = jsons['item']
+            self.players[player].guesses[self.playersList[self.playerIndex]] \
+                = jsons['item']
             await self.broadcast('{"guessed":"'+player+'"}')
             pass
         elif action == "all_voted":
             if self.playerIndex > 0:
-               self.playerIndex-=1
-               play = schemas.Play(
+                self.playerIndex -= 1
+                play = schemas.Play(
                     name=self.playersList[self.playerIndex],
-                    item1=self.players[self.playersList[self.playerIndex]].play[0],
-                    item2=self.players[self.playersList[self.playerIndex]].play[1],
-                    item3=self.players[self.playersList[self.playerIndex]].play[2]
+                    item1=self.players[
+                        self.playersList[self.playerIndex]].play[0],
+                    item2=self.players[
+                        self.playersList[self.playerIndex]].play[1],
+                    item3=self.players[
+                        self.playersList[self.playerIndex]].play[2]
                 )
-               await self.broadcast(play.json())
+                await self.broadcast(play.json())
             else:
                 self.state = 'RESULTS'
-                
                 plays = []
                 for p in self.players.keys():
                     ttl = schemas.Ttl(
                         name=p,
                         truth1=self.players[p].play[0],
                         truth2=self.players[p].play[1],
-                        lie=self.players[p].play[2] 
+                        lie=self.players[p].play[2]
                     )
                     plays.append(ttl)
 
@@ -83,7 +87,7 @@ class Game:
                             item=self.players[p].guesses[g]
                         )
                         guesses.append(guess)
-                
+
                 result = schemas.Results(
                     plays=plays,
                     guesses=guesses
@@ -91,6 +95,6 @@ class Game:
 
                 await self.broadcast(result.json())
 
-    async def disconnect(self, player:str):
+    async def disconnect(self, player: str):
         self.players[player].connected = False
         await self.broadcast('{"disconnected":"' + player + '"}')

@@ -1,10 +1,8 @@
-from typing import List, Dict
-from fastapi import FastAPI, WebSocket
-from fastapi.responses import HTMLResponse
-from collections import namedtuple
+from typing import Dict
+from fastapi import WebSocket
 from app.game import Game
-import json
 import time
+
 
 class Games:
     def __init__(self):
@@ -16,13 +14,14 @@ class Games:
         self.games[gid] = game
         return gid
 
-    async def connect(self, websocket: WebSocket, game_id: str, player_id: str):
-        if not game_id in self.games:
-          pass # throw error
+    async def connect(
+            self, websocket: WebSocket, game_id: str, player_id: str):
+        if game_id not in self.games:
+            pass  # throw error
         await self.games[game_id].connect(websocket, player_id)
 
-    async def handleMessage(self, game: str, player:str, data: str):
+    async def handleMessage(self, game: str, player: str, data: str):
         await self.games[game].handleMessage(player, data)
 
-    async def disconnect(self, game: str, player:str):
+    async def disconnect(self, game: str, player: str):
         await self.games[game].disconnect(player)

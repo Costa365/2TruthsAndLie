@@ -41,6 +41,18 @@ or
 python -m app.uvicorn main:app --reload
 ```
 
+## Linter
+
+```
+flake8 ./
+```
+
+## Run tests
+
+```
+pytest -v
+```
+
 Test endpoints:
 
 ```
