@@ -3,7 +3,7 @@ import app.schemas as schemas
 from app.games import Games
 
 app = FastAPI()
-
+games = Games()
 
 @app.get("/")
 async def get_version() -> schemas.Version:
@@ -13,10 +13,8 @@ async def get_version() -> schemas.Version:
 @app.post("/game")
 async def create_game(game: schemas.Game) -> schemas.Id:
     id = games.createGame(game.name)
-    return {"id": f"{id}"}
-
-
-games = Games()
+    s = schemas.Id(id=id)
+    return s.dict()
 
 
 @app.websocket("/ws/{game_id}/{player_id}")

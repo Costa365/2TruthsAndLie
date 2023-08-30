@@ -23,9 +23,7 @@ Should this API implement the games or just expose the API and another games ser
 
 - To Do
   - Should be able to mark a player as Facilitator 
-  - SHould be able to set the status of the game (Not started, started, waiting for plays, completed)
-
-Mongodb cluster should be created using [MongoDB Atlas](https://www.mongodb.com/)
+  - Should be able to set the status of the game (Not started, started, waiting for plays, completed)
 
 ```
 pip install fastapi
@@ -53,33 +51,18 @@ flake8 ./
 pytest -v
 ```
 
-Test endpoints:
+## Test endpoints:
 
 ```
 curl -X POST \
-  'http://127.0.0.1:8000/game' \
+  'http://localhost:8000/game' \
   --header 'Content-Type: application/json' \
-  --data-raw '{"game":"yHdVesGhsN34", "type":"This or That", "name":"Costa"}'
+  --data-raw '{"type":"This or That", "name":"Costa"}'
 
-curl -X GET 'http://127.0.0.1:8000/game/Q46gCdsbc3Jh'
-
-curl -X POST \
-  'http://127.0.0.1:8000/player' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"yHdVesGhsN34", "name":"Timothy"}'
-
-curl -X POST \
-  'http://127.0.0.1:8000/play' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "ref":"6", "data":"667"}'
-
-curl -X POST \
-  'http://127.0.0.1:8000/score' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"yHdVesGhsN34", "name":"Kevin", "score":"5"}'
+curl -X GET 'http://127.0.0.1:8
 ```
 
-Websockets
+## Websockets
 
 connect ws://localhost:8000/ws/64dbc61059/Tim
 send {"action":"start"}
