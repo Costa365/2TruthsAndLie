@@ -2,6 +2,7 @@ from typing import Dict
 from fastapi import WebSocket
 import app.schemas as schemas
 from app.player import Player
+import random
 
 import json
 
@@ -21,13 +22,18 @@ class Game:
     async def broadcast(self, data: str):
         for playr in self.players.values():
             await playr.webSocket.send_text(data)
+    
+    def getRandomIndexes(self):
+        n = random.randint(0,2)
+        return [n%3, (n+1)%3, (n+2)%3]
 
     def getPlayersPlay(self, name):
+        indexes = self.getRandomIndexes()
         return schemas.Play(
                 name=name,
-                item1=self.players[name].play[0],
-                item2=self.players[name].play[1],
-                item3=self.players[name].play[2]
+                item1=self.players[name].play[indexes[0]],
+                item2=self.players[name].play[indexes[1]],
+                item3=self.players[name].play[indexes[2]]
             )
 
     async def handleMessage(self, player: str, data: str):
