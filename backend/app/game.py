@@ -22,6 +22,14 @@ class Game:
         for playr in self.players.values():
             await playr.webSocket.send_text(data)
 
+    def getPlayersPlay(self, name):
+        return schemas.Play(
+                name=name,
+                item1=self.players[name].play[0],
+                item2=self.players[name].play[1],
+                item3=self.players[name].play[2]
+            )
+
     async def handleMessage(self, player: str, data: str):
         jsons = json.loads(data)
         action = jsons['action']
@@ -40,13 +48,7 @@ class Game:
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
             self.playerIndex = len(self.playersList)-1
-            # TODO move this the function and randomize
-            play = schemas.Play(
-                name=self.playersList[self.playerIndex],
-                item1=self.players[self.playersList[self.playerIndex]].play[0],
-                item2=self.players[self.playersList[self.playerIndex]].play[1],
-                item3=self.players[self.playersList[self.playerIndex]].play[2]
-            )
+            play = self.getPlayersPlay(self.playersList[self.playerIndex])
             await self.broadcast(play.json())
         elif action == "guess":
             self.players[player].guesses[self.playersList[self.playerIndex]] \
@@ -56,15 +58,7 @@ class Game:
         elif action == "all_voted":
             if self.playerIndex > 0:
                 self.playerIndex -= 1
-                play = schemas.Play(
-                    name=self.playersList[self.playerIndex],
-                    item1=self.players[
-                        self.playersList[self.playerIndex]].play[0],
-                    item2=self.players[
-                        self.playersList[self.playerIndex]].play[1],
-                    item3=self.players[
-                        self.playersList[self.playerIndex]].play[2]
-                )
+                play = self.getPlayersPlay(self.playersList[self.playerIndex])
                 await self.broadcast(play.json())
             else:
                 self.state = 'RESULTS'

@@ -5,6 +5,7 @@ from app.games import Games
 app = FastAPI()
 games = Games()
 
+
 @app.get("/")
 async def get_version() -> schemas.Version:
     return {"version": "Team Games API v0.1"}
