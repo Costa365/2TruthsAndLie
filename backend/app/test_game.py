@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from .main import app
+import pytest
 
 client = TestClient(app)
 
@@ -26,6 +27,15 @@ def test_join_game():
             f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
         data = websocket.receive_json()
         assert data == {"connected": "Kugan"}
+
+
+def test_join_game_that_does_not_exist():
+    with pytest.raises(ValueError) as excinfo:
+        with client.websocket_connect(
+                'ws://localhost:8000/ws/11/Kugan') as websocket:
+            data = websocket.receive_json()
+            assert data == {"connected": "Kugan"}
+    assert str(excinfo.value) == "Game does not exist"
 
 
 def test_player_disconnect():

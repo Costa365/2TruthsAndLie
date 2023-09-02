@@ -17,7 +17,7 @@ class Games:
     async def connect(
             self, websocket: WebSocket, game_id: str, player_id: str):
         if game_id not in self.games:
-            pass  # throw error
+            raise ValueError("Game does not exist")
         await self.games[game_id].connect(websocket, player_id)
 
     async def handleMessage(self, game: str, player: str, data: str):

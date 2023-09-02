@@ -22,10 +22,10 @@ class Game:
     async def broadcast(self, data: str):
         for playr in self.players.values():
             await playr.webSocket.send_text(data)
-    
+
     def getRandomIndexes(self):
-        n = random.randint(0,2)
-        return [n%3, (n+1)%3, (n+2)%3]
+        n = random.randint(0, 2)
+        return [n % 3, (n+1) % 3, (n+2) % 3]
 
     def getPlayersPlay(self, name):
         indexes = self.getRandomIndexes()
