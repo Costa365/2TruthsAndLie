@@ -1,8 +1,8 @@
-import './App.css';
+import './styles.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function App() {
+function Join() {
   const [inputText, setInputText] = useState('');
   const [response, setResponse] = useState('');
 
@@ -35,11 +35,11 @@ function App() {
           value={inputText}
           onChange={handleInputChange}
         />
-        <button onClick={handleButtonClick}>Create New Game</button>
+        <button onClick={handleButtonClick}>Join Game</button>
       </div>
 
     </div>
   );
 }
 
-export default App;
+export default Join;
