@@ -15,7 +15,7 @@ export default class App extends Component {
         <div>
           <Routes>
             <Route exact path='/' element={ <Create/> } />
-            <Route path='/join' element={ <Join/> } />
+            <Route exact path="/join/:gameid/:player?" element={ <Join/> } />
             <Route element={ <NoMatch/> } />
           </Routes>
         </div>

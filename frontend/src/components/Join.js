@@ -1,25 +1,33 @@
 import './styles.css';
 import React, { useState } from 'react';
 import axios from 'axios';
+import useWebSocket from 'react-use-websocket';
+import { useParams } from "react-router-dom";
 
 function Join() {
   const [inputText, setInputText] = useState('');
   const [response, setResponse] = useState('');
+  let { gameid, player } = useParams();
+
+  if(player!=null){
+    useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
+      onOpen: () => {
+        console.log('WebSocket connection established.');
+      }
+    });  
+  }
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
 
   const handleButtonClick = () => {
-    const apiUrl = 'http://127.0.0.1:8000/game';
-    
-    axios.post(apiUrl, { type:'2 Truths And A Lie', name: inputText })
-      .then((response) => {
-        alert(response.data['id']);
-      })
-      .catch((error) => {
-        console.error('Error sending data to the API:', error);
-      });
+    // THROW'S AN EXCEPTION. CAN ONLY BE DONE IN CTR
+    useWebSocket(`ws://localhost:8000/ws/${gameid}/${inputText}`, {
+      onOpen: () => {
+        console.log('WebSocket connection established.');
+      }
+    }); 
   };
 
   return (
