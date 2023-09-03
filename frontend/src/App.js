@@ -12,7 +12,7 @@ function App() {
 
   const handleButtonClick = () => {
     const apiUrl = 'http://127.0.0.1:8000/game';
-
+    
     axios.post(apiUrl, { type:'2 Truths And A Lie', name: inputText })
       .then((response) => {
         alert(response.data['id']);
