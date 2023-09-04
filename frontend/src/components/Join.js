@@ -1,33 +1,28 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useWebSocket from 'react-use-websocket';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function Join() {
   const [inputText, setInputText] = useState('');
   const [response, setResponse] = useState('');
   let { gameid, player } = useParams();
 
-  if(player!=null){
-    useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
-      onOpen: () => {
-        console.log('WebSocket connection established.');
-      }
-    });  
-  }
+  let navigate = useNavigate(); 
 
+  useEffect(() => {
+    if(player!=undefined){
+      navigate(`/game/${gameid}/${player}`); 
+    }
+  })
+  
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
 
   const handleButtonClick = () => {
-    // THROW'S AN EXCEPTION. CAN ONLY BE DONE IN CTR
-    useWebSocket(`ws://localhost:8000/ws/${gameid}/${inputText}`, {
-      onOpen: () => {
-        console.log('WebSocket connection established.');
-      }
-    }); 
+    navigate(`/game/${gameid}/${inputText}`); 
   };
 
   return (
