@@ -4,7 +4,6 @@ import axios from 'axios';
 
 function Create() {
   const [inputText, setInputText] = useState('');
-  const [response, setResponse] = useState('');
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);

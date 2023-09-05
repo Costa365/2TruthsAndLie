@@ -1,12 +1,9 @@
 import './styles.css';
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 
 function Game() {
-  const [inputText, setInputText] = useState('');
-  const [response, setResponse] = useState('');
   let { gameid, player } = useParams();
 
   if(player!=null){
@@ -16,10 +13,6 @@ function Game() {
       }
     });  
   }
-
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
-  };
 
   return (
     <div className="App">
