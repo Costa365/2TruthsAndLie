@@ -1,46 +1,6 @@
-curl -X POST \
-  'http://127.0.0.1:8000/game' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"type":"2 Truths And A Lie"}'
+ToDo:
 
-
-curl -X POST \
-  'http://127.0.0.1:8000/player' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"bNdVkfpQas93", "name":"Timothy"}'
-
-curl -X POST \
-  'http://127.0.0.1:8000/play' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"bNdVkfpQas93", "name":"Kevin", "ref":"6", "data":"667"}'
-
-
-curl -X POST \
-  'http://127.0.0.1:8000/score' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{"game":"bNdVkfpQas93", "name":"Kevin", "score":"5"}'
-
-curl -X GET 'http://127.0.0.1:8000/game/rPdVespQas34'
-
-curl -X GET 'http://127.0.0.1:8000/admin' \
-  -H "Accept: application/json" \
-  -H "Authorization: Bearer akljnv13bvi2vfo0b0bw"
-
-db.games.updateOne(
-   { Game: "bNdVkfpQas93" },
-   { $push: { Players: { "Name":"Freddy", "Score":0, "Plays": [] } } }
-)
-
-db.games.updateOne( { Game: "bNdVkfpQas93", "Players.Name": "Kevin" }, 
-{ $push: { "Players.$[el].Plays": { "Ref": "3", "Data": "33" } } }, 
-{ arrayFilters: [{ "el.Name": "Kevin" }], new: true })
-
-db.games.updateOne( 
-{ Game: "bNdVkfpQas93", "Players.Name": "Kevin" }, 
-{ $set: {"Players.$[el].Score": 88}},
-{ arrayFilters: [{ "el.Name": "Kevin" }]}
-)
-
+- Don't allow duplicate name
 
 MVP
 - This or That

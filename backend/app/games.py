@@ -14,6 +14,12 @@ class Games:
         self.games[gid] = game
         return gid
 
+    def getGameStatus(self, gameid: str):
+        if gameid not in self.games.keys():
+            return {"exists": False, "status": ""}
+        else:
+            return {"exists": True, "status": self.games[gameid].state}
+
     async def connect(
             self, websocket: WebSocket, game_id: str, player_id: str):
         if game_id not in self.games:

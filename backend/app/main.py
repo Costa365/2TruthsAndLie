@@ -1,4 +1,4 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import app.schemas as schemas
 from app.games import Games
@@ -23,6 +23,15 @@ app.add_middleware(
 @app.get("/")
 async def get_version() -> schemas.Version:
     return {"version": "Team Games API v0.1"}
+
+
+@app.get("/game/{game_id}")
+async def get_game(game_id: str) -> schemas.GameStatus:
+    status = games.getGameStatus(gameid=game_id)
+    s = schemas.GameStatus(exists=status["exists"], state=status["status"])
+    if s.exists is False:
+        raise HTTPException(status_code=404, detail="Game not found")
+    return s.dict()
 
 
 @app.post("/game")

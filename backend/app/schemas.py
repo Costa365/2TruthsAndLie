@@ -15,6 +15,11 @@ class Game(BaseModel):
     name: str
 
 
+class GameStatus(BaseModel):
+    exists: bool
+    state: str
+
+
 class Player(BaseModel):
     game: str
     name: str

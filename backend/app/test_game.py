@@ -14,6 +14,27 @@ def test_endpoint():
     assert 'Team Games API v0.1' in data['version']
 
 
+def test_game_exists():
+    url = ENDPOINT + '/game'
+    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    response = client.post(url, json=body)
+    data = response.json()
+    assert response.status_code == 200
+    assert 'id' in data and data.get('id') is not None
+    gid = data['id']
+
+    url = url+'/'+gid
+    response = client.get(url)
+    data = response.json()
+    assert response.status_code == 200
+    assert data.get('exists') is True
+
+    url = url+'1'
+    response = client.get(url)
+    data = response.json()
+    assert response.status_code == 404
+
+
 def test_join_game():
     url = ENDPOINT + '/game'
     body = {'type': '2 Truths And A Lie', 'name': 'costa'}
