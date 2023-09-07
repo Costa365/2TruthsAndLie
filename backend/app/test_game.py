@@ -59,6 +59,28 @@ def test_join_game_that_does_not_exist():
     assert str(excinfo.value) == "Game does not exist"
 
 
+def test_duplicate_player_name():
+    url = ENDPOINT + '/game'
+    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    response = client.post(url, json=body)
+    data = response.json()
+    assert response.status_code == 200
+    assert 'id' in data and data.get('id') is not None
+    gid = data['id']
+
+    with pytest.raises(ValueError) as excinfo:
+        with client.websocket_connect(
+                f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
+            data = websocket.receive_json()
+            assert data == {"connected": "Kugan"}
+
+            with client.websocket_connect(
+                    f'ws://localhost:8000/ws/{gid}/Kugan') as websocket2:
+                data2 = websocket2.receive_json()
+                assert data2 == {"connected": "Kugan"}
+    assert str(excinfo.value) == "Duplicate player name"
+
+
 def test_player_disconnect():
     url = ENDPOINT + '/game'
     body = {'type': '2 Truths And A Lie', 'name': 'costa'}

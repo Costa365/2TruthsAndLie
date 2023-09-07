@@ -24,6 +24,8 @@ class Games:
             self, websocket: WebSocket, game_id: str, player_id: str):
         if game_id not in self.games:
             raise ValueError("Game does not exist")
+        if player_id in self.games[game_id].players.keys():
+            raise ValueError("Duplicate player name")
         await self.games[game_id].connect(websocket, player_id)
 
     async def handleMessage(self, game: str, player: str, data: str):
