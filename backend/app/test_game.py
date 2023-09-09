@@ -106,6 +106,15 @@ def test_player_disconnect():
         data = websocket.receive_json()
         assert data == {"disconnected": "Steve"}
 
+        url = ENDPOINT + f'/game/{gid}'
+        response = client.get(url)
+        data = response.json()
+        assert response.status_code == 200
+        assert data['exists'] == True
+        assert data['state'] == 'WAITING_FOR_PLAYERS'
+        assert {'name': 'Kugan', 'online': True} in data['players']
+        assert {'name': 'Steve', 'online': False} in data['players']
+
 
 def test_game_play():
     url = ENDPOINT + '/game'
@@ -127,6 +136,15 @@ def test_game_play():
             assert data2 == {"connected": "Steve"}
             data = websocket.receive_json()
             assert data == {"connected": "Steve"}
+
+            url = ENDPOINT + f'/game/{gid}'
+            response = client.get(url)
+            data = response.json()
+            assert response.status_code == 200
+            assert data['exists'] == True
+            assert data['state'] == 'WAITING_FOR_PLAYERS'
+            assert {'name': 'Kugan', 'online': True} in data['players']
+            assert {'name': 'Steve', 'online': True} in data['players']
 
             websocket.send_json({"action": "start"})
 

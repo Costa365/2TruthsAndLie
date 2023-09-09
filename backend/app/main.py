@@ -37,7 +37,7 @@ async def get_game(gameId: str) -> schemas.GameInfo:
 async def create_game(game: schemas.Game) -> schemas.Id:
     id = games.createGame(game.name)
     s = schemas.Id(id=id)
-    return s.dict()
+    return s
 
 
 @app.websocket("/ws/{game_id}/{player_id}")
