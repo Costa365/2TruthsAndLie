@@ -37,6 +37,48 @@ class Game:
                 item3=self.players[name].play[indexes[2]]
             )
 
+    def getGameInfo(self) -> schemas.GameInfo:
+        players = []
+        for p in self.players.keys():
+            player = schemas.Player(
+                name=p,
+                online=self.players[p].connected
+            )
+            players.append(player)
+
+        return schemas.GameInfo(
+            exists=True,
+            state=self.state,
+            players=players,
+            plays=self.getPlays(),
+            guesses=self.getGuesses()
+        )
+
+    def getPlays(self):
+        plays = []
+        for p in self.players.keys():
+            if (len(self.players[p].play) > 0):
+                ttl = schemas.Ttl(
+                    name=p,
+                    truth1=self.players[p].play[0],
+                    truth2=self.players[p].play[1],
+                    lie=self.players[p].play[2]
+                )
+                plays.append(ttl)
+        return plays
+
+    def getGuesses(self):
+        guesses = []
+        for p in self.players.keys():
+            for g in self.players[p].guesses.keys():
+                guess = schemas.Guesses(
+                    guesser=p,
+                    player=g,
+                    item=self.players[p].guesses[g]
+                )
+                guesses.append(guess)
+        return guesses
+
     async def handleMessage(self, player: str, data: str):
         jsons = json.loads(data)
         action = jsons['action']
@@ -69,26 +111,8 @@ class Game:
                 await self.broadcast(play.json())
             else:
                 self.state = 'RESULTS'
-                plays = []
-                for p in self.players.keys():
-                    ttl = schemas.Ttl(
-                        name=p,
-                        truth1=self.players[p].play[0],
-                        truth2=self.players[p].play[1],
-                        lie=self.players[p].play[2]
-                    )
-                    plays.append(ttl)
-
-                guesses = []
-                for p in self.players.keys():
-                    for g in self.players[p].guesses.keys():
-                        guess = schemas.Guesses(
-                            guesser=p,
-                            player=g,
-                            item=self.players[p].guesses[g]
-                        )
-                        guesses.append(guess)
-
+                plays = self.getPlays()
+                guesses = self.getGuesses()
                 result = schemas.Results(
                     plays=plays,
                     guesses=guesses

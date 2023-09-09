@@ -1,6 +1,6 @@
 ToDo:
 
-- Don't allow duplicate name
+- Get game info endpoint so that new players get all info
 
 MVP
 - This or That

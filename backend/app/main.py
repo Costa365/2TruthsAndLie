@@ -25,13 +25,12 @@ async def get_version() -> schemas.Version:
     return {"version": "Team Games API v0.1"}
 
 
-@app.get("/game/{game_id}")
-async def get_game(game_id: str) -> schemas.GameStatus:
-    status = games.getGameStatus(gameid=game_id)
-    s = schemas.GameStatus(exists=status["exists"], state=status["status"])
-    if s.exists is False:
+@app.get("/game/{gameId}")
+async def get_game(gameId: str) -> schemas.GameInfo:
+    status = games.getGameInfo(gameId=gameId)
+    if status.exists is False:
         raise HTTPException(status_code=404, detail="Game not found")
-    return s.dict()
+    return status
 
 
 @app.post("/game")

@@ -15,14 +15,9 @@ class Game(BaseModel):
     name: str
 
 
-class GameStatus(BaseModel):
-    exists: bool
-    state: str
-
-
 class Player(BaseModel):
-    game: str
     name: str
+    online: bool
 
 
 class Play(BaseModel):
@@ -52,5 +47,13 @@ class Guesses(BaseModel):
 
 
 class Results(BaseModel):
+    plays: List[Ttl]
+    guesses: List[Guesses]
+
+
+class GameInfo(BaseModel):
+    exists: bool
+    state: str
+    players: List[Player]
     plays: List[Ttl]
     guesses: List[Guesses]

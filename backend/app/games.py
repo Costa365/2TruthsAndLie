@@ -2,6 +2,7 @@ from typing import Dict
 from fastapi import WebSocket
 from app.game import Game
 import time
+import app.schemas as schemas
 
 
 class Games:
@@ -14,19 +15,25 @@ class Games:
         self.games[gid] = game
         return gid
 
-    def getGameStatus(self, gameid: str):
-        if gameid not in self.games.keys():
-            return {"exists": False, "status": ""}
+    def getGameInfo(self, gameId: str) -> schemas.GameInfo:
+        if gameId not in self.games.keys():
+            return schemas.GameInfo(
+                exists=False,
+                state="",
+                players=[],
+                plays=[],
+                guesses=[]
+            )
         else:
-            return {"exists": True, "status": self.games[gameid].state}
+            return self.games[gameId].getGameInfo()
 
     async def connect(
-            self, websocket: WebSocket, game_id: str, player_id: str):
-        if game_id not in self.games:
+            self, websocket: WebSocket, gameId: str, player_id: str):
+        if gameId not in self.games:
             raise ValueError("Game does not exist")
-        if player_id in self.games[game_id].players.keys():
+        if player_id in self.games[gameId].players.keys():
             raise ValueError("Duplicate player name")
-        await self.games[game_id].connect(websocket, player_id)
+        await self.games[gameId].connect(websocket, player_id)
 
     async def handleMessage(self, game: str, player: str, data: str):
         await self.games[game].handleMessage(player, data)
