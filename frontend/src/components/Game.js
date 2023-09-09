@@ -1,10 +1,27 @@
 import './styles.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 
 function Game() {
   let { gameid, player } = useParams();
+
+  useEffect(() => {
+    const url = `http://localhost:8000/game/${gameid}`;
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch(url);
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.log("Error on reading games status from API", error);
+        }
+    };
+
+    fetchData();
+  }, []);
+
 
   if(player!=null){
     useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
