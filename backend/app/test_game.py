@@ -47,7 +47,7 @@ def test_join_game():
     with client.websocket_connect(
             f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
         data = websocket.receive_json()
-        assert data == {"connected": "Kugan"}
+        assert data == {"event": "connected", "player": "Kugan"}
 
 
 def test_join_game_that_does_not_exist():
@@ -55,7 +55,7 @@ def test_join_game_that_does_not_exist():
         with client.websocket_connect(
                 'ws://localhost:8000/ws/11/Kugan') as websocket:
             data = websocket.receive_json()
-            assert data == {"connected": "Kugan"}
+            assert data == {"event": "connected", "player": "Kugan"}
     assert str(excinfo.value) == "Game does not exist"
 
 
@@ -72,12 +72,12 @@ def test_duplicate_player_name():
         with client.websocket_connect(
                 f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
             data = websocket.receive_json()
-            assert data == {"connected": "Kugan"}
+            assert data == {"event": "connected", "player": "Kugan"}
 
             with client.websocket_connect(
                     f'ws://localhost:8000/ws/{gid}/Kugan') as websocket2:
                 data2 = websocket2.receive_json()
-                assert data2 == {"connected": "Kugan"}
+                assert data2 == {"event": "connected", "player": "Kugan"}
     assert str(excinfo.value) == "Duplicate player name"
 
 
@@ -93,18 +93,18 @@ def test_player_disconnect():
     with client.websocket_connect(
             f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
         data = websocket.receive_json()
-        assert data == {"connected": "Kugan"}
+        assert data == {"event": "connected", "player": "Kugan"}
 
         with client.websocket_connect(
                 f'ws://localhost:8000/ws/{gid}/Steve') as websocket2:
             data2 = websocket2.receive_json()
-            assert data2 == {"connected": "Steve"}
+            assert data2 == {"event": "connected", "player": "Steve"}
 
         data = websocket.receive_json()
-        assert data == {"connected": "Steve"}
+        assert data == {"event": "connected", "player": "Steve"}
 
         data = websocket.receive_json()
-        assert data == {"disconnected": "Steve"}
+        assert data == {"event": "disconnected", "player": "Steve"}
 
         url = ENDPOINT + f'/game/{gid}'
         response = client.get(url)
@@ -128,14 +128,14 @@ def test_game_play():
     with client.websocket_connect(
             f'ws://localhost:8000/ws/{gid}/Kugan') as websocket:
         data = websocket.receive_json()
-        assert data == {"connected": "Kugan"}
+        assert data == {"event": "connected", "player": "Kugan"}
 
         with client.websocket_connect(
                 f'ws://localhost:8000/ws/{gid}/Steve') as websocket2:
             data2 = websocket2.receive_json()
-            assert data2 == {"connected": "Steve"}
+            assert data2 == {"event": "connected", "player": "Steve"}
             data = websocket.receive_json()
-            assert data == {"connected": "Steve"}
+            assert data == {"event": "connected", "player": "Steve"}
 
             url = ENDPOINT + f'/game/{gid}'
             response = client.get(url)

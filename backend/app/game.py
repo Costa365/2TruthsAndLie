@@ -17,7 +17,7 @@ class Game:
         await websocket.accept()
         self.players[player] = Player(player, websocket)
         self.players[player].play = ()
-        await self.broadcast('{"connected":"' + player + '"}')
+        await self.broadcast('{"event":"connected","player":"' + player + '"}')
 
     async def broadcast(self, data: str):
         for playr in self.players.values():
@@ -122,4 +122,4 @@ class Game:
 
     async def disconnect(self, player: str):
         self.players[player].connected = False
-        await self.broadcast('{"disconnected":"' + player + '"}')
+        await self.broadcast('{"event":"disconnected","player":"' + player + '"}')

@@ -35,6 +35,12 @@ function Game() {
     return playerList1
   };
 
+  const handleEvent = (event) =>  {
+    const eventType = event["event"];
+    console.log(eventType)
+    return 1;
+  };
+
   if(player!=null){
     useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
       onOpen: () => {
@@ -44,8 +50,7 @@ function Game() {
       onMessage: (event) => {
         const json = JSON.parse(event.data);
         console.log('WS Event: '+JSON.stringify(json));
-
-        // Create handleEvent method - thisSession.hasOwnProperty('merchant_id')
+        handleEvent(json)
       }
       
     });  
