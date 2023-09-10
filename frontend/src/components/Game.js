@@ -1,10 +1,12 @@
 import './styles.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 
 function Game() {
   let { gameid, player } = useParams();
+  const [gameStatus, setGameStatus] = useState({});
+
 
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
@@ -13,7 +15,7 @@ function Game() {
         try {
             const response = await fetch(url);
             const json = await response.json();
-            console.log(json);
+            setGameStatus(gameStatus => (json));
         } catch (error) {
             console.log("Error on reading games status from API", error);
         }
@@ -22,6 +24,16 @@ function Game() {
     fetchData();
   }, []);
 
+  const renderPlayers = () =>  {
+    let playerList1=[]
+    if(gameStatus.players!==undefined){
+      for (let i = 0, len = gameStatus.players.length; i < len; i++) {
+        let status = gameStatus.players[i].online?"Online":"Offline";
+        playerList1.push(<li key={i}>{gameStatus.players[i].name} ({status})</li>);
+      }
+    }
+    return playerList1
+  };
 
   if(player!=null){
     useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
@@ -38,9 +50,15 @@ function Game() {
       </header>
 
       <h1>{player}</h1>
+      <div>
+        Game Status: {gameStatus.state}
+      </div>
 
       <div>
-        This is the game
+        Players: 
+        <ul>
+        {renderPlayers()}
+        </ul>
       </div>
 
     </div>

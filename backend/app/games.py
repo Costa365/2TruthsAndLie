@@ -28,12 +28,14 @@ class Games:
             return self.games[gameId].getGameInfo()
 
     async def connect(
-            self, websocket: WebSocket, gameId: str, player_id: str):
+            self, websocket: WebSocket, gameId: str, playerId: str):
         if gameId not in self.games:
             raise ValueError("Game does not exist")
-        if player_id in self.games[gameId].players.keys():
+        if playerId in self.games[gameId].players.keys() and \
+            self.games[gameId].players[playerId].connected:
             raise ValueError("Duplicate player name")
-        await self.games[gameId].connect(websocket, player_id)
+        await self.games[gameId].connect(websocket, playerId)
+        self.games[gameId].players[playerId].connected = True
 
     async def handleMessage(self, game: str, player: str, data: str):
         await self.games[game].handleMessage(player, data)
