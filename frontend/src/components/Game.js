@@ -39,7 +39,13 @@ function Game() {
     useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
       onOpen: () => {
         console.log('WebSocket connection established.');
+      },
+
+      onMessage: (event) => {
+        const json = JSON.parse(event.data);
+        console.log('WS Event: '+JSON.stringify(json));
       }
+      
     });  
   }
 
