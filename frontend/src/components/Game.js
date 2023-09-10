@@ -44,6 +44,8 @@ function Game() {
       onMessage: (event) => {
         const json = JSON.parse(event.data);
         console.log('WS Event: '+JSON.stringify(json));
+
+        // Create handleEvent method - thisSession.hasOwnProperty('merchant_id')
       }
       
     });  

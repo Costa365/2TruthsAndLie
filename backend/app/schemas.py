@@ -21,6 +21,7 @@ class Player(BaseModel):
 
 
 class Play(BaseModel):
+    event: str="guess"
     name: str
     item1: str
     item2: str
@@ -47,6 +48,7 @@ class Guesses(BaseModel):
 
 
 class Results(BaseModel):
+    event: str="results"
     plays: List[Ttl]
     guesses: List[Guesses]
 

@@ -85,14 +85,14 @@ class Game:
         if action == "start":
             if self.state == 'WAITING_FOR_PLAYERS':
                 self.state = 'STARTED'
-                await self.broadcast('{"game":"started"}')
+                await self.broadcast('{"event": "started"}')
         if action == "play":
             if self.state == 'STARTED':
                 truth1 = jsons['truth1']
                 truth2 = jsons['truth2']
                 lie = jsons['lie']
                 self.players[player].play = (truth1, truth2, lie)
-                await self.broadcast('{"played":"'+player+'"}')
+                await self.broadcast('{"event": "played", "player": "' + player +'"}')
         if action == "all_played":
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
@@ -102,7 +102,7 @@ class Game:
         elif action == "guess":
             self.players[player].guesses[self.playersList[self.playerIndex]] \
                 = jsons['item']
-            await self.broadcast('{"guessed":"'+player+'"}')
+            await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
             pass
         elif action == "all_voted":
             if self.playerIndex > 0:
