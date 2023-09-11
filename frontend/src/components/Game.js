@@ -7,7 +7,6 @@ function Game() {
   let { gameid, player } = useParams();
   const [gameStatus, setGameStatus] = useState({});
 
-
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
 
@@ -37,7 +36,35 @@ function Game() {
 
   const handleEvent = (event) =>  {
     const eventType = event["event"];
-    console.log(eventType)
+    let player = "";
+
+    switch(eventType) {
+      case "connected":
+        player = event["player"];  
+        console.log("Connected: "+player);
+        break;
+      case "disconnected":
+         player = event["player"];
+        console.log("Connected: "+player);
+        break;
+      case "started":
+        console.log("Game Started");
+        break;
+      case "played":
+        
+        break;
+      case "guess":
+        
+        break;
+      case "guessed":
+        
+        break;
+      case "results":
+        
+        break;
+      default:
+        console.log("Unknown event: " + eventType);
+    }
     return 1;
   };
 
