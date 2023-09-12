@@ -5,7 +5,26 @@ import { useParams } from "react-router-dom";
 
 function Game() {
   let { gameid, player } = useParams();
-  const [gameStatus, setGameStatus] = useState({});
+  const [players, setPlayers] = useState({});
+  const [gameStatus, setGameStatus] = useState("");
+
+
+  const updatePlayerStatus = (name, online) => {
+    let playersDict = players;
+    playersDict[name]=online;
+    setPlayers(players => (playersDict));
+  }
+
+  const readPlayerStatus = (playerStatus) => {
+    let playersDict = {}
+    if(playerStatus.players!==undefined){
+      for (let i = 0, len = playerStatus.players.length; i < len; i++) {
+        playersDict[playerStatus.players[i].name]=playerStatus.players[i].online;
+      }
+    }
+    setPlayers(players => (playersDict));
+  }
+  
 
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
@@ -14,7 +33,8 @@ function Game() {
         try {
             const response = await fetch(url);
             const json = await response.json();
-            setGameStatus(gameStatus => (json));
+            readPlayerStatus(json);
+            setGameStatus(gameStatus => (json.state));
         } catch (error) {
             console.log("Error on reading games status from API", error);
         }
@@ -24,14 +44,12 @@ function Game() {
   }, []);
 
   const renderPlayers = () =>  {
-    let playerList1=[]
-    if(gameStatus.players!==undefined){
-      for (let i = 0, len = gameStatus.players.length; i < len; i++) {
-        let status = gameStatus.players[i].online?"Online":"Offline";
-        playerList1.push(<li key={i}>{gameStatus.players[i].name} ({status})</li>);
-      }
+    let playerList=[];    
+    for (let player in players) {
+      let status = players[player]?"Online":"Offline";
+      playerList.push(<li key={player}>{player} ({status})</li>);
     }
-    return playerList1
+    return playerList;
   };
 
   const handleEvent = (event) =>  {
@@ -40,20 +58,24 @@ function Game() {
 
     switch(eventType) {
       case "connected":
-        player = event["player"];  
+        player = event["player"];
+        updatePlayerStatus(player,true);
         console.log("Connected: "+player);
         break;
       case "disconnected":
-         player = event["player"];
+        player = event["player"];
+        updatePlayerStatus(player,false);
         console.log("Connected: "+player);
         break;
       case "started":
         console.log("Game Started");
+        setGameStatus(gameStatus => ("GAME_STARTED"));
         break;
       case "played":
         
         break;
       case "guess":
+        setGameStatus(gameStatus => ("GAME_VOTE"));
         
         break;
       case "guessed":
