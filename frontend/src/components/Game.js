@@ -2,12 +2,13 @@ import './styles.css';
 import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
+import Start from './Start';
 
 function Game() {
   let { gameid, player } = useParams();
   const [players, setPlayers] = useState({});
   const [gameStatus, setGameStatus] = useState("");
-
+  const [isFacilitator, setIsFacilitator] = useState(false);
 
   const updatePlayerStatus = (name, online) => {
     let playersDict = players;
@@ -24,7 +25,6 @@ function Game() {
     }
     setPlayers(players => (playersDict));
   }
-  
 
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
@@ -34,7 +34,8 @@ function Game() {
             const response = await fetch(url);
             const json = await response.json();
             readPlayerStatus(json);
-            setGameStatus(gameStatus => (json.state));
+            setGameStatus(json.state);
+            setIsFacilitator(player === json.facilitator);
         } catch (error) {
             console.log("Error on reading games status from API", error);
         }
@@ -43,7 +44,7 @@ function Game() {
     fetchData();
   }, []);
 
-  const renderPlayers = () =>  {
+  const renderPlayers = () => {
     let playerList=[];    
     for (let player in players) {
       let status = players[player]?"Online":"Offline";
@@ -51,6 +52,11 @@ function Game() {
     }
     return playerList;
   };
+
+  const handleStartClick = () => {
+    alert("HERE!!!!")
+    //send ws
+  }
 
   const handleEvent = (event) =>  {
     const eventType = event["event"];
@@ -105,6 +111,7 @@ function Game() {
     });  
   }
 
+
   return (
     <div className="App">
       <header className="App-header">
@@ -113,7 +120,11 @@ function Game() {
 
       <h1>{player}</h1>
       <div>
-        Game Status: {gameStatus.state}
+        Game Status: {gameStatus}
+      </div>
+
+      <div>
+        {isFacilitator ? <Start onClick={handleStartClick} />:<div />}
       </div>
 
       <div>
