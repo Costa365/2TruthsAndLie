@@ -22,7 +22,8 @@ class Games:
                 state="",
                 players=[],
                 plays=[],
-                guesses=[]
+                guesses=[],
+                facilitator=""
             )
         else:
             return self.games[gameId].getGameInfo()

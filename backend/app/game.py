@@ -51,7 +51,8 @@ class Game:
             state=self.state,
             players=players,
             plays=self.getPlays(),
-            guesses=self.getGuesses()
+            guesses=self.getGuesses(),
+            facilitator=self.facilitator
         )
 
     def getPlays(self):

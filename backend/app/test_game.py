@@ -83,7 +83,7 @@ def test_duplicate_player_name():
 
 def test_player_disconnect():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
@@ -114,6 +114,7 @@ def test_player_disconnect():
         assert data['state'] == 'WAITING_FOR_PLAYERS'
         assert {'name': 'Kugan', 'online': True} in data['players']
         assert {'name': 'Steve', 'online': False} in data['players']
+        assert data['facilitator'] == "Costa"
 
 
 def test_game_play():
