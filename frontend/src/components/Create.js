@@ -1,9 +1,12 @@
 import './styles.css';
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 function Create() {
   const [inputText, setInputText] = useState('');
+  
+  let navigate = useNavigate(); 
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -14,7 +17,7 @@ function Create() {
     
     axios.post(apiUrl, { type:'2 Truths And A Lie', name: inputText })
       .then((response) => {
-        alert(response.data['id']);
+        navigate(`/game/${response.data['id']}/${inputText}`); 
       })
       .catch((error) => {
         console.error('Error sending data to the API:', error);
