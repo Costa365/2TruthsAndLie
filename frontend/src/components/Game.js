@@ -12,9 +12,21 @@ function Game() {
   const [facilitator, setFacilitator] = useState("");
   const [isFacilitator, setIsFacilitator] = useState(false);
 
-  const updatePlayerStatus = (name, online) => {
+  const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
-    playersDict[name]=online;
+    console.log(playersDict)
+    if (name in playersDict && "online" in playersDict[name]){
+      playersDict[name]["online"]=online;
+    }
+    setPlayers(players => (playersDict));
+  }
+
+  const updatePlayerPlayedStatus = (name, played) => {
+    let playersDict = players;
+    console.log(playersDict)
+    if (name in playersDict && "played" in playersDict[name]){
+      playersDict[name]["played"]=played;
+    }
     setPlayers(players => (playersDict));
   }
 
@@ -22,7 +34,10 @@ function Game() {
     let playersDict = {}
     if(playerStatus.players!==undefined){
       for (let i = 0, len = playerStatus.players.length; i < len; i++) {
-        playersDict[playerStatus.players[i].name]=playerStatus.players[i].online;
+        let statusDict = {}
+        statusDict["online"] = playerStatus.players[i].online
+        statusDict["played"] = playerStatus.players[i].played
+        playersDict[playerStatus.players[i].name]=statusDict;
       }
     }
     setPlayers(players => (playersDict));
@@ -50,11 +65,12 @@ function Game() {
   const renderPlayers = () => {
     let playerList=[];    
     for (let player in players) {
-      let status = players[player]?"Online":"Offline";
+      let status = players[player]["online"]?"Online":"Offline";
       if(player === facilitator){
         status += "⚙️"
       }
-      playerList.push(<li key={player}>{player} ({status})</li>);
+      let played = players[player]["played"]?"Played":"";
+      playerList.push(<li key={player}>{player} ({status}) ({played})</li>);
     }
     return playerList;
   };
@@ -70,12 +86,12 @@ function Game() {
     switch(eventType) {
       case "connected":
         player = event["player"];
-        updatePlayerStatus(player,true);
+        updatePlayerConnectionStatus(player,true);
         console.log("Connected: "+player);
         break;
       case "disconnected":
         player = event["player"];
-        updatePlayerStatus(player,false);
+        updatePlayerConnectionStatus(player,false);
         console.log("Connected: "+player);
         break;
       case "started":
@@ -84,6 +100,7 @@ function Game() {
         break;
       case "played":
         player = event["player"];
+        updatePlayerPlayedStatus(player,true);
         console.log("Played: "+player);
         break;
       case "guess":
@@ -142,7 +159,7 @@ function Game() {
       </div>
 
       <div>
-        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Join Game: http://localhost:8000/join/{gameid}</div>:<div />}
+        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Join Game: http://localhost:3000/join/{gameid}</div>:<div />}
       </div>
 
       <div>

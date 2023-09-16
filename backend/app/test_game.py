@@ -112,8 +112,10 @@ def test_player_disconnect():
         assert response.status_code == 200
         assert data['exists'] is True
         assert data['state'] == 'WAITING_FOR_PLAYERS'
-        assert {'name': 'Kugan', 'online': True} in data['players']
-        assert {'name': 'Steve', 'online': False} in data['players']
+        assert {'name': 'Kugan', 'online': True, "played": False} \
+            in data['players']
+        assert {'name': 'Steve', 'online': False, "played": False} \
+            in data['players']
         assert data['facilitator'] == "Costa"
 
 
@@ -144,8 +146,10 @@ def test_game_play():
             assert response.status_code == 200
             assert data['exists'] is True
             assert data['state'] == 'WAITING_FOR_PLAYERS'
-            assert {'name': 'Kugan', 'online': True} in data['players']
-            assert {'name': 'Steve', 'online': True} in data['players']
+            assert {'name': 'Kugan', 'online': True, "played": False} \
+                in data['players']
+            assert {'name': 'Steve', 'online': True, "played": False} \
+                in data['players']
 
             websocket.send_json({"action": "start"})
 
@@ -173,6 +177,15 @@ def test_game_play():
             assert data2 == {"event": "played", "player": "Steve"}
             data = websocket.receive_json()
             assert data == {"event": "played", "player": "Steve"}
+
+            url = ENDPOINT + f'/game/{gid}'
+            response = client.get(url)
+            data = response.json()
+            assert response.status_code == 200
+            assert {'name': 'Kugan', 'online': True, "played": True} \
+                in data['players']
+            assert {'name': 'Steve', 'online': True, "played": True} \
+                in data['players']
 
             websocket.send_json({"action": "all_played"})
             data = websocket.receive_json()

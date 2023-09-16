@@ -42,7 +42,8 @@ class Game:
         for p in self.players.keys():
             player = schemas.Player(
                 name=p,
-                online=self.players[p].connected
+                online=self.players[p].connected,
+                played=len(self.players[p].play) > 0
             )
             players.append(player)
 
@@ -50,8 +51,8 @@ class Game:
             exists=True,
             state=self.state,
             players=players,
-            plays=self.getPlays(),
-            guesses=self.getGuesses(),
+            # plays=self.getPlays(),
+            # guesses=self.getGuesses(),
             facilitator=self.facilitator
         )
 
