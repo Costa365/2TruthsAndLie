@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 import Start from './Start';
+import TtlInput from './TtlInput';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -82,7 +83,8 @@ function Game() {
         setGameStatus(gameStatus => ("GAME_STARTED"));
         break;
       case "played":
-        
+        player = event["player"];
+        console.log("Played: "+player);
         break;
       case "guess":
         setGameStatus(gameStatus => ("GAME_VOTE"));
@@ -114,7 +116,15 @@ function Game() {
     
   });  
 
-
+  const handleTtlSubmit = (data) => {
+    console.log('Form data submitted:', data);
+    sendJsonMessage({
+      "action": "play",
+      "truth1": data.truth1,
+      "truth2": data.truth2,
+      "lie": data.lie
+    });
+  };
 
   return (
     <div className="App">
@@ -140,6 +150,10 @@ function Game() {
         <ul>
         {renderPlayers()}
         </ul>
+      </div>
+
+      <div>
+        {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
       </div>
 
     </div>
