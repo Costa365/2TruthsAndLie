@@ -8,6 +8,7 @@ function Game() {
   let { gameid, player } = useParams();
   const [players, setPlayers] = useState({});
   const [gameStatus, setGameStatus] = useState("");
+  const [facilitator, setFacilitator] = useState("");
   const [isFacilitator, setIsFacilitator] = useState(false);
 
   const updatePlayerStatus = (name, online) => {
@@ -35,6 +36,7 @@ function Game() {
             const json = await response.json();
             readPlayerStatus(json);
             setGameStatus(json.state);
+            setFacilitator(json.facilitator);
             setIsFacilitator(player === json.facilitator);
         } catch (error) {
             console.log("Error on reading games status from API", error);
@@ -48,6 +50,9 @@ function Game() {
     let playerList=[];    
     for (let player in players) {
       let status = players[player]?"Online":"Offline";
+      if(player === facilitator){
+        status += "⚙️"
+      }
       playerList.push(<li key={player}>{player} ({status})</li>);
     }
     return playerList;
@@ -123,7 +128,11 @@ function Game() {
       </div>
 
       <div>
-        {(isFacilitator && (gameStatus == 'WAITING_FOR_PLAYERS')) ? <Start onClick={handleStartClick} />:<div />}
+        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <Start onClick={handleStartClick} />:<div />}
+      </div>
+
+      <div>
+        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Join Game: http://localhost:8000/join/{gameid}</div>:<div />}
       </div>
 
       <div>

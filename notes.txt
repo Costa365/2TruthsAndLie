@@ -1,8 +1,5 @@
 ToDo:
 
-- Show game url and redirect facilitator to game
-- Show url only for facilitator
-- Show Start game button only for facilitator
 - Show TTL fields on game start
 - Send fields to API on 'Done' click
 - Show 'End Game' button only for facilitator
