@@ -93,7 +93,8 @@ class Game:
                 truth2 = jsons['truth2']
                 lie = jsons['lie']
                 self.players[player].play = (truth1, truth2, lie)
-                await self.broadcast('{"event": "played", "player": "' + player +'"}')
+                await self.broadcast('{"event": "played", "player": "' +
+                                     player + '"}')
         if action == "all_played":
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
@@ -123,4 +124,5 @@ class Game:
 
     async def disconnect(self, player: str):
         self.players[player].connected = False
-        await self.broadcast('{"event":"disconnected","player":"' + player + '"}')
+        await self.broadcast('{"event":"disconnected","player":"' +
+                             player + '"}')

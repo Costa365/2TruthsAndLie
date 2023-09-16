@@ -33,7 +33,7 @@ class Games:
         if gameId not in self.games:
             raise ValueError("Game does not exist")
         if playerId in self.games[gameId].players.keys() and \
-            self.games[gameId].players[playerId].connected:
+                self.games[gameId].players[playerId].connected:
             raise ValueError("Duplicate player name")
         await self.games[gameId].connect(websocket, playerId)
         self.games[gameId].players[playerId].connected = True

@@ -110,7 +110,7 @@ def test_player_disconnect():
         response = client.get(url)
         data = response.json()
         assert response.status_code == 200
-        assert data['exists'] == True
+        assert data['exists'] is True
         assert data['state'] == 'WAITING_FOR_PLAYERS'
         assert {'name': 'Kugan', 'online': True} in data['players']
         assert {'name': 'Steve', 'online': False} in data['players']
@@ -142,7 +142,7 @@ def test_game_play():
             response = client.get(url)
             data = response.json()
             assert response.status_code == 200
-            assert data['exists'] == True
+            assert data['exists'] is True
             assert data['state'] == 'WAITING_FOR_PLAYERS'
             assert {'name': 'Kugan', 'online': True} in data['players']
             assert {'name': 'Steve', 'online': True} in data['players']
@@ -215,7 +215,7 @@ def test_game_play():
 
             websocket.send_json({"action": "all_voted"})
             data = websocket.receive_json()
-            expectedData = {'event':'results',
+            expectedData = {'event': 'results',
                             'plays': [{'name': 'Kugan',
                                        'truth1': "I'm a vegan",
                                        'truth2': 'I have been to India',
