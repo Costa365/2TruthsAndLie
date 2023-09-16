@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 import Start from './Start';
+import End from './AllPlayed';
 import TtlInput from './TtlInput';
+import AllPlayed from './AllPlayed';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -79,6 +81,10 @@ function Game() {
     sendJsonMessage({"action": "start"});
   }
 
+  const handleAllPlayedClick = () => {
+    sendJsonMessage({"action": "all_played"});
+  }
+
   const handleEvent = (event) =>  {
     const eventType = event["event"];
     let player = "";
@@ -96,7 +102,7 @@ function Game() {
         break;
       case "started":
         console.log("Game Started");
-        setGameStatus(gameStatus => ("GAME_STARTED"));
+        setGameStatus(gameStatus => ("STARTED"));
         break;
       case "played":
         player = event["player"];
@@ -105,7 +111,7 @@ function Game() {
         break;
       case "guess":
         setGameStatus(gameStatus => ("GAME_VOTE"));
-        
+        console.log("All played");
         break;
       case "guessed":
         
@@ -171,6 +177,10 @@ function Game() {
 
       <div>
         {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
+      </div>
+
+      <div>
+        {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
       </div>
 
     </div>
