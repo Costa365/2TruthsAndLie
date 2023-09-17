@@ -19,7 +19,7 @@ function Game() {
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
     if (!(name in playersDict)){
-      playersDict[name]={"online":online,"played":false};
+      playersDict[name]={"online":online,"played":false,"guessed":false};
     }
     else {
       playersDict[name]["online"]=online;
@@ -33,13 +33,29 @@ function Game() {
     setPlayers(players => (playersDict));
   }
 
+  const updatePlayerGuessedStatus = (name, guessed) => {
+    let playersDict = players;
+    playersDict[name]["guessed"]=guessed;
+    setPlayers(players => (playersDict));
+  }
+
+  const clearPlayerGuessedStatus = (name, guessed) => {
+    let playersDict = players;
+    for (let key in playersDict){
+      playersDict[key].guessed = false;
+    }
+    setPlayers(players => (playersDict));
+  }
+
+
   const readPlayerStatus = (playerStatus) => {
     let playersDict = {}
     if(playerStatus.players!==undefined){
       for (let i = 0, len = playerStatus.players.length; i < len; i++) {
         playersDict[playerStatus.players[i].name]={
           "online":playerStatus.players[i].online,
-          "played":playerStatus.players[i].played};
+          "played":playerStatus.players[i].played,
+          "guessed":false};
       }
     }
     setPlayers(players => (playersDict));
@@ -72,7 +88,8 @@ function Game() {
         status += "⚙️"
       }
       let played = players[player]["played"]?"Played":"";
-      playerList.push(<li key={player}>{player} ({status}) ({played})</li>);
+      let guessed = players[player]["guessed"]?"Guessed":"";
+      playerList.push(<li key={player}>{player} ({status}) {played} {guessed}</li>);
     }
     return playerList;
   };
@@ -86,6 +103,7 @@ function Game() {
   }
 
   const handleAllGuessedClick = () => {
+    clearPlayerGuessedStatus();
     sendJsonMessage({"action": "all_guessed"});
   }
 
@@ -120,10 +138,15 @@ function Game() {
         console.log("All played");
         break;
       case "guessed":
-        
+        player = event["player"];
+        updatePlayerGuessedStatus(player,true);
+        console.log("Guessed: "+player);
         break;
       case "results":
-        
+        clearPlayerGuessedStatus();
+        setGameStatus(gameStatus => ("RESULTS"));
+        //{"event":"results","plays":[{"name":"Bob","truth1":"hkjhjhkjh","truth2":"hgfhgfhgfhgf","lie":"utuytytyut"},{"name":"Nick","truth1":"hjgjhgjhgjhg","truth2":"nvnhjhjh","lie":"nnbnvnbvnbvb"}],"guesses":[{"guesser":"Bob","player":"Nick","item":2},{"guesser":"Bob","player":"Bob","item":3},{"guesser":"Nick","player":"Nick","item":3},{"guesser":"Nick","player":"Bob","item":2}]}, 
+        console.log(players);
         break;
       default:
         console.log("Unknown event: " + eventType);
@@ -155,8 +178,8 @@ function Game() {
     });
   };
 
-  const handleGuessSubmit = (data) => {
-    console.log('Form data submitted (handleGuessSubmit):' + data["lie"]);
+  const handleGuessSubmit = (guess) => {
+    sendJsonMessage({"action": "guess", "item": guess});
   };
 
   return (
@@ -194,7 +217,7 @@ function Game() {
       </div>
 
       <div>
-        {(gameStatus === 'GUESS') ? <GuessTtl props={playersTtl} onClick={handleGuessSubmit} />:<div />}
+        {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
       </div>
 
       <div>
