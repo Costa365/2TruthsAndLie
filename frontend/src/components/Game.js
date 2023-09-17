@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import Start from './Start';
 import TtlInput from './TtlInput';
 import AllPlayed from './AllPlayed';
+import AllGuessed from './AllGuessed';
+import GuessTtl from './GuessTtl';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -12,6 +14,7 @@ function Game() {
   const [gameStatus, setGameStatus] = useState("");
   const [facilitator, setFacilitator] = useState("");
   const [isFacilitator, setIsFacilitator] = useState(false);
+  const [playersTtl, setPlayersTtl] = useState({});
 
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
@@ -82,6 +85,10 @@ function Game() {
     sendJsonMessage({"action": "all_played"});
   }
 
+  const handleAllGuessedClick = () => {
+    sendJsonMessage({"action": "all_guessed"});
+  }
+
   const handleEvent = (event) =>  {
     const eventType = event["event"];
     let player = "";
@@ -107,7 +114,9 @@ function Game() {
         console.log("Played: "+player);
         break;
       case "guess":
-        setGameStatus(gameStatus => ("GAME_VOTE"));
+        setGameStatus(gameStatus => ("GUESS"));
+        setPlayersTtl(event);
+        console.log(event);
         console.log("All played");
         break;
       case "guessed":
@@ -137,13 +146,17 @@ function Game() {
   });  
 
   const handleTtlSubmit = (data) => {
-    console.log('Form data submitted:', data);
+    console.log('Form data submitted (handleTtlSubmit):', data);
     sendJsonMessage({
       "action": "play",
       "truth1": data.truth1,
       "truth2": data.truth2,
       "lie": data.lie
     });
+  };
+
+  const handleGuessSubmit = (data) => {
+    console.log('Form data submitted (handleGuessSubmit):' + data["lie"]);
   };
 
   return (
@@ -178,6 +191,14 @@ function Game() {
 
       <div>
         {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
+      </div>
+
+      <div>
+        {(gameStatus === 'GUESS') ? <GuessTtl props={playersTtl} onClick={handleGuessSubmit} />:<div />}
+      </div>
+
+      <div>
+        {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
       </div>
 
     </div>

@@ -107,7 +107,7 @@ class Game:
                 = jsons['item']
             await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
             pass
-        elif action == "all_voted":
+        elif action == "all_guessed":
             if self.playerIndex > 0:
                 self.playerIndex -= 1
                 play = self.getPlayersPlay(self.playersList[self.playerIndex])
