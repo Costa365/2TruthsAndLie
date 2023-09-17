@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 import Start from './Start';
-import End from './AllPlayed';
 import TtlInput from './TtlInput';
 import AllPlayed from './AllPlayed';
 
@@ -45,7 +44,7 @@ function Game() {
 
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
-    
+
     const fetchData = async () => {
         try {
             const response = await fetch(url);
