@@ -1,6 +1,6 @@
 ToDo:
 
-- Show TTL fields on game start
+- Orevent player from joining from GUESS onwards
 - Send fields to API on 'Done' click
 - Show 'End Game' button only for facilitator
 

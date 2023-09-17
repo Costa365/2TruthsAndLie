@@ -16,19 +16,18 @@ function Game() {
 
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
-    console.log(playersDict)
-    if (name in playersDict && "online" in playersDict[name]){
+    if (!(name in playersDict)){
+      playersDict[name]={"online":online,"played":false};
+    }
+    else {
       playersDict[name]["online"]=online;
     }
-    setPlayers(players => (playersDict));
+    setPlayers(playersDict);
   }
 
   const updatePlayerPlayedStatus = (name, played) => {
     let playersDict = players;
-    console.log(playersDict)
-    if (name in playersDict && "played" in playersDict[name]){
-      playersDict[name]["played"]=played;
-    }
+    playersDict[name]["played"]=played;
     setPlayers(players => (playersDict));
   }
 
@@ -36,10 +35,9 @@ function Game() {
     let playersDict = {}
     if(playerStatus.players!==undefined){
       for (let i = 0, len = playerStatus.players.length; i < len; i++) {
-        let statusDict = {}
-        statusDict["online"] = playerStatus.players[i].online
-        statusDict["played"] = playerStatus.players[i].played
-        playersDict[playerStatus.players[i].name]=statusDict;
+        playersDict[playerStatus.players[i].name]={
+          "online":playerStatus.players[i].online,
+          "played":playerStatus.players[i].played};
       }
     }
     setPlayers(players => (playersDict));
@@ -47,7 +45,7 @@ function Game() {
 
   useEffect(() => {
     const url = `http://localhost:8000/game/${gameid}`;
-
+    
     const fetchData = async () => {
         try {
             const response = await fetch(url);
@@ -126,14 +124,14 @@ function Game() {
   };
 
 
-  const { lastMessage, readyState, sendJsonMessage } = useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
+  const { readyState, sendJsonMessage } = useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
     onOpen: () => {
       console.log('WebSocket connection established.');
     },
 
     onMessage: (event) => {
       const json = JSON.parse(event.data);
-      console.log('WS Event: '+JSON.stringify(json));
+      console.log('WS Event: '+JSON.stringify(json)+ ", readyState="+readyState.toString());
       handleEvent(json)
     }
     
