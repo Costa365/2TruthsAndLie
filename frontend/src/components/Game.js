@@ -133,6 +133,7 @@ function Game() {
         break;
       case "guess":
         setGameStatus(gameStatus => ("GUESS"));
+        clearPlayerGuessedStatus();
         setPlayersTtl(event);
         console.log(event);
         console.log("All played");

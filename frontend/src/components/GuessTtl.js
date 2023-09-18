@@ -46,7 +46,7 @@ function GuessTtl( {onClick, props, player} ) {
     );
   }
 
-  if(player == props.name){
+  if(player === props.name){
     return cannotGuessOwn();
   }
   else {
