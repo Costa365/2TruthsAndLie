@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from "react-router-dom";
 import Start from './Start';
+import Header from './Header';
 import TtlInput from './TtlInput';
 import AllPlayed from './AllPlayed';
 import AllGuessed from './AllGuessed';
@@ -185,10 +186,7 @@ function Game() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>2 Truths And A Lie</p>
-      </header>
-
+      <Header />
       <h1>{player}</h1>
       <div>
         Game Status: {gameStatus}

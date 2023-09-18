@@ -2,6 +2,7 @@ import './styles.css';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Header from './Header';
 
 function Create() {
   const [inputText, setInputText] = useState('');
@@ -26,9 +27,7 @@ function Create() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>2 Truths And A Lie</p>
-      </header>
+      <Header />
 
       <div>
         <input
@@ -37,7 +36,7 @@ function Create() {
           value={inputText}
           onChange={handleInputChange}
         />
-        <button onClick={handleButtonClick}>Create New Game</button>
+        <button className="button-create" onClick={handleButtonClick}>Create New Game</button>
       </div>
 
     </div>

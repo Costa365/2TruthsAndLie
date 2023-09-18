@@ -1,6 +1,7 @@
 import './styles.css';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
+import Header from './Header';
 
 function Join() {
   const [inputText, setInputText] = useState('');
@@ -24,10 +25,7 @@ function Join() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>2 Truths And A Lie</p>
-      </header>
-
+      <Header />
       <div>
         <input
           type="text"

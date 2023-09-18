@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #16171b;
+  color: white;
 }
 
 code {
@@ -20,13 +22,49 @@ code {
   background-color: #282c34;
   min-height: 5vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction:row;
+  align-items:center;
+  justify-content:flex-start;
+  font-size: calc(15px + 2vmin);
   color: white;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.App-logo {
+  height: 60px;
+  margin: 5px;
+}
+
+.button-create {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  margin: 5px;
+}
+
+input{
+  border-radius: 4px;
+  margin: 5px;
+  background-color: #26272b;
+  height: 31px;
+  width: 240px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border: none;
+  color: #eeeeee;
+  border: 1px solid #212020;
+}
+
+input:focus {
+  outline: none !important;
+  border:1px solid rgb(69, 68, 68);
 }
