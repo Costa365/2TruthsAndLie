@@ -25,6 +25,12 @@ function Create() {
       });
   };
 
+  const handleKeyUp = (event) => {
+    if (event.keyCode == 13) {
+      handleButtonClick();
+    }
+  };
+
   return (
     <div className="App">
       <Header />
@@ -35,8 +41,9 @@ function Create() {
           placeholder="Enter Name"
           value={inputText}
           onChange={handleInputChange}
+          onKeyUp={handleKeyUp}
         />
-        <button className="button-create" onClick={handleButtonClick}>Create New Game</button>
+        <button id="button" onClick={handleButtonClick}>Create New Game</button>
       </div>
 
     </div>

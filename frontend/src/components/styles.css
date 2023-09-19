@@ -24,7 +24,7 @@ code {
   display: flex;
   flex-direction:row;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center;
   font-size: calc(15px + 2vmin);
   color: white;
 }
@@ -38,7 +38,7 @@ code {
   margin: 5px;
 }
 
-.button-create {
+button {
   background-color: #4CAF50;
   border: none;
   color: white;

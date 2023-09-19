@@ -23,6 +23,12 @@ function Join() {
     navigate(`/game/${gameid}/${inputText}`); 
   };
 
+  const handleKeyUp = (event) => {
+    if (event.keyCode == 13) {
+      handleButtonClick();
+    }
+  };
+
   return (
     <div className="App">
       <Header />
@@ -32,6 +38,7 @@ function Join() {
           placeholder="Enter Name"
           value={inputText}
           onChange={handleInputChange}
+          onKeyUp={handleKeyUp}
         />
         <button onClick={handleButtonClick}>Join Game</button>
       </div>
