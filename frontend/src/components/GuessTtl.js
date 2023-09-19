@@ -27,19 +27,19 @@ function GuessTtl( {onClick, props, player} ) {
     return (
       <div>
         <div>
-          <div>Guess lie of {props.name}</div>
-          <label>
+          <div className='section'>Guess lie of {props.name}</div>
+          <div><label>
             <input type="radio" value="1" checked={lie === 1} onChange={onChangeValue} />
             <span>{props.item1}</span>
-          </label>
-          <label>
+          </label></div>
+          <div><label>
             <input type="radio" value="2" checked={lie === 2} onChange={onChangeValue} />
             <span>{props.item2}</span>
-          </label>
-          <label>
+          </label></div>
+          <div><label>
             <input type="radio" value="3" checked={lie === 3} onChange={onChangeValue} />
             <span>{props.item3}</span>
-          </label>
+          </label></div>
         </div>
         <button onClick={handleClick}>Send Guess</button>
       </div>

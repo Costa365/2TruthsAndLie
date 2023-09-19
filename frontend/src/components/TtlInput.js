@@ -53,7 +53,9 @@ function TtlInput({ onSubmit }) {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <div className='section'>
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );

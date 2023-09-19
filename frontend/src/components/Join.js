@@ -32,7 +32,7 @@ function Join() {
   return (
     <div className="App">
       <Header />
-      <div>
+      <div className='section'>
         <input
           type="text"
           placeholder="Enter Name"

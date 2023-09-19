@@ -4,7 +4,7 @@ import React from 'react';
 function Start({onClick }) {
   
   return (
-    <div>
+    <div className='section'>
       <button onClick={onClick}>Start Game</button>
     </div>
   );

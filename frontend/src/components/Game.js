@@ -83,14 +83,19 @@ function Game() {
 
   const renderPlayers = () => {
     let playerList=[];    
-    for (let player in players) {
-      let status = players[player]["online"]?"Online":"Offline";
-      if(player === facilitator){
+    for (let playerName in players) {
+      let status = players[playerName]["online"]?"Online":"Offline";
+      if(playerName === facilitator){
         status += "⚙️"
       }
-      let played = players[player]["played"]?"Played":"";
-      let guessed = players[player]["guessed"]?"Guessed":"";
-      playerList.push(<li key={player}>{player} ({status}) {played} {guessed}</li>);
+      let played = players[playerName]["played"]?"Played":"";
+      let guessed = players[playerName]["guessed"]?"Guessed":"";
+      if(player===playerName){
+        playerList.push(<li key={playerName}><b>{playerName}</b> ({status}) {played} {guessed}</li>);
+      }
+      else{
+        playerList.push(<li key={playerName}>{playerName} ({status}) {played} {guessed}</li>);
+      }
     }
     return playerList;
   };
@@ -187,39 +192,40 @@ function Game() {
   return (
     <div className="App">
       <Header />
-      <h1>{player}</h1>
-      <div>
+      <div className='section'>
         Game Status: {gameStatus}
       </div>
 
-      <div>
-        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <Start onClick={handleStartClick} />:<div />}
-      </div>
-
-      <div>
+      <div className='section'>
         {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Join Game: http://localhost:3000/join/{gameid}</div>:<div />}
       </div>
 
       <div>
-        Players: 
+        <h2>Players</h2>
+        <div className='parent'>
         <ul>
         {renderPlayers()}
         </ul>
+        </div>
       </div>
 
-      <div>
+      <div className='section'>
+        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <Start onClick={handleStartClick} />:<div />}
+      </div>
+
+      <div className='section'>
         {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
       </div>
 
-      <div>
+      <div className='section'>
         {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
       </div>
 
-      <div>
+      <div className='section'>
         {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
       </div>
 
-      <div>
+      <div className='section'>
         {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
       </div>
 
