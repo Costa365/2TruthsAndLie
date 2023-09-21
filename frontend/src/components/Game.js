@@ -197,7 +197,7 @@ function Game() {
       </div>
 
       <div className='section'>
-        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Join Game: http://localhost:3000/join/{gameid}</div>:<div />}
+        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Players can join the game using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
       </div>
 
       <div>

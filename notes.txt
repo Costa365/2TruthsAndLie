@@ -1,6 +1,7 @@
 ToDo:
 
-- Orevent player from joining from GUESS onwards
+- Add player TTL guess to status GET
+- Prevent player from joining from GUESS onwards
 - Send fields to API on 'Done' click
 - Show 'End Game' button only for facilitator
 
