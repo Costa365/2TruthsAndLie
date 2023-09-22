@@ -73,6 +73,7 @@ function Game() {
             setGameStatus(json.state);
             setFacilitator(json.facilitator);
             setIsFacilitator(player === json.facilitator);
+            setPlayersTtl(json.playBeingGuessed)
         } catch (error) {
             console.log("Error on reading games status from API", error);
         }

@@ -17,13 +17,18 @@ class Games:
 
     def getGameInfo(self, gameId: str) -> schemas.GameInfo:
         if gameId not in self.games.keys():
+            playBeingGuessed = schemas.Play(
+                name="",
+                item1="",
+                item2="",
+                item3=""
+            )
             return schemas.GameInfo(
                 exists=False,
                 state="",
                 players=[],
-                plays=[],
-                guesses=[],
-                facilitator=""
+                facilitator="",
+                playBeingGuessed=playBeingGuessed
             )
         else:
             return self.games[gameId].getGameInfo()

@@ -12,6 +12,8 @@ class Game:
         self.facilitator = facilitator
         self.players: Dict[Player] = {}
         self.state = 'WAITING_FOR_PLAYERS'
+        self.playersList = []
+        self.playerIndex = 0
 
     async def connect(self, websocket: WebSocket, player: str):
         await websocket.accept()
@@ -28,7 +30,7 @@ class Game:
         n = random.randint(0, 2)
         return [n % 3, (n+1) % 3, (n+2) % 3]
 
-    def getPlayersPlay(self, name):
+    def getPlayersPlay(self, name) -> schemas.Play:
         indexes = self.getRandomIndexes()
         return schemas.Play(
                 name=name,
@@ -47,13 +49,23 @@ class Game:
             )
             players.append(player)
 
+        playBeingGuessed = schemas.Play(
+                name="",
+                item1="",
+                item2="",
+                item3=""
+            )
+
+        if (len(self.playersList) > 0):
+            playBeingGuessed = self.getPlayersPlay(
+                self.playersList[self.playerIndex])
+
         return schemas.GameInfo(
             exists=True,
             state=self.state,
             players=players,
-            # plays=self.getPlays(),
-            # guesses=self.getGuesses(),
-            facilitator=self.facilitator
+            facilitator=self.facilitator,
+            playBeingGuessed=playBeingGuessed
         )
 
     def getPlays(self):

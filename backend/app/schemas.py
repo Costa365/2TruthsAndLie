@@ -58,6 +58,5 @@ class GameInfo(BaseModel):
     exists: bool
     state: str
     players: List[Player]
-    # plays: List[Ttl]
-    # guesses: List[Guesses]
     facilitator: str
+    playBeingGuessed: Play
