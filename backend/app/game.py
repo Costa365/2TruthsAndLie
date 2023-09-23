@@ -32,12 +32,17 @@ class Game:
 
     def getPlayersPlay(self, name) -> schemas.Play:
         indexes = self.getRandomIndexes()
-        return schemas.Play(
-                name=name,
-                item1=self.players[name].play[indexes[0]],
-                item2=self.players[name].play[indexes[1]],
-                item3=self.players[name].play[indexes[2]]
-            )
+        if(len(self.players[name].play) > 0):
+            return schemas.Play(
+                    name=name,
+                    item1=self.players[name].play[indexes[0]],
+                    item2=self.players[name].play[indexes[1]],
+                    item3=self.players[name].play[indexes[2]]
+                )
+        else:
+            return schemas.Play(
+                    name=name,item1="",item2="",item3=""
+                )
 
     def getGameInfo(self) -> schemas.GameInfo:
         players = []
@@ -120,6 +125,7 @@ class Game:
             await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
             pass
         elif action == "all_guessed":
+            # TODO skip if all ""
             if self.playerIndex > 0:
                 self.playerIndex -= 1
                 play = self.getPlayersPlay(self.playersList[self.playerIndex])
