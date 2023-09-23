@@ -97,6 +97,15 @@ class Game:
                 )
                 guesses.append(guess)
         return guesses
+    
+    async def broadcastNextPlayerToGuess(self):
+        while self.playerIndex > 0:
+            self.playerIndex -= 1
+            play = self.getPlayersPlay(self.playersList[self.playerIndex])
+            if(len(play.item1+play.item2+play.item3)>0):
+                await self.broadcast(play.json())       
+                return  True
+        return False
 
     async def handleMessage(self, player: str, data: str):
         jsons = json.loads(data)
@@ -117,29 +126,30 @@ class Game:
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
             self.playerIndex = len(self.playersList)-1
-            play = self.getPlayersPlay(self.playersList[self.playerIndex])
-            await self.broadcast(play.json())
+            await self.broadcastNextPlayerToGuess()
         elif action == "guess":
             self.players[player].guesses[self.playersList[self.playerIndex]] \
                 = jsons['item']
             await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
             pass
         elif action == "all_guessed":
-            # TODO skip if all ""
-            if self.playerIndex > 0:
-                self.playerIndex -= 1
-                play = self.getPlayersPlay(self.playersList[self.playerIndex])
-                await self.broadcast(play.json())
-            else:
-                self.state = 'RESULTS'
-                plays = self.getPlays()
-                guesses = self.getGuesses()
-                result = schemas.Results(
-                    plays=plays,
-                    guesses=guesses
-                )
+            print("all_guessed")
+            while True:
+                print("all_guessed" + str(self.playerIndex))
+                if self.playerIndex <= 0:
+                    self.state = 'RESULTS'
+                    plays = self.getPlays()
+                    guesses = self.getGuesses()
+                    result = schemas.Results(
+                        plays=plays,
+                        guesses=guesses
+                    )
+                    await self.broadcast(result.json())
+                    return
 
-                await self.broadcast(result.json())
+                broadcasted = await self.broadcastNextPlayerToGuess()
+                if(broadcasted):
+                    return  
 
     async def disconnect(self, player: str):
         self.players[player].connected = False
