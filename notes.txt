@@ -1,9 +1,8 @@
 ToDo:
 
-- Add player TTL guess to status GET
-- Prevent player from joining from GUESS onwards
-- Send fields to API on 'Done' click
-- Show 'End Game' button only for facilitator
+- Show join URL in STARTED state too
+- Prevent player from joining from GUESS onwards (Doesn't actually matter )
+- UI stuff
 
 MVP
 - This or That
