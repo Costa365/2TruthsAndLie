@@ -32,7 +32,7 @@ class Game:
 
     def getPlayersPlay(self, name) -> schemas.Play:
         indexes = self.getRandomIndexes()
-        if(len(self.players[name].play) > 0):
+        if (len(self.players[name].play) > 0):
             return schemas.Play(
                     name=name,
                     item1=self.players[name].play[indexes[0]],
@@ -41,7 +41,7 @@ class Game:
                 )
         else:
             return schemas.Play(
-                    name=name,item1="",item2="",item3=""
+                    name=name, item1="", item2="", item3=""
                 )
 
     def getGameInfo(self) -> schemas.GameInfo:
@@ -97,14 +97,14 @@ class Game:
                 )
                 guesses.append(guess)
         return guesses
-    
+
     async def broadcastNextPlayerToGuess(self):
         while self.playerIndex > 0:
             self.playerIndex -= 1
             play = self.getPlayersPlay(self.playersList[self.playerIndex])
-            if(len(play.item1+play.item2+play.item3)>0):
-                await self.broadcast(play.json())       
-                return  True
+            if (len(play.item1+play.item2+play.item3) > 0):
+                await self.broadcast(play.json())
+                return True
         return False
 
     async def handleMessage(self, player: str, data: str):
@@ -125,7 +125,7 @@ class Game:
         if action == "all_played":
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
-            self.playerIndex = len(self.playersList)-1
+            self.playerIndex = len(self.playersList)
             await self.broadcastNextPlayerToGuess()
         elif action == "guess":
             self.players[player].guesses[self.playersList[self.playerIndex]] \
@@ -133,9 +133,7 @@ class Game:
             await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
             pass
         elif action == "all_guessed":
-            print("all_guessed")
             while True:
-                print("all_guessed" + str(self.playerIndex))
                 if self.playerIndex <= 0:
                     self.state = 'RESULTS'
                     plays = self.getPlays()
@@ -148,8 +146,8 @@ class Game:
                     return
 
                 broadcasted = await self.broadcastNextPlayerToGuess()
-                if(broadcasted):
-                    return  
+                if (broadcasted):
+                    return
 
     async def disconnect(self, player: str):
         self.players[player].connected = False
