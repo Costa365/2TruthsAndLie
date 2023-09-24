@@ -111,7 +111,7 @@ def test_player_disconnect():
         data = response.json()
         assert response.status_code == 200
         assert data['exists'] is True
-        assert data['state'] == 'WAITING_FOR_PLAYERS'
+        assert data['state'] == 'WAITING'
         assert {'name': 'Kugan', 'online': True, "played": False} \
             in data['players']
         assert {'name': 'Steve', 'online': False, "played": False} \
@@ -145,7 +145,7 @@ def test_game_play():
             data = response.json()
             assert response.status_code == 200
             assert data['exists'] is True
-            assert data['state'] == 'WAITING_FOR_PLAYERS'
+            assert data['state'] == 'WAITING'
             assert {'name': 'Kugan', 'online': True, "played": False} \
                 in data['players']
             assert {'name': 'Steve', 'online': True, "played": False} \

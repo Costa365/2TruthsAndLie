@@ -11,7 +11,7 @@ class Game:
     def __init__(self, facilitator):
         self.facilitator = facilitator
         self.players: Dict[Player] = {}
-        self.state = 'WAITING_FOR_PLAYERS'
+        self.state = 'WAITING'
         self.playersList = []
         self.playerIndex = 0
 
@@ -111,7 +111,7 @@ class Game:
         jsons = json.loads(data)
         action = jsons['action']
         if action == "start":
-            if self.state == 'WAITING_FOR_PLAYERS':
+            if self.state == 'WAITING':
                 self.state = 'STARTED'
                 await self.broadcast('{"event": "started"}')
         if action == "play":

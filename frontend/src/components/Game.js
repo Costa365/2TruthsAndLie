@@ -8,6 +8,7 @@ import TtlInput from './TtlInput';
 import AllPlayed from './AllPlayed';
 import AllGuessed from './AllGuessed';
 import GuessTtl from './GuessTtl';
+import Status from './Status';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -193,12 +194,10 @@ function Game() {
   return (
     <div className="App">
       <Header />
-      <div className='section'>
-        Game Status: {gameStatus}
-      </div>
+      <Status status={gameStatus}/>
 
       <div className='section'>
-        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <div>Players can join the game using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
+        {(isFacilitator && (gameStatus === 'WAITING')) ? <div>Players can join the game using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
       </div>
 
       <div>
@@ -211,7 +210,7 @@ function Game() {
       </div>
 
       <div className='section'>
-        {(isFacilitator && (gameStatus === 'WAITING_FOR_PLAYERS')) ? <Start onClick={handleStartClick} />:<div />}
+        {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
       </div>
 
       <div className='section'>
