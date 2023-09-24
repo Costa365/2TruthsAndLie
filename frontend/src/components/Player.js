@@ -1,11 +1,11 @@
 import './styles.css';
 import React from 'react';
 
-function Player({name, online, played, guessed}) {
+function Player({name, online, played, guessed, isMe, isFaciliator}) {
   
   return (
     <div className='player-div'>
-      {name} | {online} | {played} | {guessed}
+      {name} ({isMe}) ({isFaciliator}) | {online} | {played} | {guessed}
     </div>
   );
 }
