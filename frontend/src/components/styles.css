@@ -52,6 +52,26 @@ code {
   font-weight: bold;
 }
 
+.players-div {
+  background-color: #282525;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.player-div {
+  background-color: #244e62;
+  color: rgb(255, 255, 255);
+  padding: 4px;
+  height: fit-content;
+  width: fit-content;
+  margin: 2px;
+  border-radius: 4px;
+}
+
 button {
   background-color: #4CAF50;
   border: none;

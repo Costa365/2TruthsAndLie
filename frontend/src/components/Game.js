@@ -9,6 +9,7 @@ import AllPlayed from './AllPlayed';
 import AllGuessed from './AllGuessed';
 import GuessTtl from './GuessTtl';
 import Status from './Status';
+import Players from './Players';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -82,25 +83,6 @@ function Game() {
 
     fetchData();
   }, []);
-
-  const renderPlayers = () => {
-    let playerList=[];    
-    for (let playerName in players) {
-      let status = players[playerName]["online"]?"Online":"Offline";
-      if(playerName === facilitator){
-        status += "⚙️"
-      }
-      let played = players[playerName]["played"]?"Played":"";
-      let guessed = players[playerName]["guessed"]?"Guessed":"";
-      if(player===playerName){
-        playerList.push(<li key={playerName}><b>{playerName}</b> ({status}) {played} {guessed}</li>);
-      }
-      else{
-        playerList.push(<li key={playerName}>{playerName} ({status}) {played} {guessed}</li>);
-      }
-    }
-    return playerList;
-  };
 
   const handleStartClick = () => {
     sendJsonMessage({"action": "start"});
@@ -196,14 +178,7 @@ function Game() {
       <Header />
       <Status status={gameStatus}/>
 
-      <div>
-        <h2>Players</h2>
-        <div className='parent'>
-        <ul>
-        {renderPlayers()}
-        </ul>
-        </div>
-      </div>
+      <Players players={players} player={player} facilitator={facilitator} />
 
       <div className='section'>
         {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
