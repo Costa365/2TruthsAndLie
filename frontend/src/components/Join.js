@@ -35,7 +35,7 @@ function Join() {
       <div className='section'>
         <input
           type="text"
-          placeholder="Enter Name"
+          placeholder="Enter Your Name"
           value={inputText}
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}
