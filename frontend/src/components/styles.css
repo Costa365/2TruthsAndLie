@@ -65,8 +65,26 @@ button {
   margin: 5px;
 }
 
+button:hover {
+  background-color: #258628;
+}
+
+button:active {
+  background-color: #1b671e;
+  transform: translateY(1px);
+}
+
 .admin-button {
   background-color: #5e1d6b;
+}
+
+.admin-button:hover {
+  background-color: #51175d;
+}
+
+.admin-button:active {
+  background-color: #4a1654;
+  transform: translateY(1px);
 }
 
 input{
