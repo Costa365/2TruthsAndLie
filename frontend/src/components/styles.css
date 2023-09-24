@@ -65,6 +65,10 @@ button {
   margin: 5px;
 }
 
+.admin-button {
+  background-color: #5e1d6b;
+}
+
 input{
   border-radius: 4px;
   margin: 7px;
@@ -95,6 +99,12 @@ input:focus {
   margin-top: 12px;
   margin-bottom: 12px;
 } 
+
+.facilitator {
+  background-color: #333333;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+}
 /*
 label {
   display: inline-block;

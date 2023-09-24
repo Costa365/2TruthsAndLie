@@ -25,6 +25,9 @@ function Status({status}) {
         setWaitingClass('status-off'); setStartedClass('status-off');
         setGuessingClass('status-off'); setResultsClass('status-on');
         break;
+      default:
+        setWaitingClass('status-off'); setStartedClass('status-off');
+        setGuessingClass('status-off'); setResultsClass('status-off');
     }
   }, [status]);
   

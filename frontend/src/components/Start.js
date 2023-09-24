@@ -5,7 +5,7 @@ function Start({onClick }) {
   
   return (
     <div className='section'>
-      <button onClick={onClick}>Start Game</button>
+      <button className='admin-button' onClick={onClick}>Start Game</button>
     </div>
   );
 }

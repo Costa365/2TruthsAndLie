@@ -196,10 +196,6 @@ function Game() {
       <Header />
       <Status status={gameStatus}/>
 
-      <div className='section'>
-        {(isFacilitator && (gameStatus === 'WAITING')) ? <div>Players can join the game using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
-      </div>
-
       <div>
         <h2>Players</h2>
         <div className='parent'>
@@ -210,23 +206,29 @@ function Game() {
       </div>
 
       <div className='section'>
-        {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
-      </div>
-
-      <div className='section'>
         {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
-      </div>
-
-      <div className='section'>
-        {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
       </div>
 
       <div className='section'>
         {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
       </div>
 
-      <div className='section'>
-        {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
+      <div className='facilitator'>
+        <div className='section'>
+          {isFacilitator ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
+        </div>
+
+        <div className='section'>
+          {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
+        </div>
+
+        <div className='section'>
+          {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
+        </div>
+
+        <div className='section'>
+          {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
+        </div>
       </div>
 
     </div>
