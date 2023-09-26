@@ -66,10 +66,24 @@ code {
   background-color: #244e62;
   color: rgb(255, 255, 255);
   padding: 4px;
-  height: fit-content;
+  height: 20px;
   width: fit-content;
   margin: 2px;
   border-radius: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.player-div-you {
+  background-color: #622443;
+  color: rgb(255, 255, 255);
+  padding: 4px;
+  height: 20px;
+  width: fit-content;
+  margin: 2px;
+  border-radius: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 button {
@@ -143,6 +157,22 @@ input:focus {
   color: rgb(255, 255, 255);
   padding: 10px;
 }
+
+.img-player-on {
+  height: 20px;
+  width: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.img-player-off {
+  height: 20px;
+  width: 20px;
+  padding-left: 3px;
+  padding-right: 3px;
+  opacity: 0.06;
+}
+
 /*
 label {
   display: inline-block;

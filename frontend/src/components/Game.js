@@ -110,7 +110,7 @@ function Game() {
       case "disconnected":
         player = event["player"];
         updatePlayerConnectionStatus(player,false);
-        console.log("Connected: "+player);
+        console.log("Disconnected: "+player);
         break;
       case "started":
         console.log("Game Started");
