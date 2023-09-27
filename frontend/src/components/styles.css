@@ -44,7 +44,7 @@ code {
 }
 
 .status-off {
-  color: rgb(72, 72, 72);
+  color: rgb(136, 136, 136);
 }
 
 .status-on {
@@ -63,7 +63,7 @@ code {
 }
 
 .player-div {
-  background-color: #244e62;
+  background-color: #217faa;
   color: rgb(255, 255, 255);
   padding: 4px;
   height: 20px;
@@ -75,7 +75,7 @@ code {
 }
 
 .player-div-you {
-  background-color: #622443;
+  background-color: #b66128;
   color: rgb(255, 255, 255);
   padding: 4px;
   height: 20px;
@@ -124,7 +124,7 @@ button:active {
 input{
   border-radius: 4px;
   margin: 7px;
-  background-color: #26272b;
+  background-color: #4b4a4a;
   height: 31px;
   width: 440px;
   box-sizing: border-box;
@@ -136,7 +136,7 @@ input{
 
 input:focus {
   outline: none !important;
-  border:1px solid rgb(69, 68, 68);
+  border:1px solid rgb(94, 94, 94);
 }
 
 .parent {
@@ -172,10 +172,3 @@ input:focus {
   padding-right: 3px;
   opacity: 0.06;
 }
-
-/*
-label {
-  display: inline-block;
-  width: 40px;
-  text-align: right;
-}*/
