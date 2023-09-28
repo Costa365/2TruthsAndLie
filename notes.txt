@@ -1,7 +1,40 @@
 ToDo:
 
-- Show join URL in STARTED state too
-- Prevent player from joining from GUESS onwards (Doesn't actually matter )
+- SORT OUT GUESSER
+{
+  "event": "results",
+  "plays": [
+    {
+      "name": "Costa",
+      "truth1": "Costa T1",
+      "truth2": "Costa T2",
+      "lie": "Costa L1"
+    },
+    {
+      "name": "Max",
+      "truth1": "Max T1",
+      "truth2": "Max T2",
+      "lie": "Max L1"
+    }
+  ],
+  "guesses": [
+    {
+      "guesser": "Costa",
+      "player": "Max",
+      "item": 1
+    },
+    {
+      "guesser": "Max",
+      "player": "Costa",
+      "item": 1
+    }
+  ]
+}
+
+item is probably wrong.
+Figure out how to add this data to the table
+
+- GET Endpoint should return results in results state 
 - UI stuff
 
 MVP

@@ -10,6 +10,7 @@ import AllGuessed from './AllGuessed';
 import GuessTtl from './GuessTtl';
 import Status from './Status';
 import Players from './Players';
+import Results from './Results';
 
 function Game() {
   let { gameid, player } = useParams();
@@ -18,6 +19,7 @@ function Game() {
   const [facilitator, setFacilitator] = useState("");
   const [isFacilitator, setIsFacilitator] = useState(false);
   const [playersTtl, setPlayersTtl] = useState({});
+  const [results, setResults] = useState({});
 
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
@@ -136,6 +138,7 @@ function Game() {
       case "results":
         clearPlayerGuessedStatus();
         setGameStatus(gameStatus => ("RESULTS"));
+        setResults(event);
         //{"event":"results","plays":[{"name":"Bob","truth1":"hkjhjhkjh","truth2":"hgfhgfhgfhgf","lie":"utuytytyut"},{"name":"Nick","truth1":"hjgjhgjhgjhg","truth2":"nvnhjhjh","lie":"nnbnvnbvnbvb"}],"guesses":[{"guesser":"Bob","player":"Nick","item":2},{"guesser":"Bob","player":"Bob","item":3},{"guesser":"Nick","player":"Nick","item":3},{"guesser":"Nick","player":"Bob","item":2}]}, 
         console.log(players);
         break;
@@ -186,6 +189,10 @@ function Game() {
 
       <div className='section'>
         {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
+      </div>
+
+      <div className='section'>
+        {(gameStatus === 'RESULTS') ? <Results results={results} />:<div />}
       </div>
 
       <div className='facilitator'>
