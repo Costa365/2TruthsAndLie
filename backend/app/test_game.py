@@ -201,7 +201,8 @@ def test_game_play():
             assert "I have 5 sisters" in data2.values()
             assert "I have never eaten bread" in data2.values()
 
-            websocket.send_json({"action": "guess", "item": 1})
+            websocket.send_json({"action": "guess", "item":
+                                 "I have never eaten bread"})
             data = websocket.receive_json()
             assert data == {"event": "guessed", "player": "Kugan"}
             data2 = websocket2.receive_json()
@@ -220,7 +221,7 @@ def test_game_play():
             assert "I have been to India" in data.values()
             assert "I have run 5 marathons" in data.values()
 
-            websocket2.send_json({"action": "guess", "item": 2})
+            websocket2.send_json({"action": "guess", "item": "I'm a vegan"})
             data = websocket.receive_json()
             assert data == {"event": "guessed", "player": "Steve"}
             data2 = websocket2.receive_json()
@@ -239,10 +240,10 @@ def test_game_play():
                                        'lie': 'I have never eaten bread'}],
                             'guesses': [{'guesser': 'Kugan',
                                          'player': 'Steve',
-                                         'item': 1},
+                                         'item': 'I have never eaten bread'},
                                         {'guesser': 'Steve',
                                          'player': 'Kugan',
-                                         'item': 2}]}
+                                         'item': "I'm a vegan"}]}
             assert data == expectedData
             data2 = websocket2.receive_json()
             assert data2 == expectedData

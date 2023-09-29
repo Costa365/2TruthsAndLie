@@ -38,7 +38,7 @@ function Results({results}) {
         let truth1 = play['truth1'];
         let truth2 = play['truth2'];
         let lie = play['lie'];
-        let guesses = getGuessesForItem(name,1);
+        let guesses = getGuessesForItem(name,truth1);
         rows.push(
           <tr key={count}>
             <td rowSpan="3">{name}</td>
@@ -48,7 +48,7 @@ function Results({results}) {
           </tr>
         );
         count++;
-        guesses = getGuessesForItem(name,2);
+        guesses = getGuessesForItem(name,truth2);
         rows.push(
           <tr key={count}>
             <td>Truth 2</td>
@@ -57,7 +57,7 @@ function Results({results}) {
           </tr>
         );
         count++;
-        guesses = getGuessesForItem(name,3);
+        guesses = getGuessesForItem(name,lie);
         rows.push(
           <tr key={count}>
             <td>Lie</td>

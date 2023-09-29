@@ -45,7 +45,7 @@ class Score(BaseModel):
 class Guesses(BaseModel):
     guesser: str
     player: str
-    item: int
+    item: str
 
 
 class Results(BaseModel):
