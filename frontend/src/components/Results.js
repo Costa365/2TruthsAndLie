@@ -10,7 +10,7 @@ function Results({results}) {
       for(let i = 0; i < results['guesses'].length; i++) {
         let guess = results['guesses'][i];
         if (guess.player === name && guess.item === item){
-          if(guesses != ""){
+          if(guesses !== ""){
             guesses += ", " 
           }
           guesses += guess.guesser;
