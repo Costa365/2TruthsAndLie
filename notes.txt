@@ -1,7 +1,7 @@
 ToDo:
-- Don't show online in RESULTS or make it work
-- Joining in RESULTS should show results
-- Handle game not existing - 404
+- If try to join in results, then API still sends plays 
+- Better randomization of TTL
+- Set title
 - UI stuff
 
 MVP

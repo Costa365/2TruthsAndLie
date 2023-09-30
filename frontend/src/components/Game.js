@@ -20,6 +20,7 @@ function Game() {
   const [isFacilitator, setIsFacilitator] = useState(false);
   const [playersTtl, setPlayersTtl] = useState({});
   const [results, setResults] = useState({});
+  const [wsStatus, setWsStatus] = useState("CONNECTING");
 
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
@@ -150,6 +151,7 @@ function Game() {
 
   const { readyState, sendJsonMessage } = useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
     onOpen: () => {
+      setWsStatus("CONNECTED");
       console.log('WebSocket connection established.');
     },
 
@@ -157,8 +159,11 @@ function Game() {
       const json = JSON.parse(event.data);
       console.log('WS Event: '+JSON.stringify(json)+ ", readyState="+readyState.toString());
       handleEvent(json)
+    },
+
+    onError: (error) => {
+      setWsStatus("ERROR");
     }
-    
   });  
 
   const handleTtlSubmit = (data) => {
@@ -175,43 +180,64 @@ function Game() {
     sendJsonMessage({"action": "guess", "item": guess});
   };
 
+  const getPage = () => {
+
+    return(
+      <span>
+        <Players players={players} player={player} facilitator={facilitator} />
+
+        <div className='section'>
+          {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
+        </div>
+
+        <div className='section'>
+          {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
+        </div>
+
+        <div className='section'>
+          {(gameStatus === 'RESULTS') ? <Results results={results} />:<div />}
+        </div>
+
+        <div className='facilitator'>
+          <div className='section'>
+            {isFacilitator ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
+          </div>
+
+          <div className='section'>
+            {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
+          </div>
+
+          <div className='section'>
+            {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
+          </div>
+
+          <div className='section'>
+            {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
+          </div>
+        </div>
+      </span>
+    );
+  };
+
+  const getError = () => {
+    if(player in players){
+      return (<div>There is already a player called {player} in the game - try a different name</div>);
+    }
+
+    if((gameStatus === 'RESULTS')){
+      return (<div>Unable to join the game because it has finished</div>);
+    }
+
+    return(
+      <div>Unable to connect to the game, please check that the URL is correct</div>
+    )
+  };
+
   return (
     <div className="App">
       <Header />
       <Status status={gameStatus}/>
-
-      <Players players={players} player={player} facilitator={facilitator} />
-
-      <div className='section'>
-        {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
-      </div>
-
-      <div className='section'>
-        {(gameStatus === 'GUESS') ? <GuessTtl player={player} props={playersTtl} onClick={handleGuessSubmit} />:<div />}
-      </div>
-
-      <div className='section'>
-        {(gameStatus === 'RESULTS') ? <Results results={results} />:<div />}
-      </div>
-
-      <div className='facilitator'>
-        <div className='section'>
-          {isFacilitator ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
-        </div>
-
-        <div className='section'>
-          {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
-        </div>
-
-        <div className='section'>
-          {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
-        </div>
-
-        <div className='section'>
-          {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
-        </div>
-      </div>
-
+      {(wsStatus === "CONNECTED") ? getPage() : (wsStatus === "CONNECTING") ? <div>Connecting to Game ... </div> : getError()}
     </div>
   );
 }

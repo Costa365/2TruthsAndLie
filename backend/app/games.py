@@ -42,6 +42,11 @@ class Games:
         if playerId in self.games[gameId].players.keys() and \
                 self.games[gameId].players[playerId].connected:
             raise ValueError("Duplicate player name")
+        if self.games[gameId].state == "RESULTS" and \
+            playerId not in self.games[gameId].players.keys():
+                websocket.close()
+                raise ValueError("Game has finished")
+
         await self.games[gameId].connect(websocket, playerId)
         self.games[gameId].players[playerId].connected = True
 
