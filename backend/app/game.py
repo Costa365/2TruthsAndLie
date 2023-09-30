@@ -17,8 +17,12 @@ class Game:
 
     async def connect(self, websocket: WebSocket, player: str):
         await websocket.accept()
-        self.players[player] = Player(player, websocket)
-        self.players[player].play = ()
+        if player not in self.players:
+            self.players[player] = Player(player, websocket)
+            self.players[player].play = ()
+        else:
+            self.players[player].webSocket=websocket
+            self.players[player].connected=True
         await self.broadcast('{"event":"connected","player":"' + player + '"}')
 
     async def broadcast(self, data: str):
@@ -46,6 +50,8 @@ class Game:
 
     def getGameInfo(self) -> schemas.GameInfo:
         players = []
+        guesses = []
+        plays = []
         for p in self.players.keys():
             player = schemas.Player(
                 name=p,
@@ -61,16 +67,22 @@ class Game:
                 item3=""
             )
 
-        if (len(self.playersList) > 0):
+        if (len(self.playersList) > 0 and self.state != 'RESULTS'):
             playBeingGuessed = self.getPlayersPlay(
                 self.playersList[self.playerIndex])
+
+        if (self.state == 'RESULTS'):
+            guesses = self.getGuesses()
+            plays = self.getPlays()
 
         return schemas.GameInfo(
             exists=True,
             state=self.state,
             players=players,
             facilitator=self.facilitator,
-            playBeingGuessed=playBeingGuessed
+            playBeingGuessed=playBeingGuessed,
+            guesses=guesses,
+            plays=plays
         )
 
     def getPlays(self):

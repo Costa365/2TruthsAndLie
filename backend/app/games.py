@@ -28,7 +28,9 @@ class Games:
                 state="",
                 players=[],
                 facilitator="",
-                playBeingGuessed=playBeingGuessed
+                playBeingGuessed=playBeingGuessed,
+                guesses=[],
+                plays=[]
             )
         else:
             return self.games[gameId].getGameInfo()

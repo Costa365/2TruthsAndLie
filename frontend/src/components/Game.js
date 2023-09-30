@@ -52,7 +52,6 @@ function Game() {
     setPlayers(players => (playersDict));
   }
 
-
   const readPlayerStatus = (playerStatus) => {
     let playersDict = {}
     if(playerStatus.players!==undefined){
@@ -77,7 +76,8 @@ function Game() {
             setGameStatus(json.state);
             setFacilitator(json.facilitator);
             setIsFacilitator(player === json.facilitator);
-            setPlayersTtl(json.playBeingGuessed)
+            setPlayersTtl(json.playBeingGuessed);
+            setResults(json);
         } catch (error) {
             console.log("Error on reading games status from API", error);
         }
@@ -139,7 +139,6 @@ function Game() {
         clearPlayerGuessedStatus();
         setGameStatus(gameStatus => ("RESULTS"));
         setResults(event);
-        //{"event":"results","plays":[{"name":"Bob","truth1":"hkjhjhkjh","truth2":"hgfhgfhgfhgf","lie":"utuytytyut"},{"name":"Nick","truth1":"hjgjhgjhgjhg","truth2":"nvnhjhjh","lie":"nnbnvnbvnbvb"}],"guesses":[{"guesser":"Bob","player":"Nick","item":2},{"guesser":"Bob","player":"Bob","item":3},{"guesser":"Nick","player":"Nick","item":3},{"guesser":"Nick","player":"Bob","item":2}]}, 
         console.log(players);
         break;
       default:

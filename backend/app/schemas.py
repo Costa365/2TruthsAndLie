@@ -60,3 +60,5 @@ class GameInfo(BaseModel):
     players: List[Player]
     facilitator: str
     playBeingGuessed: Play
+    plays: List[Ttl]
+    guesses: List[Guesses]

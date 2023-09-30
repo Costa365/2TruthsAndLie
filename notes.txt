@@ -1,40 +1,7 @@
 ToDo:
-
-- SORT OUT GUESSER
-{
-  "event": "results",
-  "plays": [
-    {
-      "name": "Costa",
-      "truth1": "Costa T1",
-      "truth2": "Costa T2",
-      "lie": "Costa L1"
-    },
-    {
-      "name": "Max",
-      "truth1": "Max T1",
-      "truth2": "Max T2",
-      "lie": "Max L1"
-    }
-  ],
-  "guesses": [
-    {
-      "guesser": "Costa",
-      "player": "Max",
-      "item": 1
-    },
-    {
-      "guesser": "Max",
-      "player": "Costa",
-      "item": 1
-    }
-  ]
-}
-
-item is probably wrong.
-Figure out how to add this data to the table
-
-- GET Endpoint should return results in results state 
+- Don't show online in RESULTS or make it work
+- Joining in RESULTS should show results
+- Handle game not existing - 404
 - UI stuff
 
 MVP
@@ -97,4 +64,5 @@ POST /action {"game":"yHdVesGhsN34", "action":"next_player"}
 goto GUESS
 
 WS /scoreboard {[{"name":"Timothy", "score":2},{"name":"Dick", "score":1}]}  (Srv -> Plyr) Reduect to pages
- 
+
+ICONS: https://www.flaticon.com/search?word=question&type=uicon
