@@ -21,8 +21,8 @@ class Game:
             self.players[player] = Player(player, websocket)
             self.players[player].play = ()
         else:
-            self.players[player].webSocket=websocket
-            self.players[player].connected=True
+            self.players[player].webSocket = websocket
+            self.players[player].connected = True
         await self.broadcast('{"event":"connected","player":"' + player + '"}')
 
     async def broadcast(self, data: str):
