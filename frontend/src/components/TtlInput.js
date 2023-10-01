@@ -21,40 +21,40 @@ function TtlInput({ onSubmit }) {
   };
 
   return (
-    <div>
+    <div className='statements'>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="truth1">Truth:</label>
+        <div className='statement'>
+          <label htmlFor='truth1'>Truth:</label>
           <input
-            type="text"
-            id="truth1"
-            name="truth1"
+            type='text'
+            id='truth1'
+            name='truth1'
             value={formData.truth1}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="truth2">Truth:</label>
+        <div className='statement'>
+          <label htmlFor='truth2'>Truth:</label>
           <input
-            type="text"
-            id="truth2"
-            name="truth2"
+            type='text'
+            id='truth2'
+            name='truth2'
             value={formData.truth2}
             onChange={handleInputChange}
           />
         </div>
-        <div>
-          <label htmlFor="lie">Lie:</label>
+        <div className='statement'>
+          <label htmlFor='lie'>Lie:</label>
           <input
-            type="text"
-            id="lie"
-            name="lie"
+            type='text'
+            id='lie'
+            name='lie'
             value={formData.lie}
             onChange={handleInputChange}
           />
         </div>
         <div className='section'>
-          <button type="submit">Submit</button>
+          <button type='submit'>Submit</button>
         </div>
       </form>
     </div>

@@ -66,3 +66,4 @@ goto GUESS
 WS /scoreboard {[{"name":"Timothy", "score":2},{"name":"Dick", "score":1}]}  (Srv -> Plyr) Reduect to pages
 
 ICONS: https://www.flaticon.com/search?word=question&type=uicon
+Spinner: https://loading.io/

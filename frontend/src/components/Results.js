@@ -4,14 +4,14 @@ import React from 'react';
 function Results({results}) {
 
   const getGuessesForItem = (name,item) => {
-    let guesses = "";
+    let guesses = '';
 
     if('guesses' in results) {
       for(let i = 0; i < results['guesses'].length; i++) {
         let guess = results['guesses'][i];
         if (guess.player === name && guess.item === item){
-          if(guesses !== ""){
-            guesses += ", " 
+          if(guesses !== ''){
+            guesses += ', ' 
           }
           guesses += guess.guesser;
         }
@@ -41,7 +41,7 @@ function Results({results}) {
         let guesses = getGuessesForItem(name,truth1);
         rows.push(
           <tr key={count}>
-            <td rowSpan="3">{name}</td>
+            <td rowSpan='3'>{name}</td>
             <td>Truth 1</td>
             <td>{truth1}</td>
             <td>{guesses}</td>

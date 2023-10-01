@@ -7,10 +7,10 @@ function Players({players, player, facilitator}) {
   const renderPlayers = () => {
     let playerList=[];    
     for (let playerName in players) {
-      let status = players[playerName]["online"]?"Online":"Offline";
+      let status = players[playerName]['online']?'Online':'Offline';
       let isFaciliator = (playerName === facilitator);
-      let played = players[playerName]["played"]?"Played":"";
-      let guessed = players[playerName]["guessed"]?"Guessed":"";
+      let played = players[playerName]['played']?'Played':'';
+      let guessed = players[playerName]['guessed']?'Guessed':'';
       let isMe = (player===playerName);
       playerList.push(<Player key={playerName} 
         name={playerName} online={status} 

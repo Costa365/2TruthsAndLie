@@ -32,18 +32,19 @@ function Create() {
   };
 
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
 
       <div className='section'>
         <input
-          type="text"
-          placeholder="Enter Your Name"
+          className='name'
+          type='text'
+          placeholder='Enter Your Name'
           value={inputText}
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}
         />
-        <button id="button" onClick={handleButtonClick}>Create New Game</button>
+        <button id='button' onClick={handleButtonClick}>Create New Game</button>
       </div>
 
     </div>

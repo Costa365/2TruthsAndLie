@@ -1,6 +1,6 @@
 import './styles.css';
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from './Header';
 
 function Join() {
@@ -30,12 +30,13 @@ function Join() {
   };
 
   return (
-    <div className="App">
+    <div className='App'>
       <Header />
       <div className='section'>
         <input
-          type="text"
-          placeholder="Enter Your Name"
+          className='name'
+          type='text'
+          placeholder='Enter Your Name'
           value={inputText}
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}

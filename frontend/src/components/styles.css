@@ -121,12 +121,12 @@ button:active {
   transform: translateY(1px);
 }
 
-input{
+input {
   border-radius: 4px;
   margin: 7px;
   background-color: #4b4a4a;
   height: 31px;
-  width: 440px;
+  width: 500px;
   box-sizing: border-box;
   font-size: 16px;
   border: none;
@@ -137,6 +137,10 @@ input{
 input:focus {
   outline: none !important;
   border:1px solid rgb(94, 94, 94);
+}
+
+.name {
+  width: 260px;
 }
 
 .parent {
@@ -155,7 +159,7 @@ input:focus {
 .facilitator {
   background-color: #333333;
   color: rgb(255, 255, 255);
-  padding: 10px;
+  padding: 1px;
 }
 
 .img-player-on {
@@ -181,6 +185,7 @@ input:focus {
 table, th, td {
   border: 1px solid rgb(79, 79, 79);
   border-collapse: collapse;
+  max-width: 90%;
 }
 th, td {
   background-color: #3d3d3d;
@@ -188,4 +193,10 @@ th, td {
   padding-bottom: 2px;
   padding-left: 4px;
   padding-right: 4px;
+}
+
+.statement label {
+  display: inline-block;
+  width: 60px;
+  text-align: right;
 }
