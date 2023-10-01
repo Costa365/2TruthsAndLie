@@ -21,7 +21,7 @@ function TtlInput({ onSubmit }) {
   };
 
   return (
-    <div className='statements'>
+    <div>
       <form onSubmit={handleSubmit}>
         <div className='statement'>
           <label htmlFor='truth1'>Truth:</label>

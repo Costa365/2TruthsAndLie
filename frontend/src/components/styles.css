@@ -200,3 +200,12 @@ th, td {
   width: 60px;
   text-align: right;
 }
+
+.guess input {
+  display:inline-block;
+  width: 25px;
+}
+
+.guess-area {
+  padding:20px;
+}
