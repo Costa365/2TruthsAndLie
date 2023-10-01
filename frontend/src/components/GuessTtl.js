@@ -26,7 +26,7 @@ function GuessTtl( {onClick, props, player} ) {
     return (
       <div>
         <div>
-          <div className='section'>Guess lie of {props.name}</div>
+          <div className='section'>Guess lie of <b>{props.name}</b></div>
           <div className='guess-area'>
             <div className='guess'>
               <input

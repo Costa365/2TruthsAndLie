@@ -206,6 +206,13 @@ th, td {
   width: 25px;
 }
 
+.guess label {
+  display:inline-block;
+  text-align: left;
+  width: 80%;
+  padding-top: 2opx;
+}
+
 .guess-area {
   padding:20px;
 }
