@@ -1,8 +1,8 @@
 ToDo:
-- If try to join in results, then API still sends plays 
 - Better randomization of TTL
-- Set title
-- UI stuff
+- Add footer
+- Decrease max-width of Guess because most statements will be short
+- Improve styling of results table
 
 MVP
 - This or That

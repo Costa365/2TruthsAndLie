@@ -12,6 +12,7 @@ import Status from './Status';
 import Players from './Players';
 import Results from './Results';
 import spinner from '../images/spinner.gif'
+import error from '../images/error.png'
 
 function Game() {
   let { gameid, player } = useParams();
@@ -227,17 +228,17 @@ function Game() {
   };
 
   const getError = () => {
+    let errorText = 'Unable to connect to the game, please check that the URL is correct';
+
     if(player in players){
-      return (<div>There is already a player called {player} in the game - try a different name</div>);
+      errorText = 'There is already a player called {player} in the game - try a different name';
     }
 
     if((gameStatus === 'RESULTS')){
-      return (<div>Unable to join the game because it has finished</div>);
+      errorText = 'Unable to join the game because it has finished';
     }
 
-    return(
-      <div>Unable to connect to the game, please check that the URL is correct</div>
-    )
+    return (<div className='error'><img className='error-img' src={error} alt='error' />{errorText}</div>)
   };
 
   return (

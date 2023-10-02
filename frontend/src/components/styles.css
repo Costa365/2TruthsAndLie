@@ -167,6 +167,7 @@ input:focus {
   width: 20px;
   padding-left: 3px;
   padding-right: 3px;
+  vertical-align: top;
 }
 
 .img-player-off {
@@ -175,6 +176,7 @@ input:focus {
   padding-left: 3px;
   padding-right: 3px;
   opacity: 0.06;
+  vertical-align: top;
 }
 
 .center {
@@ -215,4 +217,15 @@ th, td {
 
 .guess-area {
   padding:20px;
+}
+
+.error {
+  padding:10px;
+}
+
+.error-img {
+  height: 32px;
+  width: 32px;
+  padding-right: 4px;
+  vertical-align: middle;
 }
