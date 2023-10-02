@@ -2,6 +2,7 @@ import './styles.css';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from './Header';
+import Footer from './Footer';
 
 function Join() {
   const [inputText, setInputText] = useState('');
@@ -43,7 +44,7 @@ function Join() {
         />
         <button onClick={handleButtonClick}>Join Game</button>
       </div>
-
+      <Footer />
     </div>
   );
 }

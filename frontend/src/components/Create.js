@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Header from './Header';
+import Footer from './Footer';
 
 function Create() {
   const [inputText, setInputText] = useState('');
@@ -34,7 +35,6 @@ function Create() {
   return (
     <div className='App'>
       <Header />
-
       <div className='section'>
         <input
           className='name'
@@ -46,7 +46,7 @@ function Create() {
         />
         <button id='button' onClick={handleButtonClick}>Create New Game</button>
       </div>
-
+      <Footer />
     </div>
   );
 }

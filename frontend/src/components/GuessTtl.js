@@ -25,47 +25,45 @@ function GuessTtl( {onClick, props, player} ) {
   const guess = () => {
     return (
       <div>
-        <div>
-          <div className='section'>Guess lie of <b>{props.name}</b></div>
-          <div className='guess-area'>
-            <div className='guess'>
-              <input
-                type='radio'
-                checked={lie === props.item1} 
-                id='item1'
-                name='item1'
-                value={props.item1}
-                onChange={onChangeValue}
-              />
-              <label htmlFor='item1'>{props.item1}</label>
-            </div>
-            <div className='guess'>
-              <input
-                type='radio'
-                checked={lie === props.item2} 
-                id='item2'
-                name='item2'
-                value={props.item2}
-                onChange={onChangeValue}
-              />
-              <label htmlFor='item2'>{props.item2}</label>
-            </div>
-            <div className='guess'>
-              <input
-                type='radio'
-                checked={lie === props.item3} 
-                id='item3'
-                name='item3'
-                value={props.item3}
-                onChange={onChangeValue}
-              />
-              <label htmlFor='item3'>{props.item3}</label>
-            </div>
-            
+        <div className='section'>Guess lie of <b>{props.name}</b></div>
+        <div className='guess-area'>
+          <div className='guess'>
+            <input
+              type='radio'
+              checked={lie === props.item1} 
+              id='item1'
+              name='item1'
+              value={props.item1}
+              onChange={onChangeValue}
+            />
+            <label htmlFor='item1'>{props.item1}</label>
+          </div>
+          <div className='guess'>
+            <input
+              type='radio'
+              checked={lie === props.item2} 
+              id='item2'
+              name='item2'
+              value={props.item2}
+              onChange={onChangeValue}
+            />
+            <label htmlFor='item2'>{props.item2}</label>
+          </div>
+          <div className='guess'>
+            <input
+              type='radio'
+              checked={lie === props.item3} 
+              id='item3'
+              name='item3'
+              value={props.item3}
+              onChange={onChangeValue}
+            />
+            <label htmlFor='item3'>{props.item3}</label>
+          </div>
+          <div className='section'>
+            <button onClick={handleClick}>Submit Guess</button>
           </div>
         </div>
-        <button onClick={handleClick}>Send Guess</button>
-
       </div>
     );
   }

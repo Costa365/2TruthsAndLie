@@ -4,6 +4,7 @@ import useWebSocket from 'react-use-websocket';
 import { useParams } from 'react-router-dom';
 import Start from './Start';
 import Header from './Header';
+import Footer from './Footer';
 import TtlInput from './TtlInput';
 import AllPlayed from './AllPlayed';
 import AllGuessed from './AllGuessed';
@@ -246,6 +247,7 @@ function Game() {
       <Header />
       <Status status={gameStatus}/>
       {(wsStatus === 'CONNECTED') ? getPage() : (wsStatus === 'CONNECTING') ? <div><img src={spinner} alt='spinner' /></div> : getError()}
+      <Footer />
     </div>
   );
 }

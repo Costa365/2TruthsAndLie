@@ -1,7 +1,5 @@
 ToDo:
 - Better randomization of TTL
-- Add footer
-- Decrease max-width of Guess because most statements will be short
 - Improve styling of results table
 
 MVP
