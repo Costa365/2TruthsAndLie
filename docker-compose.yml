@@ -6,3 +6,9 @@ services:
         - "8000:8000"
     volumes:
       - ./backend:/backend
+  frontend:
+    build: ./frontend
+    ports:
+        - "3000:3000"
+    volumes:
+      - ./frontend:/frontend

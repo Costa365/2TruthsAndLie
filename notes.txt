@@ -2,6 +2,7 @@ ToDo:
 - Better randomization of TTL
 - Better gameId
 - Inform facilitator that everyone has played/guessed
+- Add enpoints as env vars
 - Containerise
 
 MVP

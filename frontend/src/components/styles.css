@@ -191,7 +191,6 @@ input:focus {
 table, th, td {
   border: 1px solid rgb(68, 51, 63);
   border-collapse: collapse;
-  max-width: 90%;
 }
 
 th, td {
@@ -240,7 +239,6 @@ th {
 
 .guess-area {
   padding:20px;
-  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(31, 31, 31);
@@ -249,7 +247,6 @@ th {
 
 .statement-area {
   padding:20px;
-  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   background-color: rgb(31, 31, 31);
