@@ -42,7 +42,7 @@ function Results({results}) {
         rows.push(
           <tr key={count}>
             <td rowSpan='3'>{name}</td>
-            <td>Truth 1</td>
+            <td >Truth 1</td>
             <td>{truth1}</td>
             <td>{guesses}</td>
           </tr>

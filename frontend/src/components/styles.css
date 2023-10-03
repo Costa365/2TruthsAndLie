@@ -189,34 +189,34 @@ input:focus {
 }
 
 table, th, td {
-  border: 1px solid rgb(79, 79, 79);
+  border: 1px solid rgb(68, 51, 63);
   border-collapse: collapse;
   max-width: 90%;
 }
 
 th, td {
-  background-color: rgb(31, 31, 31);
+  background-color: rgb(50, 36, 36);
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 10px;
   padding-right: 10px;
   text-align: left;
 }
-
-tr:nth-child(7n) td {
-  background-color:rgb(191, 76, 0);
+ 
+tr:nth-child(6n-1) td {
+  background-color:rgb(51, 36, 75);
 }
 
-tr:nth-child(7n-1) td {
-  background-color:rgb(191, 76, 0);
+tr:nth-child(6n) td {
+  background-color:rgb(51, 36, 75);
 }
 
-tr:nth-child(7n-2) td {
-  background-color:rgb(191, 76, 0);
+tr:nth-child(6n+1) td {
+  background-color:rgb(51, 36, 75);
 }
 
 th {
-  background-color: rgb(70, 0, 88);
+  background-color: rgb(125, 70, 26);
 }
 
 .statement label {
