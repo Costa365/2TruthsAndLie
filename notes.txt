@@ -1,6 +1,8 @@
 ToDo:
 - Better randomization of TTL
-- Improve styling of results table
+- Better gameId
+- Inform facilitator that everyone has played/guessed
+- Containerise
 
 MVP
 - This or That

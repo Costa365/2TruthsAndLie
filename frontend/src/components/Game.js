@@ -187,19 +187,19 @@ function Game() {
     return (
       <div className='facilitator'>
         <div className='section'>
-          {isFacilitator ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div />}
+          {(gameStatus !== 'RESULTS') ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div>You're the facilitator.</div>}
         </div>
 
         <div className='section'>
-          {(isFacilitator && (gameStatus === 'WAITING')) ? <Start onClick={handleStartClick} />:<div />}
+          {(gameStatus === 'WAITING') ? <Start onClick={handleStartClick} />:<div />}
         </div>
 
         <div className='section'>
-          {(isFacilitator && (gameStatus === 'STARTED')) ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
+          {(gameStatus === 'STARTED') ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
         </div>
 
         <div className='section'>
-          {(isFacilitator && (gameStatus === 'GUESS')) ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
+          {(gameStatus === 'GUESS') ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
         </div>
       </div>
     );

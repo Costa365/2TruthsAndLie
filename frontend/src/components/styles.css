@@ -198,8 +198,25 @@ th, td {
   background-color: rgb(31, 31, 31);
   padding-top: 2px;
   padding-bottom: 2px;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+tr:nth-child(7n) td {
+  background-color:rgb(191, 76, 0);
+}
+
+tr:nth-child(7n-1) td {
+  background-color:rgb(191, 76, 0);
+}
+
+tr:nth-child(7n-2) td {
+  background-color:rgb(191, 76, 0);
+}
+
+th {
+  background-color: rgb(70, 0, 88);
 }
 
 .statement label {
@@ -211,6 +228,7 @@ th, td {
 .guess input {
   display:inline-block;
   width: 25px;
+  vertical-align: middle;
 }
 
 .guess label {
