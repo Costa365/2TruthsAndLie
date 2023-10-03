@@ -5,7 +5,7 @@ function Footer() {
   
   return (
     <div className='status-div footer'>
-      Two Thruths And A Lie | © 2023
+      Two Truths And A Lie | © 2023
     </div>
   );
 }
