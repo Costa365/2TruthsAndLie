@@ -3,14 +3,21 @@ from fastapi import WebSocket
 from app.game import Game
 import time
 import app.schemas as schemas
+import hashlib
 
 
 class Games:
     def __init__(self):
         self.games: Dict[str] = {}
 
-    def createGame(self, facilitator: str):
+    def createGameId(self):
         gid = '{0:010x}'.format(int(time.time() * 256))
+        h = hashlib.sha3_256()
+        h.update(gid.encode())
+        return h.hexdigest()[20:32]
+
+    def createGame(self, facilitator: str):
+        gid = self.createGameId()
         game = Game(facilitator)
         self.games[gid] = game
         return gid

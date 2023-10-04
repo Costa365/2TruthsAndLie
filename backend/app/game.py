@@ -31,8 +31,11 @@ class Game:
                 await playr.webSocket.send_text(data)
 
     def getRandomIndexes(self):
-        n = random.randint(0, 2)
-        return [n % 3, (n+1) % 3, (n+2) % 3]
+        perms = [
+            [0, 1, 2], [0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]
+        ]
+        n = random.randint(0, 5)
+        return perms[n]
 
     def getPlayersPlay(self, name) -> schemas.Play:
         indexes = self.getRandomIndexes()
