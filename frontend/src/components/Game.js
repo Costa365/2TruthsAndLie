@@ -25,6 +25,10 @@ function Game() {
   const [results, setResults] = useState({});
   const [wsStatus, setWsStatus] = useState('CONNECTING');
 
+  const beUrl = process.env.REACT_APP_BACKEND;
+  const wsUrl = process.env.REACT_APP_WSOCK;
+  const feUrl = window.location.origin;
+
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
     if (!(name in playersDict)){
@@ -70,7 +74,7 @@ function Game() {
   }
 
   useEffect(() => {
-    const url = `http://localhost:8000/game/${gameid}`;
+    const url = `${beUrl}/game/${gameid}`;
 
     const fetchData = async () => {
         try {
@@ -152,7 +156,7 @@ function Game() {
   };
 
 
-  const { readyState, sendJsonMessage } = useWebSocket(`ws://localhost:8000/ws/${gameid}/${player}`, {
+  const { readyState, sendJsonMessage } = useWebSocket(`${wsUrl}/${gameid}/${player}`, {
     onOpen: () => {
       setWsStatus('CONNECTED');
       console.log('WebSocket connection established.');
@@ -187,7 +191,7 @@ function Game() {
     return (
       <div className='facilitator'>
         <div className='section'>
-          {(gameStatus !== 'RESULTS') ? <div>You're the facilitator. Players can join using this URL: <u>http://localhost:3000/join/{gameid}</u></div>: <div>You're the facilitator.</div>}
+          {(gameStatus !== 'RESULTS') ? <div>You're the facilitator. Players can join using this URL: <u>{feUrl}/join/{gameid}</u></div>: <div>You're the facilitator.</div>}
         </div>
 
         <div className='section'>

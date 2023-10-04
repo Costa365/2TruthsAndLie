@@ -2,13 +2,18 @@ version: '3'
 services:
   backend:
     build: ./backend
+    environment:
+      - FRONTEND=http://localhost:3000
     ports:
         - "8000:8000"
     volumes:
       - ./backend:/backend
   frontend:
     build: ./frontend
+    environment:
+      - REACT_APP_BACKEND=http://localhost:8000
+      - REACT_APP_WSOCK=ws://localhost:8000/ws
     ports:
-        - "3000:3000"
+      - "3000:3000"
     volumes:
       - ./frontend:/frontend

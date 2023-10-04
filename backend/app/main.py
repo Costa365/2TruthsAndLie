@@ -2,13 +2,15 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import app.schemas as schemas
 from app.games import Games
+import os
 
 app = FastAPI()
 games = Games()
 
+backendUrl = os.getenv("FRONTEND")
+
 origins = [
-    "http://localhost",
-    "http://localhost:3000",
+    backendUrl
 ]
 
 app.add_middleware(
