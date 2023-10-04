@@ -3,7 +3,6 @@ from fastapi import WebSocket
 import app.schemas as schemas
 from app.player import Player
 import random
-
 import json
 
 

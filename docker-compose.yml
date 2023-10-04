@@ -4,10 +4,12 @@ services:
     build: ./backend
     environment:
       - FRONTEND=http://localhost:3000
+      - DEBUG=1
     ports:
         - "8000:8000"
     volumes:
-      - ./backend:/backend
+      - ./backend/app:/code/app
+    restart: on-failure
   frontend:
     build: ./frontend
     environment:
@@ -16,4 +18,5 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/frontend
+      - ./frontend:/usr/src/app
+    restart: on-failure
