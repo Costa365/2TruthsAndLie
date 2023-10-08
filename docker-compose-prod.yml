@@ -1,0 +1,34 @@
+version: '3'
+services:
+  backend:
+    build: ./backend
+    environment:
+      - FRONTEND=https://cc365.online
+      - VIRTUAL_HOST=api.cc365.online
+      - PORT=8010
+    ports:
+        - "8010:8010"
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./backend/app:/code/app
+    restart: on-failure
+  frontend:
+    build: ./frontend
+    environment:
+      - REACT_APP_BACKEND=https://api.cc365.online
+      - REACT_APP_WSOCK=wss://api.cc365.online/ws
+      - VIRTUAL_HOST=cc365.online
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    networks:
+      - nginx-proxy
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: on-failure
+
+networks:
+  nginx-proxy:
+    external: true

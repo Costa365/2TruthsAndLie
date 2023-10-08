@@ -10,12 +10,14 @@ function Create() {
   
   let navigate = useNavigate(); 
 
+  const beUrl = process.env.REACT_APP_BACKEND;
+
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
 
   const handleButtonClick = () => {
-    const apiUrl = 'http://127.0.0.1:8000/game';
+    const apiUrl = `${beUrl}/game`;
     
     axios.post(apiUrl, { type:'2 Truths And A Lie', name: inputText })
       .then((response) => {

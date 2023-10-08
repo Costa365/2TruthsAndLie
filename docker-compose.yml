@@ -6,17 +6,18 @@ services:
       - FRONTEND=http://localhost:3000
       - DEBUG=1
     ports:
-        - "8000:8000"
+        - "8010:8010"
     volumes:
       - ./backend/app:/code/app
     restart: on-failure
   frontend:
     build: ./frontend
     environment:
-      - REACT_APP_BACKEND=http://localhost:8000
-      - REACT_APP_WSOCK=ws://localhost:8000/ws
+      - REACT_APP_BACKEND=http://localhost:8010
+      - REACT_APP_WSOCK=ws://localhost:8010/ws
     ports:
       - "3000:3000"
     volumes:
       - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
     restart: on-failure

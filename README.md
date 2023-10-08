@@ -1,6 +1,6 @@
 # Team Games #
 
-Generic Team Games API usng Python / Fast API / Mongo DB.
+Generic Team Games API usng Python / Fast API.
 
 Options: We could make this a totally generic API which can be used by frontend (play game) or by admin (update scores)
 Should this API implement the games or just expose the API and another games service should utilise it?
