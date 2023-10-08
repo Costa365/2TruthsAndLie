@@ -187,7 +187,13 @@ def test_game_play():
             assert {'name': 'Steve', 'online': True, "played": True} \
                 in data['players']
 
-            websocket.send_json({"action": "all_played"})
+            data = websocket.receive_json()
+            assert data["event"] == "all_played"
+            data2 = websocket2.receive_json()
+            assert data2["event"] == "all_played"
+
+            websocket.send_json({"action": "proceed_from_play"})
+
             data = websocket.receive_json()
             assert data["event"] == "guess"
             assert data["name"] == "Steve"

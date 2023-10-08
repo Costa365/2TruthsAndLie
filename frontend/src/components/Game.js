@@ -99,7 +99,7 @@ function Game() {
   }
 
   const handleAllPlayedClick = () => {
-    sendJsonMessage({'action': 'all_played'});
+    sendJsonMessage({'action': 'proceed_from_play'});
   }
 
   const handleAllGuessedClick = () => {
@@ -130,6 +130,12 @@ function Game() {
         player = event['player'];
         updatePlayerPlayedStatus(player,true);
         console.log('Played: '+player);
+        break;
+      case 'all_played':
+        console.log('All players have submitted 2 truths and a lie'); 
+        if (isFacilitator){
+          alert('ALL PLAYED!!!!');
+        }
         break;
       case 'guess':
         setGameStatus(gameStatus => ('GUESS'));

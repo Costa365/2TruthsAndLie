@@ -5,7 +5,7 @@ function AllPlayed({onClick}) {
   
   return (
     <div className='section'>
-      <button className='admin-button' onClick={onClick}>All Played</button>
+      <button className='admin-button' onClick={onClick}>Proceed To Next Stage</button>
     </div>
   );
 }

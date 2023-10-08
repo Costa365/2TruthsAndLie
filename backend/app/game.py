@@ -112,6 +112,13 @@ class Game:
                 guesses.append(guess)
         return guesses
 
+    def allPlayersPlayed(self):
+        allPlayed = True
+        for p in self.players.keys():
+            if len(self.players[p].play) == 0:
+                allPlayed = False
+        return allPlayed
+
     async def broadcastNextPlayerToGuess(self):
         while self.playerIndex > 0:
             self.playerIndex -= 1
@@ -136,7 +143,9 @@ class Game:
                 self.players[player].play = (truth1, truth2, lie)
                 await self.broadcast('{"event": "played", "player": "' +
                                      player + '"}')
-        if action == "all_played":
+                if self.allPlayersPlayed():
+                    await self.broadcast('{"event": "all_played"}')
+        if action == "proceed_from_play":
             self.state = 'GUESS'
             self.playersList = list(self.players.keys())
             self.playerIndex = len(self.playersList)

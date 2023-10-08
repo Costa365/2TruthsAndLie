@@ -5,7 +5,7 @@ function AllGuessed({onClick}) {
   
   return (
     <div className='section'>
-      <button className='admin-button' onClick={onClick}>All Guessed</button>
+      <button className='admin-button' onClick={onClick}>Proceed To Next Stage</button>
     </div>
   );
 }

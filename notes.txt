@@ -43,9 +43,9 @@ POST /play   {"game":"yHdVesGhsN34", "name":"Kevin", "true1":"zzzzzz", "true2":"
 
 WS /voted {"name":"Timothy"} (Srv -> Plyr)
 
-POST /action {"game":"yHdVesGhsN34", "action":"all_played"}
+POST /action {"game":"yHdVesGhsN34", "action":"proceed_from_play"}
 
-WS /all_played {} (Srv -> Plyr) Redirect to page
+WS /proceed_from_play {} (Srv -> Plyr) Redirect to page
 
 GUESS:
 
