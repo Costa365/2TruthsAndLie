@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from 'react-router-dom';
 import Start from './Start';
@@ -73,9 +73,8 @@ function Game() {
     setPlayers(players => (playersDict));
   }
 
-  useEffect(() => {
+  const readGameStatus = () => {
     const url = `${beUrl}/game/${gameid}`;
-
     const fetchData = async () => {
         try {
             const response = await fetch(url);
@@ -90,9 +89,8 @@ function Game() {
             console.log('Error on reading games status from API', error);
         }
     };
-
     fetchData();
-  }, []);
+  }
 
   const handleStartClick = () => {
     sendJsonMessage({'action': 'start'});
@@ -109,27 +107,30 @@ function Game() {
 
   const handleEvent = (event) =>  {
     const eventType = event['event'];
-    let player = '';
+    let playerName = '';
 
     switch(eventType) {
       case 'connected':
-        player = event['player'];
-        updatePlayerConnectionStatus(player,true);
-        console.log('Connected: '+player);
+        playerName = event['player'];
+        updatePlayerConnectionStatus(playerName,true);
+        if(playerName === player){
+          readGameStatus();
+        }
+        console.log('Connected: '+playerName);
         break;
       case 'disconnected':
-        player = event['player'];
-        updatePlayerConnectionStatus(player,false);
-        console.log('Disconnected: '+player);
+        playerName = event['player'];
+        updatePlayerConnectionStatus(playerName,false);
+        console.log('Disconnected: '+playerName);
         break;
       case 'started':
         console.log('Game Started');
         setGameStatus(gameStatus => ('STARTED'));
         break;
       case 'played':
-        player = event['player'];
-        updatePlayerPlayedStatus(player,true);
-        console.log('Played: '+player);
+        playerName = event['player'];
+        updatePlayerPlayedStatus(playerName,true);
+        console.log('Played: '+playerName);
         break;
       case 'all_played':
         console.log('All players have submitted 2 truths and a lie'); 
@@ -142,12 +143,12 @@ function Game() {
         clearPlayerGuessedStatus();
         setPlayersTtl(event);
         console.log(event);
-        console.log('All played');
+        console.log('Entered the GUESS state');
         break;
       case 'guessed':
-        player = event['player'];
-        updatePlayerGuessedStatus(player,true);
-        console.log('Guessed: '+player);
+        playerName = event['player'];
+        updatePlayerGuessedStatus(playerName,true);
+        console.log('Guessed: '+playerName);
         break;
       case 'results':
         clearPlayerGuessedStatus();
@@ -160,7 +161,6 @@ function Game() {
     }
     return 1;
   };
-
 
   const { readyState, sendJsonMessage } = useWebSocket(`${wsUrl}/${gameid}/${player}`, {
     onOpen: () => {
