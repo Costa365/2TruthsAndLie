@@ -16,7 +16,7 @@ import spinner from '../images/spinner.gif'
 import error from '../images/error.png'
 
 function Game() {
-  let { gameid, player } = useParams();
+  const { gameid, player } = useParams();
   const [players, setPlayers] = useState({});
   const [gameStatus, setGameStatus] = useState('');
   const [facilitator, setFacilitator] = useState('');
@@ -24,6 +24,7 @@ function Game() {
   const [playersTtl, setPlayersTtl] = useState({});
   const [results, setResults] = useState({});
   const [wsStatus, setWsStatus] = useState('CONNECTING');
+  const [allDone, setAllDone] = useState(false);
 
   const beUrl = process.env.REACT_APP_BACKEND;
   const wsUrl = process.env.REACT_APP_WSOCK;
@@ -135,7 +136,7 @@ function Game() {
       case 'all_played':
         console.log('All players have submitted 2 truths and a lie'); 
         if (isFacilitator){
-          alert('ALL PLAYED!!!!');
+          setAllDone(true);
         }
         break;
       case 'guess':
@@ -205,6 +206,7 @@ function Game() {
         </div>
 
         <div className='section'>
+          {(gameStatus === 'STARTED' && allDone) ? <div className='facilitator-info'>All players have submitted 2 truths and a lie. Ready for next stage.</div> : <div />}
           {(gameStatus === 'STARTED') ? <AllPlayed onClick={handleAllPlayedClick} />:<div />}
         </div>
 

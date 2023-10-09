@@ -263,3 +263,8 @@ th {
   padding-right: 4px;
   vertical-align: middle;
 }
+
+.facilitator-info {
+  color: rgb(18, 156, 62);
+  font-style: italic;
+}
