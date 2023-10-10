@@ -98,12 +98,13 @@ function Game() {
   }
 
   const handleAllPlayedClick = () => {
+    setAllDone(false);
     sendJsonMessage({'action': 'proceed_from_play'});
   }
 
   const handleAllGuessedClick = () => {
     clearPlayerGuessedStatus();
-    sendJsonMessage({'action': 'all_guessed'});
+    sendJsonMessage({'action': 'proceed_from_guess'});
   }
 
   const handleEvent = (event) =>  {
@@ -143,6 +144,7 @@ function Game() {
         setGameStatus(gameStatus => ('GUESS'));
         clearPlayerGuessedStatus();
         setPlayersTtl(event);
+        setAllDone(false);
         console.log(event);
         console.log('Entered the GUESS state');
         break;
@@ -150,6 +152,12 @@ function Game() {
         playerName = event['player'];
         updatePlayerGuessedStatus(playerName,true);
         console.log('Guessed: '+playerName);
+        break;
+      case 'all_guessed':
+        console.log('All players have guessed'); 
+        if (isFacilitator){
+          setAllDone(true);
+        }
         break;
       case 'results':
         clearPlayerGuessedStatus();
@@ -211,6 +219,7 @@ function Game() {
         </div>
 
         <div className='section'>
+          {(gameStatus === 'GUESS' && allDone) ? <div className='facilitator-info'>All players have submitted their guesses</div> : <div />}
           {(gameStatus === 'GUESS') ? <AllGuessed onClick={handleAllGuessedClick} />:<div />}
         </div>
       </div>

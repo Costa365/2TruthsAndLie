@@ -119,6 +119,15 @@ class Game:
                 allPlayed = False
         return allPlayed
 
+    def allPlayersGuessed(self):
+        allGuessed = True
+        for p in self.players.keys():
+            if p != self.playersList[self.playerIndex]:
+                if not self.playersList[self.playerIndex] in \
+                        self.players[p].guesses:
+                    allGuessed = False
+        return allGuessed
+
     async def broadcastNextPlayerToGuess(self):
         while self.playerIndex > 0:
             self.playerIndex -= 1
@@ -154,8 +163,9 @@ class Game:
             self.players[player].guesses[self.playersList[self.playerIndex]] \
                 = jsons['item']
             await self.broadcast('{"event": "guessed", "player":"'+player+'"}')
-            pass
-        elif action == "all_guessed":
+            if self.allPlayersGuessed():
+                await self.broadcast('{"event": "all_guessed"}')
+        elif action == "proceed_from_guess":
             while True:
                 if self.playerIndex <= 0:
                     self.state = 'RESULTS'

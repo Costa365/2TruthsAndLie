@@ -55,7 +55,7 @@ WS /lie {"lie_guess":2} (Plyr -> Svr)
 
 WS /voted {"name":"Timothy"} (Srv -> Plyr)
 
-POST /action {"game":"yHdVesGhsN34", "action":"all_guessed"}
+POST /action {"game":"yHdVesGhsN34", "action":"proceed_from_guess"}
 
 WS /votes {[{"name":"Timothy", "lie_guess":2},{"name":"Dick", "lie_guess":1}], "lie":2} (Srv -> Plyr)
 

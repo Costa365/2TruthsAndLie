@@ -214,7 +214,12 @@ def test_game_play():
             data2 = websocket2.receive_json()
             assert data2 == {"event": "guessed", "player": "Kugan"}
 
-            websocket.send_json({"action": "all_guessed"})
+            data = websocket.receive_json()
+            assert data["event"] == "all_guessed"
+            data2 = websocket2.receive_json()
+            assert data2["event"] == "all_guessed"
+
+            websocket.send_json({"action": "proceed_from_guess"})
 
             data = websocket.receive_json()
             assert data["name"] == "Kugan"
@@ -233,7 +238,13 @@ def test_game_play():
             data2 = websocket2.receive_json()
             assert data2 == {"event": "guessed", "player": "Steve"}
 
-            websocket.send_json({"action": "all_guessed"})
+            websocket.send_json({"action": "proceed_from_guess"})
+
+            data = websocket.receive_json()
+            assert data["event"] == "all_guessed"
+            data2 = websocket2.receive_json()
+            assert data2["event"] == "all_guessed"
+
             data = websocket.receive_json()
             expectedData = {'event': 'results',
                             'plays': [{'name': 'Kugan',
