@@ -105,6 +105,7 @@ button {
 
 button:hover {
   background-color: #258628;
+  cursor: pointer;
 }
 
 button:active {
@@ -130,7 +131,8 @@ input {
   margin: 7px;
   background-color: #4b4a4a;
   height: 31px;
-  width: 500px;
+  width: 70%;
+  max-width: 600px;
   box-sizing: border-box;
   font-size: 16px;
   border: none;

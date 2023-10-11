@@ -1,7 +1,11 @@
 ToDo:
-- Width of TTL textboxes too long in mobile
-- Better feedback when click button - maybe change to resubmit
-- Inform facilitator that everyone has played/guessed
+- Add text box to provide instructions
+- Show the items to the person who's being voted for
+- Create score
+- Add favicon
+- Create new domain
+- Add some more help info
+- Add proper BE logs with time stamps
 
 
 MVP

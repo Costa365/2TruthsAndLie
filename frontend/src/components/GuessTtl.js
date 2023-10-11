@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 function GuessTtl( {onClick, props, player} ) {
   const [lie, setLie] = useState('');
 
+  const [btnText, setBtnText] = useState('Submit Guess');
+
   useEffect(() => {
     setLie(props.item1);
   }, [props]);
 
   const handleClick = (event) => {
     onClick(lie);
+    setBtnText('Resubmit Guess');
   };
 
   const onChangeValue = (event) => {
@@ -61,7 +64,7 @@ function GuessTtl( {onClick, props, player} ) {
             <label htmlFor='item3'>{props.item3}</label>
           </div>
           <div className='section'>
-            <button onClick={handleClick}>Submit Guess</button>
+            <button onClick={handleClick}>{btnText}</button>
           </div>
         </div>
       </div>

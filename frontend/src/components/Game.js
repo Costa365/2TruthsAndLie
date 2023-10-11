@@ -16,7 +16,7 @@ import spinner from '../images/spinner.gif'
 import error from '../images/error.png'
 
 function Game() {
-  const { gameid, player } = useParams();
+  const {gameid, player} = useParams();
   const [players, setPlayers] = useState({});
   const [gameStatus, setGameStatus] = useState('');
   const [facilitator, setFacilitator] = useState('');

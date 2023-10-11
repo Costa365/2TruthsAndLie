@@ -6,6 +6,8 @@ function TtlInput({ onSubmit }) {
     truth2: '',
     lie: '',
   });
+  
+  const [btnText, setBtnText] = useState('Submit');
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -18,6 +20,7 @@ function TtlInput({ onSubmit }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(formData);
+    setBtnText('Resubmit');
   };
 
   return (
@@ -54,7 +57,7 @@ function TtlInput({ onSubmit }) {
           />
         </div>
         <div className='section'>
-          <button type='submit'>Submit</button>
+          <button id='btnSubmit' type='submit'>{btnText}</button>
         </div>
       </form>
     </div>
