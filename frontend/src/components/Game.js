@@ -20,6 +20,7 @@ function Game() {
   const [players, setPlayers] = useState({});
   const [gameStatus, setGameStatus] = useState('');
   const [facilitator, setFacilitator] = useState('');
+  const [instructions, setInstructions] = useState('');
   const [isFacilitator, setIsFacilitator] = useState(false);
   const [playersTtl, setPlayersTtl] = useState({});
   const [results, setResults] = useState({});
@@ -83,6 +84,7 @@ function Game() {
             readPlayerStatus(json);
             setGameStatus(json.state);
             setFacilitator(json.facilitator);
+            setInstructions(json.instructions);
             setIsFacilitator(player === json.facilitator);
             setPlayersTtl(json.playBeingGuessed);
             setResults(json);
@@ -232,7 +234,7 @@ function Game() {
         <Players players={players} player={player} facilitator={facilitator} />
 
         <div className='section'>
-          {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} />: <div />}
+          {(gameStatus === 'STARTED') ? <TtlInput onSubmit={handleTtlSubmit} instructions={instructions} />: <div />}
         </div>
 
         <div className='section'>

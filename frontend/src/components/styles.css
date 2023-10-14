@@ -113,6 +113,24 @@ button:active {
   transform: translateY(1px);
 }
 
+.button-enabled {
+  border: none;
+}
+
+.button-disabled {
+  background-color: #575757;
+}
+
+.button-disabled:hover {
+  background-color: #575757;
+  cursor: default;
+}
+
+.button-disabled:active {
+  background-color: #575757;
+  transform: translateY(0px);
+}
+
 .admin-button {
   background-color: #5e1d6b;
 }
@@ -147,6 +165,11 @@ input:focus {
 
 .name {
   width: 260px;
+}
+
+.instructions {
+  width: 80%;
+  text-justify: top;
 }
 
 .parent {

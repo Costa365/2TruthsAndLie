@@ -9,6 +9,7 @@ ToDo:
 - Review the code
 - Update to Python 3.12
 - GitHub actions - tests and flake8
+- Add admin endpoint
 
 MVP
 - This or That

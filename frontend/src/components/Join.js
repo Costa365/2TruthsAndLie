@@ -6,6 +6,7 @@ import Footer from './Footer';
 
 function Join() {
   const [inputText, setInputText] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   let { gameid, player } = useParams();
 
   let navigate = useNavigate(); 
@@ -18,6 +19,7 @@ function Join() {
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
+    setButtonDisabled(event.target.value.length === 0);
   };
 
   const handleButtonClick = () => {
@@ -42,7 +44,12 @@ function Join() {
           onChange={handleInputChange}
           onKeyUp={handleKeyUp}
         />
-        <button onClick={handleButtonClick}>Join Game</button>
+        <button 
+          className={buttonDisabled ? 'button-disabled' : 'button-enabled'} 
+          disabled={buttonDisabled} 
+          title={buttonDisabled ? 'Your name is required' : ''}
+          id='button' onClick={handleButtonClick}>Join Game
+        </button>
       </div>
       <Footer />
     </div>

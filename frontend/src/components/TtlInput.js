@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function TtlInput({ onSubmit }) {
+function TtlInput({ onSubmit, instructions }) {
   const [formData, setFormData] = useState({
     truth1: '',
     truth2: '',
@@ -25,6 +25,7 @@ function TtlInput({ onSubmit }) {
 
   return (
     <div className='statement-area'>
+      {instructions}
       <form onSubmit={handleSubmit}>
         <div className='statement'>
           <label htmlFor='truth1'>Truth:</label>
