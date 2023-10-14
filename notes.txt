@@ -3,10 +3,12 @@ ToDo:
 - Show the items to the person who's being voted for
 - Create score
 - Add favicon
-- Create new domain
+- Create new domain truthslie.site
 - Add some more help info
 - Add proper BE logs with time stamps
-
+- Review the code
+- Update to Python 3.12
+- GitHub actions - tests and flake8
 
 MVP
 - This or That

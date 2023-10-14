@@ -7,8 +7,9 @@ import json
 
 
 class Game:
-    def __init__(self, facilitator):
+    def __init__(self, facilitator, instructions):
         self.facilitator = facilitator
+        self.instructions = instructions
         self.players: Dict[Player] = {}
         self.state = 'WAITING'
         self.playersList = []
@@ -82,6 +83,7 @@ class Game:
             state=self.state,
             players=players,
             facilitator=self.facilitator,
+            instructions=self.instructions,
             playBeingGuessed=playBeingGuessed,
             guesses=guesses,
             plays=plays

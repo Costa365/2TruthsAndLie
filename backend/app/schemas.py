@@ -13,6 +13,7 @@ class Id(BaseModel):
 class Game(BaseModel):
     type: str
     name: str
+    instructions: str
 
 
 class Player(BaseModel):
@@ -59,6 +60,7 @@ class GameInfo(BaseModel):
     state: str
     players: List[Player]
     facilitator: str
+    instructions: str
     playBeingGuessed: Play
     plays: List[Ttl]
     guesses: List[Guesses]

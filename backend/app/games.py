@@ -16,9 +16,9 @@ class Games:
         h.update(gid.encode())
         return h.hexdigest()[20:32]
 
-    def createGame(self, facilitator: str):
+    def createGame(self, facilitator: str, instructions: str):
         gid = self.createGameId()
-        game = Game(facilitator)
+        game = Game(facilitator, instructions)
         self.games[gid] = game
         return gid
 
@@ -35,6 +35,7 @@ class Games:
                 state="",
                 players=[],
                 facilitator="",
+                instructions="",
                 playBeingGuessed=playBeingGuessed,
                 guesses=[],
                 plays=[]

@@ -37,7 +37,7 @@ async def get_game(gameId: str) -> schemas.GameInfo:
 
 @app.post("/game")
 async def create_game(game: schemas.Game) -> schemas.Id:
-    id = games.createGame(game.name)
+    id = games.createGame(game.name, game.instructions)
     s = schemas.Id(id=id)
     return s
 

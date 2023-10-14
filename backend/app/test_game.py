@@ -11,12 +11,13 @@ def test_endpoint():
     response = client.get(ENDPOINT)
     data = response.json()
     assert response.status_code == 200
-    assert 'Team Games API v0.1' in data['version']
+    assert 'Team Games API v' in data['version']
 
 
 def test_game_exists():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa',
+            'instructions': 'Tell us 2 truths 1 lie'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
@@ -37,7 +38,8 @@ def test_game_exists():
 
 def test_join_game():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa',
+            'instructions': 'Tell us 2 truths 1 lie'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
@@ -61,7 +63,8 @@ def test_join_game_that_does_not_exist():
 
 def test_duplicate_player_name():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa',
+            'instructions': 'Tell us 2 truths 1 lie'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
@@ -83,7 +86,8 @@ def test_duplicate_player_name():
 
 def test_player_disconnect():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'Costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa',
+            'instructions': 'Tell us 2 truths 1 lie'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
@@ -116,12 +120,14 @@ def test_player_disconnect():
             in data['players']
         assert {'name': 'Steve', 'online': False, "played": False} \
             in data['players']
-        assert data['facilitator'] == "Costa"
+        assert data['facilitator'] == 'Costa'
+        assert data['instructions'] == 'Tell us 2 truths 1 lie'
 
 
 def test_game_play():
     url = ENDPOINT + '/game'
-    body = {'type': '2 Truths And A Lie', 'name': 'costa'}
+    body = {'type': '2 Truths And A Lie', 'name': 'Costa',
+            'instructions': 'Tell us 2 truths 1 lie'}
     response = client.post(url, json=body)
     data = response.json()
     assert response.status_code == 200
