@@ -1,6 +1,7 @@
 ToDo:
 - Show the items to the person who's being voted for
 - Add favicon
+- Detect closed ws
 - Create new domain truthslie.site
 - Add some more help info
 - Add proper BE logs with time stamps
