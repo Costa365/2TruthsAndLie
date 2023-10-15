@@ -119,6 +119,7 @@ button:active {
 
 .button-disabled {
   background-color: #575757;
+  color: #717171;
 }
 
 .button-disabled:hover {
@@ -164,12 +165,17 @@ input:focus {
 }
 
 .name {
-  width: 260px;
+  width: 170px;
 }
 
 .instructions {
   width: 80%;
   text-justify: top;
+}
+
+.instructions-text{
+  margin-bottom: 15px;
+  color: rgb(255, 145, 0);
 }
 
 .parent {

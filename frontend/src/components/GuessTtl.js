@@ -7,7 +7,9 @@ function GuessTtl( {onClick, props, player} ) {
 
   useEffect(() => {
     setLie(props.item1);
+    setBtnText('Submit Guess');
   }, [props]);
+  
 
   const handleClick = (event) => {
     onClick(lie);

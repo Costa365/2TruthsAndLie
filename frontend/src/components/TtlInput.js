@@ -25,7 +25,9 @@ function TtlInput({ onSubmit, instructions }) {
 
   return (
     <div className='statement-area'>
-      {instructions}
+      <div className='instructions-text'>
+        {instructions}
+      </div>
       <form onSubmit={handleSubmit}>
         <div className='statement'>
           <label htmlFor='truth1'>Truth:</label>
