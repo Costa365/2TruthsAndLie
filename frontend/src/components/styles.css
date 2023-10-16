@@ -299,3 +299,11 @@ th {
   color: rgb(18, 156, 62);
   font-style: italic;
 }
+
+li {
+  text-align:center;
+}
+
+ul {
+  list-style-type: none;
+}
