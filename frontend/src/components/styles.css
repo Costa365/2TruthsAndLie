@@ -151,7 +151,7 @@ input {
   background-color: #4b4a4a;
   height: 31px;
   width: 70%;
-  max-width: 600px;
+  max-width: 540px;
   box-sizing: border-box;
   font-size: 16px;
   border: none;
@@ -165,7 +165,7 @@ input:focus {
 }
 
 .name {
-  width: 170px;
+  width: 364px;
 }
 
 .instructions {

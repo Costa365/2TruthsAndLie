@@ -47,7 +47,7 @@ function Create() {
       <div className='section'>
         <input
           id='name'
-          autocomplete = 'false'
+          autoComplete = 'false'
           className='name'
           type='text'
           placeholder='Enter Your Name'
@@ -55,10 +55,16 @@ function Create() {
           onChange={handleNameChange}
           onKeyUp={handleKeyUp}
         />
+        <button 
+          className={buttonDisabled ? 'button-disabled' : 'button-enabled'} 
+          disabled={buttonDisabled} 
+          title={buttonDisabled ? 'Your name is required' : ''}
+          id='button' onClick={handleButtonClick}>Create New Game
+        </button>
         <br />
         <input
           id='instructions'
-          autocomplete = 'false'
+          autoComplete = 'false'
           className='instructions'
           type='text'
           placeholder='Enter Game Instructions'
@@ -66,13 +72,6 @@ function Create() {
           onChange={handleInstructionsChange}
           onKeyUp={handleKeyUp}
         />
-        <br />
-        <button 
-          className={buttonDisabled ? 'button-disabled' : 'button-enabled'} 
-          disabled={buttonDisabled} 
-          title={buttonDisabled ? 'Your name is required' : ''}
-          id='button' onClick={handleButtonClick}>Create New Game
-        </button>
       </div>
       <Footer />
     </div>
