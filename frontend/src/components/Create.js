@@ -61,17 +61,19 @@ function Create() {
           title={buttonDisabled ? 'Your name is required' : ''}
           id='button' onClick={handleButtonClick}>Create New Game
         </button>
-        <br />
-        <input
-          id='instructions'
-          autoComplete = 'false'
-          className='instructions'
-          type='text'
-          placeholder='Enter Game Instructions'
-          value={instructions}
-          onChange={handleInstructionsChange}
-          onKeyUp={handleKeyUp}
-        />
+        <div className='instructions-div'>
+          <div className='instructions-text'>Instructions:</div>
+          <input
+            id='instructions'
+            autoComplete = 'false'
+            className='instructions'
+            type='text'
+            placeholder='Enter Game Instructions'
+            value={instructions}
+            onChange={handleInstructionsChange}
+            onKeyUp={handleKeyUp}
+          />
+        </div>
       </div>
       <Footer />
     </div>

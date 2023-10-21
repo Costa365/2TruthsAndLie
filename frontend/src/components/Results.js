@@ -70,7 +70,7 @@ function Results({results}) {
     }
 
     return(
-      <table className='center'>
+      <table className='results'>
         <tbody>
           {rows}
         </tbody>

@@ -26,12 +26,14 @@ function GuessTtl( {onClick, props, player} ) {
   const cannotGuessOwn = () => {
     return (
       <div>
-        The other players are guessing which of your items is a lie
-        <div>
+        <div className='instructions-text'>
+          The other players are guessing which of your statements is a lie
+        </div>
+        <div className='guess-summary'>
           <ul>
-            <li>1. {props.item1}</li>
-            <li>2. {props.item2}</li>
-            <li>3. {props.item3}</li>
+            <li className='guess-summary-item'>1. {props.item1}</li>
+            <li className='guess-summary-item'>2. {props.item2}</li>
+            <li className='guess-summary-item'>3. {props.item3}</li>
           </ul>
         </div>
       </div>)
@@ -40,7 +42,7 @@ function GuessTtl( {onClick, props, player} ) {
   const guess = () => {
     return (
       <div>
-        <div className='section'>Guess lie of <b>{props.name}</b></div>
+        <div className='instructions-text'>Guess lie of <b>{props.name}</b></div>
         <div className='guess-area'>
           <div className='guess'>
             <input

@@ -165,17 +165,22 @@ input:focus {
 }
 
 .name {
-  width: 364px;
+  width: 360px;
 }
 
 .instructions {
   width: 80%;
+  min-width: 356px;
   text-justify: top;
 }
 
-.instructions-text{
-  margin-bottom: 15px;
+.instructions-text {
+  margin-bottom: 6px;
   color: rgb(255, 145, 0);
+}
+
+.instructions-div {
+  margin-top: 20px;
 }
 
 .parent {
@@ -192,7 +197,7 @@ input:focus {
 } 
 
 .facilitator {
-  background-color: #333333;
+  background-color: #282525;
   color: rgb(255, 255, 255);
   padding: 1px;
 }
@@ -214,9 +219,10 @@ input:focus {
   vertical-align: top;
 }
 
-.center {
+.results {
   margin-left: auto;
   margin-right: auto;
+  max-width: 90%;
 }
 
 table, th, td {
@@ -258,14 +264,14 @@ th {
 .guess input {
   display:inline-block;
   width: 25px;
-  vertical-align: middle;
+  vertical-align:top;
 }
 
 .guess label {
   display:inline-block;
   text-align: left;
   width: 80%;
-  padding-top: 2opx;
+  padding-top: 7px;
 }
 
 .guess-area {
@@ -274,6 +280,20 @@ th {
   margin-right: auto;
   background-color: rgb(31, 31, 31);
   border-radius: 5px;
+  max-width: 80%;
+}
+
+.guess-summary {
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.guess-summary-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: left;
 }
 
 .statement-area {
