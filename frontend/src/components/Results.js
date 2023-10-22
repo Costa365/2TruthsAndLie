@@ -27,7 +27,7 @@ function Results({results}) {
       <tr key='header'>
         <th>Player</th>
         <th>Item</th>
-        <th>Play</th>
+        <th>Statement</th>
         <th>Guesses</th>
       </tr>);
 

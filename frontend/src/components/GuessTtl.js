@@ -30,7 +30,7 @@ function GuessTtl( {onClick, props, player} ) {
           The other players are guessing which of your statements is a lie
         </div>
         <div className='guess-summary'>
-          <ul>
+          <ul className='guess-summary-ul'>
             <li className='guess-summary-item'>1. {props.item1}</li>
             <li className='guess-summary-item'>2. {props.item2}</li>
             <li className='guess-summary-item'>3. {props.item3}</li>
