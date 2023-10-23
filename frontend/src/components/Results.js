@@ -2,6 +2,7 @@ import './styles.css';
 import React from 'react';
 
 function Results({results}) {
+  let scores = {};
 
   const getGuessesForItem = (name,item) => {
     let guesses = '';
@@ -23,6 +24,7 @@ function Results({results}) {
   const renderResults = () => {
     let rows=[];
     let count=0;
+
     rows.push(
       <tr key='header'>
         <th>Player</th>
@@ -65,22 +67,69 @@ function Results({results}) {
             <td>{guesses}</td>
           </tr>
         );
+        guesses.split(", ").forEach(function (name) {
+          if (name.length>0){
+            if (!(name in scores)){
+              scores[name]=0;
+            }
+            scores[name]++;
+          }
+        });
         count++;
       }
     }
 
     return(
-      <table className='results'>
-        <tbody>
-          {rows}
-        </tbody>
-      </table>
+      <div>
+        <h3>Results</h3>
+        <table className='results'>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </div>
     );
+  }
+
+  const renderRankings = () => {
+    let players = [];
+    if (Object.keys(scores).length === 0){
+      return(
+        <div>
+          <h3>Rankings</h3>
+          <div>No players guessed correctly</div>
+        </div>
+      );
+    }
+    else {
+      let items = Object.keys(scores).map(function(key) {
+        return [key, scores[key]];
+      });
+      items.sort(function(first, second) {
+        return second[1] - first[1];
+      });
+      for (var i = 0; i < items.length; i++) {
+        players.push(
+          <li className='summary-item' key={i.toString()}>
+            {items[i][0]} (Correct Guesses: {items[i][1]})
+          </li>
+        );
+      }
+      return(
+        <div className='summary'>
+          <h3>Rankings</h3>
+          <ol className='summary-ul'>
+            {players}
+          </ol>
+        </div>
+      );
+    }
   }
 
   return (
     <div>
       {renderResults()}
+      {renderRankings()}
     </div>
   );
 }

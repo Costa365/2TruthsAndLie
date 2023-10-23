@@ -272,7 +272,7 @@ th {
 .guess input {
   display:inline-block;
   width: 25px;
-  vertical-align:top;
+  vertical-align: top;
 }
 
 .guess label {
@@ -289,26 +289,28 @@ th {
   background-color: rgb(31, 31, 31);
   border-radius: 5px;
   max-width: 80%;
+  min-width: 300px;
   width: fit-content;
 }
 
-.guess-summary {
+.summary {
   max-width: 80%;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-.guess-summary-item {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.summary-item {
+  margin-top: 6px;
+  margin-bottom: 6px;
   text-align: left;
 }
 
-.guess-summary-ul {
+.summary-ul {
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
+  padding-left: 18px;
 }
 
 .statement-area {

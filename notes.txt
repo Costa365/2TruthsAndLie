@@ -1,6 +1,4 @@
 ToDo:
-- Add favicon
-- Detect closed ws
 - Create new domain truthslie.site
 - Add some more help info
 - Add proper BE logs with time stamps
@@ -9,7 +7,6 @@ ToDo:
 - JS linter
 - GitHub actions - tests and flake8
 - Add admin endpoint
-- Create score
 
 MVP
 - This or That
