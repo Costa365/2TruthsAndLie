@@ -3,8 +3,8 @@ services:
   backend:
     build: ./backend
     environment:
-      - FRONTEND=https://cc365.online
-      - VIRTUAL_HOST=api.cc365.online
+      - FRONTEND=https://truthslie.site
+      - VIRTUAL_HOST=api.truthslie.site
       - PORT=8010
     ports:
         - "8010:8010"
@@ -16,9 +16,9 @@ services:
   frontend:
     build: ./frontend
     environment:
-      - REACT_APP_BACKEND=https://api.cc365.online
-      - REACT_APP_WSOCK=wss://api.cc365.online/ws
-      - VIRTUAL_HOST=cc365.online
+      - REACT_APP_BACKEND=https://api.truthslie.site
+      - REACT_APP_WSOCK=wss://api.truthslie.site/ws
+      - VIRTUAL_HOST=truthslie.site
       - PORT=3000
     ports:
       - "3000:3000"
