@@ -1,10 +1,7 @@
 ToDo:
-- Create new domain truthslie.site
 - Add some more help info
+- Compile react for prod
 - Add proper BE logs with time stamps
-- Review the code
-- Update to Python 3.12
-- JS linter
 - GitHub actions - tests and flake8
 - Add admin endpoint
 
