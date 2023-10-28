@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useWebSocket from 'react-use-websocket';
 import { useParams } from 'react-router-dom';
 import Start from './Start';
@@ -31,6 +31,10 @@ function Game() {
   const wsUrl = process.env.REACT_APP_WSOCK;
   const feUrl = window.location.origin;
 
+  useEffect(() => {
+    readGameStatus();
+  }, []);
+
   const updatePlayerConnectionStatus = (name, online) => {
     let playersDict = players;
     if (!(name in playersDict)){
@@ -40,19 +44,19 @@ function Game() {
       playersDict[name]['online']=online;
     }
     setPlayers(playersDict);
-  }
+      }
 
   const updatePlayerPlayedStatus = (name, played) => {
     let playersDict = players;
     playersDict[name]['played']=played;
     setPlayers(players => (playersDict));
-  }
+      }
 
   const updatePlayerGuessedStatus = (name, guessed) => {
     let playersDict = players;
     playersDict[name]['guessed']=guessed;
     setPlayers(players => (playersDict));
-  }
+      }
 
   const clearPlayerGuessedStatus = (name, guessed) => {
     let playersDict = players;
@@ -60,11 +64,11 @@ function Game() {
       playersDict[key].guessed = false;
     }
     setPlayers(players => (playersDict));
-  }
+      }
 
   const readPlayerStatus = (playerStatus) => {
-    let playersDict = {}
-    if(playerStatus.players!==undefined){
+        let playersDict = {}
+        if(playerStatus.players!==undefined){
       for (let i = 0, len = playerStatus.players.length; i < len; i++) {
         playersDict[playerStatus.players[i].name]={
           'online':playerStatus.players[i].online,
@@ -72,11 +76,11 @@ function Game() {
           'guessed':false};
       }
     }
-    setPlayers(players => (playersDict));
-  }
+        setPlayers(players => (playersDict));
+      }
 
   const readGameStatus = () => {
-    const url = `${beUrl}/game/${gameid}`;
+        const url = `${beUrl}/game/${gameid}`;
     const fetchData = async () => {
         try {
             const response = await fetch(url);
@@ -264,7 +268,7 @@ function Game() {
     let errorText = 'Unable to connect to the game, please check that the URL is correct';
 
     if(player in players){
-      errorText = 'There is already a player called {player} in the game - try a different name';
+      errorText = `There is already a player called ${player} in the game - try a different name`;
     }
 
     if((gameStatus === 'RESULTS')){
