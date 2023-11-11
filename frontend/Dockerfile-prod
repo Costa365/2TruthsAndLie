@@ -5,8 +5,9 @@ WORKDIR /usr/src/app
 
 COPY ./ ./
 RUN npm install
+RUN npm install --production -g serve
 EXPOSE 3000
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
-CMD [ "npm", "start-prod" ]
+CMD [ "npm", "run-script", "start-prod" ]
