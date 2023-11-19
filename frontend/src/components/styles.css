@@ -186,6 +186,18 @@ input:focus {
   margin-top: 20px;
 }
 
+.player-instructions {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  max-width: 540px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: #b6b6b6;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .parent {
   text-align: center;
 }
@@ -203,6 +215,15 @@ input:focus {
   background-color: #282525;
   color: rgb(255, 255, 255);
   padding: 1px;
+}
+
+.facilitator-text {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 90%;
+  max-width: 540px;
 }
 
 .img-player-on {

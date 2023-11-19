@@ -7,7 +7,7 @@ import Footer from './Footer';
 
 function Create() {
   const [name, setName] = useState('');
-  const [instructions, setInstructions] = useState('Share 3 things about yourself: 2 truths and 1 lie');
+  const [instructions, setInstructions] = useState('Share 3 things about yourself: 2 truths and 1 lie, then click "Submit"');
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   let navigate = useNavigate(); 
@@ -44,6 +44,19 @@ function Create() {
   return (
     <div className='App'>
       <Header />
+      <div>
+        <div className='player-instructions'>
+          "Two Truths and a Lie" makes team-building fun for remote teams. By sharing three statements, team 
+          members spark conversations, building understanding and camaraderie virtually. It encourages 
+          interaction, curiosity, and laughter, creating a more cohesive remote team environment. It's a simple 
+          yet effective way to connect people across distances and strengthen the bonds within a team.
+        </div>
+        <div className='player-instructions'>
+          Enter your name, edit the instructions if required and then click "Create New Game". You are now the
+          the facilitator and can invite players by copying the URL and sharing it with the players, who can then 
+          enter their name and join the game.
+        </div>
+      </div>
       <div className='section'>
         <input
           id='name'

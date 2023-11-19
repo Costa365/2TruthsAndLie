@@ -27,7 +27,7 @@ function GuessTtl( {onClick, props, player} ) {
     return (
       <div>
         <div className='instructions-text'>
-          The other players are guessing which of your statements is a lie
+          Please wait while the other players guess which of your statements is a lie
         </div>
         <div className='summary'>
           <ul className='summary-ul'>
