@@ -18,7 +18,7 @@ class Games:
 
     def createGame(self, facilitator: str, instructions: str):
         gid = self.createGameId()
-        game = Game(facilitator, instructions)
+        game = Game(gid, facilitator, instructions)
         self.games[gid] = game
         return gid
 
@@ -31,6 +31,7 @@ class Games:
                 item3=""
             )
             return schemas.GameInfo(
+                id="0",
                 exists=False,
                 state="",
                 players=[],

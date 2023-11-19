@@ -56,6 +56,7 @@ class Results(BaseModel):
 
 
 class GameInfo(BaseModel):
+    id: str
     exists: bool
     state: str
     players: List[Player]

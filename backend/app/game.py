@@ -7,7 +7,8 @@ import json
 
 
 class Game:
-    def __init__(self, facilitator, instructions):
+    def __init__(self, gid, facilitator, instructions):
+        self.gid = gid
         self.facilitator = facilitator
         self.instructions = instructions
         self.players: Dict[Player] = {}
@@ -79,6 +80,7 @@ class Game:
             plays = self.getPlays()
 
         return schemas.GameInfo(
+            id=self.gid,
             exists=True,
             state=self.state,
             players=players,
