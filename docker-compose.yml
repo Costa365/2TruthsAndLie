@@ -5,6 +5,8 @@ services:
     environment:
       - FRONTEND=http://localhost:3000
       - DEBUG=1
+      - BASIC_AUTH_USER=changeme
+      - BASIC_AUTH_PASSWORD=changeme
     ports:
         - "8010:8010"
     volumes:

@@ -46,7 +46,7 @@ function Create() {
       <Header />
       <div>
         <div className='player-instructions'>
-          "Two Truths and a Lie" makes team-building fun for remote teams. By sharing three statements, team 
+          "2 Truths and a Lie" makes team-building fun for remote teams. By sharing three statements, team 
           members spark conversations, building understanding and camaraderie virtually. It encourages 
           interaction, curiosity, and laughter, creating a more cohesive remote team environment. It's a simple 
           yet effective way to connect people across distances and strengthen the bonds within a team.

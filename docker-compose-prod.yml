@@ -8,6 +8,8 @@ services:
       - FRONTEND=https://truthslie.site
       - VIRTUAL_HOST=api.truthslie.site
       - PORT=8010
+      - BASIC_AUTH_USER=changeme
+      - BASIC_AUTH_PASSWORD=changeme
     ports:
         - "8010:8010"
     networks:

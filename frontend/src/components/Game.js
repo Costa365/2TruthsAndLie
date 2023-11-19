@@ -251,11 +251,11 @@ function Game() {
           {(gameStatus === 'WAITING') ? <div>
             
             <div className='player-instructions'> 
-              When all the players have joined, {facilitator} will start the game.
-              You'll then be able to submit 3 statements: two truths and a lie. When all players have submitted their
-              statements, the faciliator when move the game to the next stage, where you'll vote for which of the 
-              other players' statements you think is a lie. Finally, we'll see which of the statements were false
-              and the players' guesses.
+              When all the players have joined, the facilitator, {facilitator}, will start the game.
+              You'll then be able to submit 3 statements, two of which are truths and one a lie. When all players 
+              have submitted their statements, {facilitator} will move the game to the next stage, where you'll vote 
+              for which of the other players' statements you think is a lie. Finally, we'll see which of the statements 
+              were false and the players' guesses.
             </div>
 
             <div className='player-instructions'> 

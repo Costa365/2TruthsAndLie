@@ -64,3 +64,7 @@ class GameInfo(BaseModel):
     playBeingGuessed: Play
     plays: List[Ttl]
     guesses: List[Guesses]
+
+
+class GameInfos(BaseModel):
+    games: List[GameInfo]

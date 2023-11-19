@@ -1,13 +1,18 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
+from fastapi import FastAPI, Depends, status
+from fastapi import WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 import app.schemas as schemas
 from app.games import Games
 import os
 
 app = FastAPI()
 games = Games()
+security = HTTPBasic()
 
 backendUrl = os.getenv("FRONTEND")
+baUsername = os.getenv("BASIC_AUTH_USER")
+baPassword = os.getenv("BASIC_AUTH_PASSWORD")
 
 origins = [
     backendUrl
@@ -40,6 +45,21 @@ async def create_game(game: schemas.Game) -> schemas.Id:
     id = games.createGame(game.name, game.instructions)
     s = schemas.Id(id=id)
     return s
+
+
+@app.get("/admin/games")
+async def get_games(credentials: HTTPBasicCredentials =
+                    Depends(security)) -> schemas.GameInfos:
+    if (credentials.username == baUsername and
+            credentials.password == baPassword):
+        gs = games.getAllGameInfo()
+        return gs
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Basic"},
+        )
 
 
 @app.websocket("/ws/{game_id}/{player_id}")

@@ -43,6 +43,14 @@ class Games:
         else:
             return self.games[gameId].getGameInfo()
 
+    def getAllGameInfo(self) -> schemas.GameInfos:
+        allGames = []
+        for gameId in self.games.keys():
+            allGames.append(self.games[gameId].getGameInfo())
+        return schemas.GameInfos(
+            games=allGames
+        )
+
     async def connect(
             self, websocket: WebSocket, gameId: str, playerId: str):
         if gameId not in self.games:
