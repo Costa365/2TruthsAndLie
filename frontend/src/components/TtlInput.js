@@ -27,6 +27,11 @@ function TtlInput({ onSubmit, instructions }) {
     <div className='statement-area'>
       <div className='instructions-text'>
         {instructions}
+        <div className='instructions-text'>
+          <br />
+          After entering 2 truths and a line, cick Submit
+        </div>
+        
       </div>
       <form onSubmit={handleSubmit}>
         <div className='statement'>
