@@ -12,6 +12,5 @@ Future updates.
   - [ ] Delete game
   - [ ] Cleanup - delete abandoned games and old games
   - [ ] Specify games states to get 
-- Export game results in PDF
-- Change guessing state to not require the facilitator to advance to the next player
-
+- [ ] Export game results in PDF
+- [ ] Change guessing state to not require the facilitator to advance to the next player
